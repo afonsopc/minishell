@@ -8,7 +8,7 @@ int main(int, char **)
 	{
 		line = readline("minishell> ");
 		if (line)
-			printf("%s\n", line);
+			printf("%zu\n", string().size(line));
 	}
 	return 0;
 }

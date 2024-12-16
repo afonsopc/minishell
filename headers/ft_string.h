@@ -18,7 +18,7 @@
 typedef struct s_string
 {
 	int (*contains)(const char *str, const char *hey);
-	int (*size)(const char *s);
+	size_t (*size)(const char *s);
 	char *(*copy)(const char *str);
 	char *(*join)(const char *str1, const char *str2);
 	char *(*copy_n)(const char *str, int n);
