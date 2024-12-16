@@ -29,7 +29,7 @@ int __atoi(const char *v);
 
 char **__copy_list(const char **list);
 
-static int ft_size(const char *s)
+static size_t ft_size(const char *s)
 {
 	int i;
 
