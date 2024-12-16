@@ -39,8 +39,8 @@ t_hashmap *hashmap(void *list)
 // // // 	temp = (fthis()->array)->begin;
 // // // 	while (temp)
 // // // 	{
-// // // 		str_temp = string().join(temp->key, "=");
-// // // 		list[i++] = string().join(str_temp, temp->value);
+// // // 		str_temp = str().join(temp->key, "=");
+// // // 		list[i++] = str().join(str_temp, temp->value);
 // // // 		free_ob(str_temp);
 // // // 		temp = temp->next;
 // // // 	}
@@ -103,7 +103,7 @@ static t_node *__put_hasmap(char *key, void *value)
     if (pair)
     {
         if (is_update_key)
-            pair->key = string().copy(key);
+            pair->key = str().copy(key);
     }
     return (pair);
 }

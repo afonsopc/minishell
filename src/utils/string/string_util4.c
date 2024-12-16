@@ -28,10 +28,10 @@ char **__copy_list(const char **list)
 	if (!list)
 		return (NULL);
 	value = ft_calloc(sizeof(char *) *
-					  (string().size_list((char **)list) + 1));
+					  (str().size_list((char **)list) + 1));
 	y = -1;
 	while (list[++y])
-		value[y] = string().replace(list[y], " ", "\t");
+		value[y] = str().replace(list[y], " ", "\t");
 	value[y] = NULL;
 	return (value);
 }

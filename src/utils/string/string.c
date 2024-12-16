@@ -39,22 +39,22 @@ static size_t ft_size(const char *s)
 	return (i);
 }
 
-char *ft_copy(const char *str)
+char *ft_copy(const char *s)
 {
 	char *copy;
 	int i;
 
-	if (!str)
+	if (!s)
 		return (NULL);
 	i = -1;
-	copy = ft_calloc(ft_size(str) + 1);
-	while (copy && str[++i])
-		copy[i] = str[i];
+	copy = ft_calloc(ft_size(s) + 1);
+	while (copy && s[++i])
+		copy[i] = s[i];
 	copy[i] = 0;
 	return (copy);
 }
 
-static int ft_contains(const char *str, const char *hey)
+static int ft_contains(const char *s, const char *hey)
 {
 	int i;
 	int j;
@@ -64,14 +64,14 @@ static int ft_contains(const char *str, const char *hey)
 	i = -1;
 	co = 0;
 	p = 0;
-	while (str && str[++i] && !co)
+	while (s && s[++i] && !co)
 	{
 		j = 0;
-		while (!co && hey && hey[j] && str[i + j] && hey[j] == str[i + j])
+		while (!co && hey && hey[j] && s[i + j] && hey[j] == s[i + j])
 		{
 			p = i;
 			j++;
-			if (!hey[j] || !str[i + j])
+			if (!hey[j] || !s[i + j])
 			{
 				co = !hey[j];
 				break;
@@ -81,25 +81,25 @@ static int ft_contains(const char *str, const char *hey)
 	return (co + (co * p));
 }
 
-static int __isnumber(const char *str)
+static int __isnumber(const char *s)
 {
-	if (!str)
+	if (!s)
 		return (0);
-	while (*str)
+	while (*s)
 	{
-		if (!(*str >= '0' && *str <= '9'))
+		if (!(*s >= '0' && *s <= '9'))
 			return (0);
-		str++;
+		s++;
 	}
 	return (1);
 }
 
-t_string string(void)
+t_string str(void)
 {
-	static t_string str = {
+	static t_string _str = {
 		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
 		__isalnum, __split_spacer, __itoa, __atoi, __isnumber, __copy_list};
 
-	return (str);
+	return (_str);
 }

@@ -54,7 +54,7 @@ typedef struct s_array_private t_array_private;
 // 	e = (fthis()->array)->begin;
 // 	while (e)
 // 	{
-// 		if (string().equals(key, e->key))
+// 		if (str().equals(key, e->key))
 // 			return (e);
 // 		e = e->next;
 // 		i++;
