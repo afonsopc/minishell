@@ -14,19 +14,19 @@
 
 char *__join(const char *str1, const char *str2)
 {
-	char *str;
+	char *s;
 	int i;
 
-	str = ft_calloc(string().size((char *)str1) + string().size((char *)str2) + 1);
-	if (!str)
+	s = ft_calloc(str().size((char *)str1) + str().size((char *)str2) + 1);
+	if (!s)
 		return (NULL);
 	i = 0;
 	while (str1 && *str1)
-		str[i++] = *str1++;
+		s[i++] = *str1++;
 	while (str2 && *str2)
-		str[i++] = *str2++;
-	str[i] = 0;
-	return (str);
+		s[i++] = *str2++;
+	s[i] = 0;
+	return (s);
 }
 
 /***
@@ -39,16 +39,16 @@ char **__split(char const *s, char *c, int j, char **list)
 
 	i = 0;
 	t = 0;
-	while (s && (string().contains(c, _str(*s)) || *s == '\n') && *s)
+	while (s && (str().contains(c, _str(*s)) || *s == '\n') && *s)
 		s++;
-	while (s && (!string().contains(c, _str(s[i])) && s[i] != '\n') && s[i])
+	while (s && (!str().contains(c, _str(s[i])) && s[i] != '\n') && s[i])
 		i++;
 	if (i > 0)
 		t = ft_calloc((i + 1) * sizeof(char));
 	if (i > 0)
 		t[i] = 0;
 	i = 0;
-	while (s && t && s && (!string().contains(c, _str(*s)) && *s != '\n') && *s)
+	while (s && t && s && (!str().contains(c, _str(*s)) && *s != '\n') && *s)
 		t[i++] = *s++;
 	if (++j >= 0 && i)
 		list = __split(s, c, j, list);
@@ -82,18 +82,18 @@ char *__copy_n(const char *str, int n)
 /*
 return a copy of the string but without whitespace AROUND the string
 */
-char *__str_trim(const char *str)
+char *__str_trim(const char *s)
 {
 	int size;
 
-	if (!str)
+	if (!s)
 		return (NULL);
-	while (str && *str && string().is_space(*str))
-		str++;
-	size = string().size(str) - 1;
-	while (size > 0 && str[size] && string().is_space(str[size]))
+	while (s && *s && str().is_space(*s))
+		s++;
+	size = str().size(s) - 1;
+	while (size > 0 && s[size] && str().is_space(s[size]))
 		size--;
-	return (string().copy_n(str, size + 1));
+	return (str().copy_n(s, size + 1));
 }
 
 char *__strnstr(const char *haystack, const char *needle, size_t len)

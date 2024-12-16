@@ -39,7 +39,7 @@ char *__itoa(int n)
 
 	buff[0] = '-';
 	convert_base(buff + (n < 0), n, "0123456789", 10);
-	return (string().copy(buff));
+	return (str().copy(buff));
 }
 
 int __atoi(const char *v)

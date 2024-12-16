@@ -61,18 +61,18 @@ char *__replace(const char *str1, const char *str2, const char *hey)
 	char *r;
 	char *temp;
 
-	i = string().contains(str1, hey);
+	i = str().contains(str1, hey);
 	r = NULL;
 	if (!i)
-		return (string().copy(str1));
+		return (str().copy(str1));
 	i--;
-	r = string().copy_n(str1, i);
-	str1 += (i + string().size(hey));
+	r = str().copy_n(str1, i);
+	str1 += (i + str().size(hey));
 	temp = r;
-	r = string().join(r, str2);
+	r = str().join(r, str2);
 	free(temp);
 	temp = r;
-	r = string().join(r, str1);
+	r = str().join(r, str1);
 	free(temp);
 	return (r);
 }

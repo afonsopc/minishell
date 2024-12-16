@@ -37,7 +37,7 @@ typedef struct s_string
 	char **(*copy_list)(const char **list);
 } t_string;
 
-t_string string(void);
+t_string str(void);
 char *_str(const char c);
 
 #endif
