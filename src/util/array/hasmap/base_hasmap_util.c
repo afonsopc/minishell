@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_hasmap_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:42:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	*__get_index_hasmap(size_t index)
 
 void	*__get_key_hasmap(char *key)
 {
-	int			i;
 	t_element	*e;
 
-	i = 0;
 	if (!this()->array)
 		return (NULL);
 	e = (this()->array)->begin;
@@ -57,7 +55,6 @@ void	*__get_key_hasmap(char *key)
 		if (str().equals(key, e->key))
 			return (e->value);
 		e = e->next;
-		i++;
 	}
 	return (NULL);
 }
