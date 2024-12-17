@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:37:08 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:40:00 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_STRING_H
 
 # include <stdlib.h>
-# include <ft_util.h>
 
 typedef struct s_string
 {
@@ -39,5 +38,6 @@ typedef struct s_string
 
 t_string	string(void);
 char		*_str(const char c);
+void		*ft_calloc(size_t __size);
 
 #endif
