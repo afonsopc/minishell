@@ -6,31 +6,40 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:15:49 by edos-san          #+#    #+#             */
-/*   Updated: 2022/06/25 14:24:18 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:38:10 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_util.h>
 #include <minishell.h>
 
-int free_list(void **values)
+int	free_list(char **str)
 {
-	int i;
+	int	i;
 
-	if (values)
+	if (str)
 	{
 		i = -1;
-		while (values[++i])
-			free(values[i]);
-		free(values);
+		while (str[++i])
+			free(str[i]);
+		free(str);
 		return (i);
 	}
 	return (0);
 }
 
-void *ft_calloc(size_t __size)
+char	*_str(const char c)
 {
-	void *v;
-	unsigned char *temp;
+	static char	buff[2];
+
+	buff[0] = c;
+	return (buff);
+}
+
+void	*ft_calloc(size_t __size)
+{
+	void			*v;
+	unsigned char	*temp;
 
 	if (__size < 1)
 		return (NULL);
@@ -43,12 +52,12 @@ void *ft_calloc(size_t __size)
 	return (v);
 }
 
-void *ft_realloc(void *ptr, size_t newsize)
+void	*ft_realloc(void *ptr, size_t newsize)
 {
-	char *newptr;
-	unsigned char *tmp;
-	int i;
-	size_t cursize;
+	char			*newptr;
+	unsigned char	*tmp;
+	int				i;
+	size_t			cursize;
 
 	if (ptr == 0)
 		return (ft_calloc(newsize));
@@ -62,11 +71,4 @@ void *ft_realloc(void *ptr, size_t newsize)
 		newptr[i] = tmp[i];
 	free(ptr);
 	return (newptr);
-}
-
-void **this()
-{
-	static void *v;
-
-	return (&v);
 }

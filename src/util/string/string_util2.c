@@ -6,15 +6,17 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2022/10/24 13:27:07 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:30:03 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
+#include <ft_string.h>
+#include <stdio.h>
+#include <ft_util.h>
 
-int __equals_n(const char *str1, const char *str2, int n)
+int	__equals_n(const char *str1, const char *str2, int n)
 {
-	int i;
+	int	i;
 
 	if (!str1 || !str2)
 		return (0);
@@ -28,9 +30,9 @@ int __equals_n(const char *str1, const char *str2, int n)
 	return (0);
 }
 
-int __equals(const char *str1, const char *str2)
+int	__equals(const char *str1, const char *str2)
 {
-	int i;
+	int	i;
 
 	if (!str1 || !str2)
 		return (0);
@@ -40,14 +42,14 @@ int __equals(const char *str1, const char *str2)
 	return (str1[i] == str2[i]);
 }
 
-int __is_space(char c)
+int	__is_space(char c)
 {
 	return (c == '\t' || c == '\n' || c == '\v' || c == '\r' || c == ' ');
 }
 
-int __size_list(char **list)
+int	__size_list(char **list)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (list && list[i])
@@ -55,24 +57,24 @@ int __size_list(char **list)
 	return (i);
 }
 
-char *__replace(const char *str1, const char *str2, const char *hey)
+char	*__replace(const char *str1, const char *str2, const char *hey)
 {
-	int i;
-	char *r;
-	char *temp;
+	int		i;
+	char	*r;
+	char	*temp;
 
-	i = str().contains(str1, hey);
+	i = string().contains(str1, hey);
 	r = NULL;
 	if (!i)
-		return (str().copy(str1));
+		return ((char *) str1);
 	i--;
-	r = str().copy_n(str1, i);
-	str1 += (i + str().size(hey));
+	r = string().copy_n(str1, i);
+	str1 += (i + string().size(hey));
 	temp = r;
-	r = str().join(r, str2);
+	r = string().join(r, str2);
 	free(temp);
 	temp = r;
-	r = str().join(r, str1);
+	r = string().join(r, str1);
 	free(temp);
 	return (r);
 }

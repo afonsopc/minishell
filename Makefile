@@ -11,7 +11,7 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(READLINE_FLAGS)  $(INCLUDES)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJS_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
@@ -19,7 +19,7 @@ $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
 clean:
-	@rm -rf $(OBJ_DIR) valgrind_log.txt readline.supp $(NAME).dSYM .vscode
+	@rm -rf $(OBJS) valgrind_log.txt readline.supp
 
 fclean: clean
 	@rm -rf $(NAME)
