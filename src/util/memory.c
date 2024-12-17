@@ -6,23 +6,23 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:15:49 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:38:10 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:00 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_util.h>
 #include <minishell.h>
 
-int	free_list(char **str)
+int	free_list(char **values)
 {
 	int	i;
 
-	if (str)
+	if (values)
 	{
 		i = -1;
-		while (str[++i])
-			free(str[i]);
-		free(str);
+		while (values[++i])
+			free(values[i]);
+		free(values);
 		return (i);
 	}
 	return (0);

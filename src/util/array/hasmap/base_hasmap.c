@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:03:33 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char	**__to_str_hashmpa(void)
 	temp = (this()->array)->begin;
 	while (temp)
 	{
-		str_temp = string().join(temp->key, "=");
-		(this()->hashmapp)->array[i++] = string().join(str_temp, temp->value);
+		str_temp = str().join(temp->key, "=");
+		(this()->hashmapp)->array[i++] = str().join(str_temp, temp->value);
 		free(str_temp);
 		temp = temp->next;
 	}

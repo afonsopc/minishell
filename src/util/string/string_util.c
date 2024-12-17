@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:44:16 by amaria-m          #+#    #+#             */
-/*   Updated: 2024/12/17 12:08:25 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*__join(const char *str1, const char *str2)
 	char	*s;
 	int		i;
 
-	s = ft_calloc(string().size((char *) str1) \
-	+ string().size((char *) str2) + 1);
+	s = ft_calloc(str().size((char *) str1) \
+	+ str().size((char *) str2) + 1);
 	if (!s)
 		return (NULL);
 	i = 0;
@@ -42,16 +42,16 @@ char	**__split(char const *s, char *c, int j, char **list)
 
 	i = 0;
 	t = 0;
-	while (s && (string().contains(c, _str(*s)) || *s == '\n') && *s)
+	while (s && (str().contains(c, _str(*s)) || *s == '\n') && *s)
 		s++;
-	while (s && (!string().contains(c, _str(s[i])) && s[i] != '\n') && s[i])
+	while (s && (!str().contains(c, _str(s[i])) && s[i] != '\n') && s[i])
 		i++;
 	if (i > 0)
 		t = ft_calloc((i + 1) * sizeof(char));
 	if (i > 0)
 		t[i] = 0;
 	i = 0;
-	while (s && t && s && (!string().contains(c, _str(*s)) && *s != '\n') && *s)
+	while (s && t && s && (!str().contains(c, _str(*s)) && *s != '\n') && *s)
 		t[i++] = *s++;
 	if (++j >= 0 && i)
 		list = __split(s, c, j, list);
@@ -91,12 +91,12 @@ char	*__str_trim(const char *s)
 
 	if (!s)
 		return (NULL);
-	while (s && *s && string().is_space(*s))
+	while (s && *s && str().is_space(*s))
 		s++;
-	size = string().size(s) - 1;
-	while (size > 0 && s[size] && string().is_space(s[size]))
+	size = str().size(s) - 1;
+	while (size > 0 && s[size] && str().is_space(s[size]))
 		size--;
-	return (string().copy_n(s, size + 1));
+	return (str().copy_n(s, size + 1));
 }
 
 char	*__strnstr(const char *haystack, const char *needle, size_t len)
