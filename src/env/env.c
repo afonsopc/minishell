@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.h                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:34:54 by edos-san         ###   ########.fr       */
+/*   Created: 2024/12/17 10:59:01 by edos-san          #+#    #+#             */
+/*   Updated: 2024/12/17 11:09:40 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTIL_H
-# define FT_UTIL_H
-
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "ft_string.h"
-# include "array_list.h"
-# include <stdbool.h>
-
-typedef struct s_this
+void	init_env(char **env)
 {
-	t_array			*array;
-	t_array			*array_main;
-	t_hashmap		*hashmap;
-}	t_this;
-
-t_this	*this(void);
-void	*ft_calloc(size_t __size);
-void	*ft_realloc(void *ptr, size_t newsize);
-
-#endif
+	(void) env;
+}
