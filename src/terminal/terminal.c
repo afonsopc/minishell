@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:24:05 by edos-san         ###   ########.fr       */
+/*   Created: 2024/12/17 12:23:20 by edos-san          #+#    #+#             */
+/*   Updated: 2024/12/17 12:23:41 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	loop(void)
+void	ft_exit()
 {
-	char	*line;
-
-	while (1)
-	{
-		line = readline("minishell> ");
-		add_history(line);
-		if (line)
-			printf("%zu\n", string().size(line));
-	}
-}
-
-int	main(int arc, char **argv, char **env)
-{
-	(void) arc;
-	(void) argv;
-	init_env(env);
-	ft_exit();
-	return (0);
+	hashmap(terminal()->env)->destroy();
 }
