@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:40:23 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:23:54 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ typedef struct s_terminal
 void		init_env(char **env);
 // terminal
 t_terminal	*terminal(void);
+void		ft_exit();
 
 #endif
