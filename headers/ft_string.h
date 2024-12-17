@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:40:00 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:43:45 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_string
 	int		(*isnumber)(const char *str);
 }	t_string;
 
-t_string	string(void);
+t_string	str(void);
 char		*_str(const char c);
 void		*ft_calloc(size_t __size);
 

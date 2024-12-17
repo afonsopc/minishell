@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 23:15:24 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:04:26 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**__to_str(void)
 	temp = (this()->array)->begin;
 	while (temp)
 	{
-		list[i++] = string().copy(temp->value);
+		list[i++] = str().copy(temp->value);
 		temp = temp->next;
 	}
 	list[i] = NULL;

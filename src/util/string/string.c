@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:32:28 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:44:28 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	__isnumber(const char *s)
 	return (1);
 }
 
-t_string	string(void)
+t_string	str(void)
 {
 	static t_string	s = {
 		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,

@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:30:03 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ char	*__replace(const char *str1, const char *str2, const char *hey)
 	char	*r;
 	char	*temp;
 
-	i = string().contains(str1, hey);
+	i = str().contains(str1, hey);
 	r = NULL;
 	if (!i)
 		return ((char *) str1);
 	i--;
-	r = string().copy_n(str1, i);
-	str1 += (i + string().size(hey));
+	r = str().copy_n(str1, i);
+	str1 += (i + str().size(hey));
 	temp = r;
-	r = string().join(r, str2);
+	r = str().join(r, str2);
 	free(temp);
 	temp = r;
-	r = string().join(r, str1);
+	r = str().join(r, str1);
 	free(temp);
 	return (r);
 }

@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:21:24 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*__get_key_hasmap(char *key)
 	e = (this()->array)->begin;
 	while (e)
 	{
-		if (string().equals(key, e->key))
+		if (str().equals(key, e->key))
 			return (e->value);
 		e = e->next;
 		i++;

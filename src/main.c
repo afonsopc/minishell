@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:24:05 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:00:15 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	loop(void)
 
 	while (1)
 	{
-		line = readline("minishell> ");
+		line = readline("minishell: ");
+		if (!line)
+			break ;
 		add_history(line);
-		if (line)
-			printf("%zu\n", string().size(line));
+		parse(line);
+		free(line);
 	}
 }
 
@@ -30,6 +32,7 @@ int	main(int arc, char **argv, char **env)
 	(void) arc;
 	(void) argv;
 	init_env(env);
+	loop();
 	ft_exit();
 	return (0);
 }
