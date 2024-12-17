@@ -35,13 +35,13 @@ static t_element	*base_add_element(void *value)
 	return (e);
 }
 
-static void	*base_get_element(int index)
+static void	*base_get_element(size_t index)
 {
-	int			i;
+	size_t			i;
 	t_element	*e;
 
 	i = 0;
-	if (!this()->array || index < 0 || index >= this()->array->size)
+	if (!this()->array || index >= this()->array->size)
 		return (NULL);
 	e = (this()->array)->begin;
 	while (e)

@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:32:09 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:03:33 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,35 @@
 char	**__to_str_hashmpa(void)
 {
 	t_element	*temp;
-	char		**list;
 	int			i;
 	char		*str_temp;
 
 	if (!this()->array)
 		return (NULL);
-	list = ft_calloc(sizeof(char *) * ((this()->array)->size + 1));
-	if (!list)
+	if (this()->hashmapp->update_array)
+		return (this()->hashmapp->array);
+	free_list(this()->hashmapp->array);
+	this()->hashmapp->array = ft_calloc(((this()->array)->size + 1));
+	if (!this()->hashmapp->array)
 		return (NULL);
 	i = 0;
 	temp = (this()->array)->begin;
 	while (temp)
 	{
 		str_temp = string().join(temp->key, "=");
-		list[i++] = string().join(str_temp, temp->value);
+		(this()->hashmapp)->array[i++] = string().join(str_temp, temp->value);
 		free(str_temp);
 		temp = temp->next;
 	}
-	list[i] = NULL;
-	return (list);
+	this()->hashmapp->update_array = true;
+	return (this()->hashmapp->array);
 }
 
 static int	base_destroy_hashmap(void)
 {
 	if (!this()->hashmap)
 		return (0);
+	free_list(this()->hashmapp->array);
 	if (this()->hashmap->list)
 	{
 		array(this()->hashmap->list)->destroy();
@@ -53,7 +56,7 @@ static int	base_destroy_hashmap(void)
 	return (1);
 }
 
-static int	base_size_hashmap(void)
+static size_t	base_size_hashmap(void)
 {
 	if (!this()->hashmap)
 		return (0);
@@ -65,6 +68,7 @@ t_hashmap	*hashmap(t_hashmap *a)
 	if (a)
 		this()->array = a->list;
 	this()->hashmap = a;
+	this()->hashmapp = (t_hashmap_p *) a;
 	return (a);
 }
 
@@ -72,7 +76,7 @@ void	*new_hashmap(void)
 {
 	t_hashmap	*a;
 
-	a = ft_calloc(sizeof(t_hashmap));
+	a = ft_calloc(sizeof(t_hashmap_p));
 	if (a)
 	{
 		a->list = new_array();
@@ -84,7 +88,7 @@ void	*new_hashmap(void)
 		a->destroy = base_destroy_hashmap;
 		a->for_each = __base_for_each;
 		a->size = base_size_hashmap;
-		a->to_str = __to_str_hashmpa;
+		a->to_array = __to_str_hashmpa;
 		hashmap(a);
 	}
 	return (a);
