@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:36:51 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:40:23 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "ft_util.h"
 # include "ft_string.h"
 # include <stdbool.h>
 # include <errno.h>
