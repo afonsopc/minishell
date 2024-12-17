@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 11:34:54 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:48:53 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ typedef struct s_this
 	t_array			*array;
 	t_array			*array_main;
 	t_hashmap		*hashmap;
+	t_hashmap_p		*hashmapp;
 }	t_this;
 
 t_this	*this(void);
 void	*ft_calloc(size_t __size);
 void	*ft_realloc(void *ptr, size_t newsize);
+int		free_list(char **str);
 
 #endif

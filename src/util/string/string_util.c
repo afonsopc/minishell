@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:44:16 by amaria-m          #+#    #+#             */
-/*   Updated: 2024/12/17 11:32:25 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:08:25 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**__split(char const *s, char *c, int j, char **list)
 	if (++j >= 0 && i)
 		list = __split(s, c, j, list);
 	else if (!list)
-		list = ft_calloc(j * sizeof(char *));
+		list = ft_calloc((j + 1) * sizeof(char *));
 	if (list)
 		list[--j] = t;
 	return (list);
