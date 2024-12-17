@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 13:00:15 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:58:04 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	loop(void)
 
 int	main(int arc, char **argv, char **env)
 {
+	printf("main: (%s\n", argv[0]);
 	(void) arc;
 	(void) argv;
 	init_env(env);

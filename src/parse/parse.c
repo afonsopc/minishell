@@ -6,55 +6,79 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 14:39:44 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:28:06 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void parse_token(void *token)
-{
-	char 	**tokens;
-	size_t	i;
+#define SEP_2 '2'
+#define SEP_3 '3'
 
-	printf("token: %zu\n", array(token)->size);
-	tokens = array(token)->to_str();
-	array(token)->destroy();
+static void parse_tokens(char **token)
+{
+	size_t i;
+
 	i = 0;
-	while (tokens && tokens[i])
+	while (token && token[i])
 	{
-		printf("%s\n", tokens[i++]);
+		printf("%s\n", token[i++]);
 	}
-	free_list(tokens);
+	free_list(token);
 	
 }
 
-void parse(char *line)
-{	
-	char	flag;
-	long	len;
-	void	*token;
-	char	*value;
+static bool tes(char **line, char *new, size_t *len)
+{
+	size_t l;
 
-	flag = 0;
-	token = new_array();
-	len = -1;
-	while (line[++len])
+	l = *len;
+	if (line[0][0] == '>' || line[0][1] == '<' ||
+		(line[0][0] == '|' && line[0][1] == '|') ||
+		(line[0][0] == '&' && line[0][1] == '&'))
 	{
-		if (flag == 0 && (line[len] == '\'' || line[len] == '\"'))
-			flag = line[len];
-		else if (flag == line[len])
-			flag = 0;
-		if (len && ((!flag && str().is_space(line[len])) || !line[len + 1]))
-		{
-			value = str().copy_n(line, len + (line[len + 1] == '\0'));
-			array(token)->add(str().trim(value));
-			free(value);
-			line += len + (line[len + 1] == '\0');
-			len = -1;
-		}
+		new[len[0]++] = SEP_2;
+		new[len[0]++] = *line[0]++;
+		if (new[*len - 1] == *line[0])
+			new[len[0]++] = *line[0]++;
+		new[len[0]++] = SEP_2;
 	}
-	parse_token(token);
+	else if (line[0][0] == ')' || line[0][0] == '(' || line[0][0] == '|')
+	{
+		new[len[0]++] = SEP_2;
+		new[len[0]++] = *line[0]++;
+		new[len[0]++] = SEP_2;
+	}
+	return (l != *len);
 }
 
+void parse_token(char *line, char *new, void *token)
+{	
+	char	flag;
+	size_t	len;
 
+	flag = 0;
+	len = 0;
+	(void) token;
+	while (*line)
+	{
+		if (flag == 0 && (*line == '\'' || *line == '\"'))
+			flag = *line;
+		else if (flag == *line)
+			flag = 0;
+		if (tes(&line, new, &len))
+			continue ;
+		if (!flag && str().is_space(*line))
+			*line = SEP_2;
+		new[len++] = *line++;
+	}
+	parse_tokens(str().split(new, "2"));
+}
+
+void parse(char *line)
+{
+	void	*token;
+
+	token = new_array();
+	parse_token(line, ft_calloc(str().size(line) * 10), token);
+}
