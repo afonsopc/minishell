@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 11:29:32 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 23:27:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ void	loop(void)
 	}
 }
 
-int	main(int arc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	(void) arc;
-	(void) argv;
+	t_command	cmd;
+
 	init_env(env);
-	loop();
+	(void)argc;
+	cmd.args = &argv[1];
+	cmd.args[0] = get_command_path(str().copy(argv[1]));
+	execute(&cmd);
 	ft_exit();
-	return (0);
 }
