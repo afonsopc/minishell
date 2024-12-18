@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:32:12 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 15:07:30 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:47:01 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_token(t_token	*t)
 		return ;
 	printf("type: %s\n", t->type);
 	if (t->args)
-	{	
+	{
 		printf("ARGS:\n");
 		for (int i=0; t->args[i] != NULL; i++)
 			printf("      %s\n", t->args[i]);
@@ -57,9 +57,9 @@ void	print_token(t_token	*t)
 	printf("===============\n");
 }
 
-t_token *swap(t_token	*s1, t_token *s2)
+t_token	*swap(t_token *s1, t_token *s2)
 {
-	t_token tmp1;
+	t_token	tmp1;
 
 	tmp1 = (*s1);
 	s1->type = s2->type;
@@ -75,32 +75,6 @@ t_token *swap(t_token	*s1, t_token *s2)
 	return (s1);
 }
 
-static bool insert(t_token	*head, t_token *new)
-{
-	bool r;
-
-	r = false;
-	if (!head || str().equals(head->type, "CMD"))
-		return (false);
-	if (head->left == NULL)
-	{
-		head->left = new;
-		return (true);
-	}
-	else
-		r = insert(head->left, new);
-	if (r)
-		return (true);
-	if (!r && head->right == NULL)
-	{
-		head->right = new;
-		return (true);
-	}
-	else
-		r = insert(head->right, new);
-	return (r);
-}
-
 t_token	*balancing(t_token	*head, t_token *new)
 {
 	if (!head)
@@ -111,7 +85,7 @@ t_token	*balancing(t_token	*head, t_token *new)
 		head->left = new;
 	else if (head->right == NULL)
 		head->right = new;
-	else 
+	else
 		balancing(head->right, new);
 	return (head);
 }

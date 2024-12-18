@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 13:16:03 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:18:26 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <signal.h>
 # include <termios.h>
 
-typedef long long size_ll;
+typedef long long	t_size_ll;
 
 typedef struct s_terminal
 {
@@ -39,8 +39,8 @@ typedef struct s_token
 	char			*type;
 	char			**args;
 	int				balancing;
-	struct s_token *left;
-	struct s_token *right;
+	struct s_token	*left;
+	struct s_token	*right;
 }	t_token;
 
 //parse
@@ -49,6 +49,6 @@ void		parse(char *line);
 void		init_env(char **env);
 // terminal
 t_terminal	*terminal(void);
-void		ft_exit();
+void		ft_exit(void);
 
 #endif
