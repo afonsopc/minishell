@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:45:30 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/17 23:27:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef struct s_terminal
 	void	*env;
 }	t_terminal;
 
+typedef struct s_command
+{
+	char	*path;
+	char	**args;
+}	t_command;
+
 //parse
 void		parse(char *line);
 // env
@@ -39,5 +45,8 @@ void		init_env(char **env);
 // terminal
 t_terminal	*terminal(void);
 void		ft_exit();
+// execution
+int			execute(t_command *command);
+char		*get_command_path(char *command);
 
 #endif
