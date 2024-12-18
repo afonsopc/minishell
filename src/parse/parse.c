@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 14:48:14 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:42:43 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 t_token		*new_token(char *type, char **args);
 void		print_token(t_token	*t);
 t_token		*balancing(t_token	*head, t_token *new);
-t_token 	*swap(t_token	*s1, t_token *s2);
+t_token		*swap(t_token	*s1, t_token *s2);
 
-size_ll	get_token(char **token, size_t start, t_token	**head)
+t_size_ll	get_token(char **token, size_t start, t_token	**head)
 {
-	size_ll	i;
-	t_token *t;
+	t_size_ll	i;
+	t_token		*t;
 
 	i = 0;
 	t = NULL;
 	while (1)
 	{
-		if (token[i] == NULL || str().equals(token[i], "|") ||  
+		if (token[i] == NULL || str().equals(token[i], "|") || \
 		str().equals(token[i], "||") || str().equals(token[i], "&&"))
-		{	
+		{
 			if (i > 0)
 				t = new_token(str().copy("CMD"), str().copy_array_n(token, i));
 			else
 				t = new_token(token[i], NULL);
-			// print_token(t);
 			*head = balancing(*head, t);
 			return (i + (i == 0 && token[i]) + start);
 		}
@@ -42,12 +41,11 @@ size_ll	get_token(char **token, size_t start, t_token	**head)
 	return (i);
 }
 
-static void parse_tokens(char **token)
+static void	parse_tokens(char **token)
 {
 	size_t	i;
 	t_token	*head;
 
-	int c = 0;
 	i = 0;
 	head = NULL;
 	while (token[i])
@@ -63,7 +61,7 @@ static void parse_tokens(char **token)
 	free_list(token);
 }
 
-static bool check(char **line, char *new, size_t *len)
+static bool	check(char **line, char *new, size_t *len)
 {
 	size_t	l;
 
@@ -87,8 +85,8 @@ static bool check(char **line, char *new, size_t *len)
 	return (l != *len);
 }
 
-void parse(char *line)
-{	
+void	parse(char *line)
+{
 	char	flag;
 	char	*new;
 	size_t	len;
