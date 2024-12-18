@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 17:08:11 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:37:21 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,28 @@ void	loop(void)
 	}
 }
 
+void print_list(char **args)
+{
+	while (args && *args)
+	{
+		printf(":%s\n", *args);
+		args++;
+	}
+	
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_cmd	*cmd;
 
 	((void)argc, (void)argv);
-	char **tes = str().split("neofetch --ascii_distro gentoo_small", " ");
+	// char **tes = str().split("neofetch --ascii_distro gentoo_small", " ");
 	init_env(env);
-	cmd = new_cmd(tes);
+	// print_list(hashmap(terminal()->env)->to_array());
+	// cmd = new_cmd(tes);
 	// // if (cmd)
 	// // 	execute(cmd);
-	free_cmd(cmd);
+	// free_cmd(cmd);
 	// free_list(tes);
 	ft_exit();
 }
