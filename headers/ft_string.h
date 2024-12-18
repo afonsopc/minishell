@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:43:45 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:12:09 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_string
 	char	*(*itoa)(int n);
 	int		(*atoi)(const char *v);
 	int		(*isnumber)(const char *str);
+	char	**(*copy_array_n)(char **values, long long n);
 }	t_string;
 
 t_string	str(void);

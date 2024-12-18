@@ -6,13 +6,15 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:44:28 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:12:53 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_string.h>
 #include <string_util.h>
 #include <stdio.h>
+
+char	**__copy_array_n(char **values, long long n);
 
 static size_t	ft_size(const char *s)
 {
@@ -84,7 +86,7 @@ t_string	str(void)
 	static t_string	s = {
 		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
-		__isalnum, __split_spacer, __itoa, __atoi, __isnumber
+		__isalnum, __split_spacer, __itoa, __atoi, __isnumber, __copy_array_n
 	};
 
 	return (s);

@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address,undefined
+CFLAGS = #-Wall -Wextra -Werror -g #-fsanitize=address,undefined
 INCLUDES = -I headers
 SRCS =   $(shell find . -type f -name "*.c")
 OBJS = 	$(SRCS:.c=.o)
@@ -27,7 +27,7 @@ fclean: clean
 re: fclean all
 
 r: re
-	@ ./minishell
+	@ clear && ./minishell
 
 v: re readline.supp
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=readline.supp ./minishell
