@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/18 16:45:26 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:11:50 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_command_path(char *cmd)
 	i = -1;
 	path = str().split(hashmap(terminal()->env)->get_key("PATH"), ":");
 	if (!path)
-		return (NULL);
+		return (cmd);
 	while (path[++i])
 	{
 		curr = path_join(path[i], cmd);
@@ -46,8 +46,9 @@ char	*get_command_path(char *cmd)
 		curr = NULL;
 	}
 	free_list(path);
-	free(cmd);
-	return (curr);
+	if (curr == NULL)
+		return (cmd);
+	return (free(cmd), curr);
 }
 
 int	execute(t_cmd *cmd)

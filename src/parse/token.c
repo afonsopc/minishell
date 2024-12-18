@@ -6,13 +6,13 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:32:12 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 15:47:01 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:00:03 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_token	*new_token(char *type, char **args)
+t_token	*new_token(char *type, t_cmd *cmd)
 {
 	t_token	*t;
 
@@ -27,7 +27,7 @@ t_token	*new_token(char *type, char **args)
 		t->balancing = 1;
 	else if (str().equals("&&", type))
 		t->balancing = 1;
-	t->args = args;
+	t->cmd = cmd;
 	t->type = type;
 	return (t);
 }
@@ -37,22 +37,22 @@ void	print_token(t_token	*t)
 	if (!t)
 		return ;
 	printf("type: %s\n", t->type);
-	if (t->args)
-	{
-		printf("ARGS:\n");
-		for (int i=0; t->args[i] != NULL; i++)
-			printf("      %s\n", t->args[i]);
-	}
-	else
-		printf("ARGS: NULL\n");
-	if (t->left)
-		printf("left: %s / %s\n", t->left->type, t->left->args ? t->left->args[0] : "NULL");
-	else
-		printf("left: NULL\n");
-	if (t->right)
-		printf("right: %s / %s\n", t->right->type, t->right->args ? t->right->args[0] : "NULL");
-	else
-		printf("right: NULL\n");
+	// if (t->args)
+	// {
+	// 	printf("ARGS:\n");
+	// 	for (int i=0; t->args[i] != NULL; i++)
+	// 		printf("      %s\n", t->args[i]);
+	// }
+	// else
+	// 	printf("ARGS: NULL\n");
+	// if (t->left)
+	// 	printf("left: %s / %s\n", t->left->type, t->left->args ? t->left->args[0] : "NULL");
+	// else
+	// 	printf("left: NULL\n");
+	// if (t->right)
+	// 	printf("right: %s / %s\n", t->right->type, t->right->args ? t->right->args[0] : "NULL");
+	// else
+	// 	printf("right: NULL\n");
 	printf("balancing: %i\n", t->balancing);
 	printf("===============\n");
 }
@@ -63,12 +63,12 @@ t_token	*swap(t_token *s1, t_token *s2)
 
 	tmp1 = (*s1);
 	s1->type = s2->type;
-	s1->args = s2->args;
+	s1->cmd = s2->cmd;
 	s1->left = s2->left;
 	s1->right = s2->right;
 	s1->balancing = s2->balancing;
 	s2->type = tmp1.type;
-	s2->args = tmp1.args;
+	s2->cmd = tmp1.cmd;
 	s2->left = tmp1.left;
 	s2->right = tmp1.right;
 	s2->balancing = tmp1.balancing;
