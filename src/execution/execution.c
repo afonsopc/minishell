@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/18 15:33:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:45:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,32 @@ char	*path_join(char *str1, char *str2)
 	return (final);
 }
 
-char	*get_command_path(char *command)
+char	*get_command_path(char *cmd)
 {
 	char	**path;
 	char	*curr;
 	size_t	i;
 
-	if (access(command, X_OK) != -1)
-		return (command);
+	if (access(cmd, X_OK) != -1)
+		return (cmd);
 	i = -1;
 	path = str().split(hashmap(terminal()->env)->get_key("PATH"), ":");
 	if (!path)
 		return (NULL);
 	while (path[++i])
 	{
-		curr = path_join(path[i], command);
+		curr = path_join(path[i], cmd);
 		if (access(curr, X_OK) != -1)
 			break ;
 		free(curr);
 		curr = NULL;
 	}
 	free_list(path);
-	free(command);
+	free(cmd);
 	return (curr);
 }
 
-int	execute(t_command *cmd)
+int	execute(t_cmd *cmd)
 {
 	pid_t	pid;
 	int		ret;
@@ -58,13 +58,10 @@ int	execute(t_command *cmd)
 	pid = fork();
 	if (!pid)
 		(execve(cmd->args[0], cmd->args, NULL), exit(127));
-	else
-		kill(pid, SIGTERM);
 	waitpid(pid, &ret, 0);
-	printf("status %d %d\n", ret, WEXITSTATUS(ret));
-	// if (WIFEXITED(ret))
-	// 	printf("status %d\n", WEXITSTATUS(ret));
-	// else
-	// 	printf("no exit\n");
+	if (WIFEXITED(ret))
+		printf("status %d\n", WEXITSTATUS(ret));
+	else
+		printf("no exit\n");
 	return (0);
 }

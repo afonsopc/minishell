@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 23:27:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:47:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ typedef struct s_terminal
 	void	*env;
 }	t_terminal;
 
-typedef struct s_command
+typedef struct s_cmd
 {
-	char	*path;
 	char	**args;
-}	t_command;
+}	t_cmd;
 
 typedef struct s_token
 {
@@ -57,7 +56,10 @@ void		init_env(char **env);
 t_terminal	*terminal(void);
 void		ft_exit(void);
 // execution
-int			execute(t_command *command);
-char		*get_command_path(char *command);
+int			execute(t_cmd *cmd);
+char		*get_command_path(char *cmd);
+// cmd
+void		free_cmd(t_cmd *cmd);
+t_cmd		*new_cmd(char **args);
 
 #endif
