@@ -6,55 +6,107 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 14:39:44 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:42:43 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void parse_token(void *token)
-{
-	char 	**tokens;
-	size_t	i;
+t_token		*new_token(char *type, char **args);
+void		print_token(t_token	*t);
+t_token		*balancing(t_token	*head, t_token *new);
+t_token		*swap(t_token	*s1, t_token *s2);
 
-	printf("token: %zu\n", array(token)->size);
-	tokens = array(token)->to_str();
-	array(token)->destroy();
+t_size_ll	get_token(char **token, size_t start, t_token	**head)
+{
+	t_size_ll	i;
+	t_token		*t;
+
 	i = 0;
-	while (tokens && tokens[i])
+	t = NULL;
+	while (1)
 	{
-		printf("%s\n", tokens[i++]);
+		if (token[i] == NULL || str().equals(token[i], "|") || \
+		str().equals(token[i], "||") || str().equals(token[i], "&&"))
+		{
+			if (i > 0)
+				t = new_token(str().copy("CMD"), str().copy_array_n(token, i));
+			else
+				t = new_token(token[i], NULL);
+			*head = balancing(*head, t);
+			return (i + (i == 0 && token[i]) + start);
+		}
+		i++;
 	}
-	free_list(tokens);
-	
+	return (i);
 }
 
-void parse(char *line)
-{	
+static void	parse_tokens(char **token)
+{
+	size_t	i;
+	t_token	*head;
+
+	i = 0;
+	head = NULL;
+	while (token[i])
+		i = get_token(token + i, i, &head);
+	if (head)
+	{
+		print_token(head);
+		printf("left:\n");
+		print_token(head->left);
+		printf("right:\n");
+		print_token(head->right);
+	}
+	free_list(token);
+}
+
+static bool	check(char **line, char *new, size_t *len)
+{
+	size_t	l;
+
+	l = *len;
+	if (line[0][0] == '>' || line[0][1] == '<' ||
+		(line[0][0] == '|' && line[0][1] == '|') ||
+		(line[0][0] == '&' && line[0][1] == '&'))
+	{
+		new[len[0]++] = '\2';
+		new[len[0]++] = *line[0]++;
+		if (new[*len - 1] == *line[0])
+			new[len[0]++] = *line[0]++;
+		new[len[0]++] = '\2';
+	}
+	else if (line[0][0] == ')' || line[0][0] == '(' || line[0][0] == '|')
+	{
+		new[len[0]++] = '\2';
+		new[len[0]++] = *line[0]++;
+		new[len[0]++] = '\2';
+	}
+	return (l != *len);
+}
+
+void	parse(char *line)
+{
 	char	flag;
-	long	len;
-	void	*token;
-	char	*value;
+	char	*new;
+	size_t	len;
 
 	flag = 0;
-	token = new_array();
-	len = -1;
-	while (line[++len])
+	len = 0;
+	new = ft_calloc(str().size(line) * 10);
+	if (!new)
+		return ;
+	while (*line)
 	{
-		if (flag == 0 && (line[len] == '\'' || line[len] == '\"'))
-			flag = line[len];
-		else if (flag == line[len])
+		if (flag == 0 && (*line == '\'' || *line == '\"'))
+			flag = *line;
+		else if (flag == *line)
 			flag = 0;
-		if (len && ((!flag && str().is_space(line[len])) || !line[len + 1]))
-		{
-			value = str().copy_n(line, len + (line[len + 1] == '\0'));
-			array(token)->add(str().trim(value));
-			free(value);
-			line += len + (line[len + 1] == '\0');
-			len = -1;
-		}
+		if (check(&line, new, &len))
+			continue ;
+		if (!flag && str().is_space(*line))
+			*line = '\2';
+		new[len++] = *line++;
 	}
-	parse_token(token);
+	parse_tokens(str().split(new, "\2"));
 }
-
-
