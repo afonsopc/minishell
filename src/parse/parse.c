@@ -6,79 +6,109 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 16:28:06 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:48:14 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-#define SEP_2 '2'
-#define SEP_3 '3'
+t_token		*new_token(char *type, char **args);
+void		print_token(t_token	*t);
+t_token		*balancing(t_token	*head, t_token *new);
+t_token 	*swap(t_token	*s1, t_token *s2);
+
+size_ll	get_token(char **token, size_t start, t_token	**head)
+{
+	size_ll	i;
+	t_token *t;
+
+	i = 0;
+	t = NULL;
+	while (1)
+	{
+		if (token[i] == NULL || str().equals(token[i], "|") ||  
+		str().equals(token[i], "||") || str().equals(token[i], "&&"))
+		{	
+			if (i > 0)
+				t = new_token(str().copy("CMD"), str().copy_array_n(token, i));
+			else
+				t = new_token(token[i], NULL);
+			// print_token(t);
+			*head = balancing(*head, t);
+			return (i + (i == 0 && token[i]) + start);
+		}
+		i++;
+	}
+	return (i);
+}
 
 static void parse_tokens(char **token)
 {
-	size_t i;
+	size_t	i;
+	t_token	*head;
 
+	int c = 0;
 	i = 0;
-	while (token && token[i])
+	head = NULL;
+	while (token[i])
+		i = get_token(token + i, i, &head);
+	if (head)
 	{
-		printf("%s\n", token[i++]);
+		print_token(head);
+		printf("left:\n");
+		print_token(head->left);
+		printf("right:\n");
+		print_token(head->right);
 	}
 	free_list(token);
-	
 }
 
-static bool tes(char **line, char *new, size_t *len)
+static bool check(char **line, char *new, size_t *len)
 {
-	size_t l;
+	size_t	l;
 
 	l = *len;
 	if (line[0][0] == '>' || line[0][1] == '<' ||
 		(line[0][0] == '|' && line[0][1] == '|') ||
 		(line[0][0] == '&' && line[0][1] == '&'))
 	{
-		new[len[0]++] = SEP_2;
+		new[len[0]++] = '\2';
 		new[len[0]++] = *line[0]++;
 		if (new[*len - 1] == *line[0])
 			new[len[0]++] = *line[0]++;
-		new[len[0]++] = SEP_2;
+		new[len[0]++] = '\2';
 	}
 	else if (line[0][0] == ')' || line[0][0] == '(' || line[0][0] == '|')
 	{
-		new[len[0]++] = SEP_2;
+		new[len[0]++] = '\2';
 		new[len[0]++] = *line[0]++;
-		new[len[0]++] = SEP_2;
+		new[len[0]++] = '\2';
 	}
 	return (l != *len);
 }
 
-void parse_token(char *line, char *new, void *token)
+void parse(char *line)
 {	
 	char	flag;
+	char	*new;
 	size_t	len;
 
 	flag = 0;
 	len = 0;
-	(void) token;
+	new = ft_calloc(str().size(line) * 10);
+	if (!new)
+		return ;
 	while (*line)
 	{
 		if (flag == 0 && (*line == '\'' || *line == '\"'))
 			flag = *line;
 		else if (flag == *line)
 			flag = 0;
-		if (tes(&line, new, &len))
+		if (check(&line, new, &len))
 			continue ;
 		if (!flag && str().is_space(*line))
-			*line = SEP_2;
+			*line = '\2';
 		new[len++] = *line++;
 	}
-	parse_tokens(str().split(new, "2"));
-}
-
-void parse(char *line)
-{
-	void	*token;
-
-	token = new_array();
-	parse_token(line, ft_calloc(str().size(line) * 10), token);
+	parse_tokens(str().split(new, "\2"));
 }
