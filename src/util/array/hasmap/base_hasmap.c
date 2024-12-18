@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:42:58 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:34:40 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	**__to_str_hashmpa(void)
 	if (this()->hashmapp->update_array)
 		return (this()->hashmapp->array);
 	free_list(this()->hashmapp->array);
-	this()->hashmapp->array = ft_calloc(((this()->array)->size + 1));
+	this()->hashmapp->array = ft_calloc(((this()->array)->size + 1)
+		* sizeof(char *));
 	if (!this()->hashmapp->array)
 		return (NULL);
 	i = 0;

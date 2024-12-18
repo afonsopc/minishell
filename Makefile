@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror -g -fsanitize=address,undefined
+CFLAGS =  #-g -fsanitize=address #-Wall -Wextra -Werror
 INCLUDES = -I headers
 SRCS =   $(shell find . -type f -name "*.c")
 OBJS = 	$(SRCS:.c=.o)
