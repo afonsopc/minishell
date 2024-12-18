@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 16:57:44 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:08:11 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	main(int argc, char **argv, char **env)
 	t_cmd	*cmd;
 
 	((void)argc, (void)argv);
+	char **tes = str().split("neofetch --ascii_distro gentoo_small", " ");
 	init_env(env);
-	cmd = new_cmd(str().split("neofetch --ascii_distro gentoo_small", " "));
-	if (cmd)
-		execute(cmd);
+	cmd = new_cmd(tes);
+	// // if (cmd)
+	// // 	execute(cmd);
 	free_cmd(cmd);
+	// free_list(tes);
 	ft_exit();
 }

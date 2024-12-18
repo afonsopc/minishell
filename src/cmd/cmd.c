@@ -20,7 +20,7 @@ t_cmd	*new_cmd(char **args)
 	if (!cmd)
 		return (NULL);
 	cmd->args = args;
-	cmd->args[0] = get_command_path(str().copy(args[0]));
+	cmd->args[0] = get_command_path(args[0]);
 	return (cmd);
 }
 
