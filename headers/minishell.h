@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 17:00:17 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:01:22 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_token
 }	t_token;
 
 //parse
-void		parse(char *line);
+t_token		*parse(char *line);
 // env
 void		init_env(char **env);
 // terminal
@@ -61,5 +61,7 @@ char		*get_command_path(char *cmd);
 // cmd
 void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);
+//utils
+void 		print_list(char **args);
 
 #endif

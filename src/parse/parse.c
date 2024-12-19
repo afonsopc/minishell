@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 17:01:19 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:01:42 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_size_ll	get_token(char **token, size_t start, t_token	**head)
 	return (i);
 }
 
-static void	parse_tokens(char **token)
+static t_token	*parse_tokens(char **token)
 {
 	size_t	i;
 	t_token	*head;
@@ -50,15 +50,16 @@ static void	parse_tokens(char **token)
 	head = NULL;
 	while (token[i])
 		i = get_token(token + i, i, &head);
-	if (head)
-	{
-		print_token(head);
-		printf("left:\n");
-		print_token(head->left);
-		printf("right:\n");
-		print_token(head->right);
-	}
+	// if (head)
+	// {
+	// 	print_token(head);
+	// 	printf("left:\n");
+	// 	print_token(head->left);
+	// 	printf("right:\n");
+	// 	print_token(head->right);
+	// }
 	free_list(token);
+	return (head);
 }
 
 static bool	check(char **line, char *new, size_t *len)
@@ -85,7 +86,7 @@ static bool	check(char **line, char *new, size_t *len)
 	return (l != *len);
 }
 
-void	parse(char *line)
+t_token	*parse(char *line)
 {
 	char	flag;
 	char	*new;
@@ -95,7 +96,7 @@ void	parse(char *line)
 	len = 0;
 	new = ft_calloc(str().size(line) * 10);
 	if (!new)
-		return ;
+		return NULL;
 	while (*line)
 	{
 		if (flag == 0 && (*line == '\'' || *line == '\"'))
@@ -108,5 +109,5 @@ void	parse(char *line)
 			*line = '\2';
 		new[len++] = *line++;
 	}
-	parse_tokens(str().split(new, "\2"));
+	return (parse_tokens(str().split(new, "\2")));
 }
