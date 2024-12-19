@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:34:36 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:58:22 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_size_ll	get_token(char **token, size_t start, t_token	**head)
 				t = new_token("CMD", new_cmd(str().copy_array_n(token, i)));
 			else
 				t = new_token(token[i], NULL);
-			print_token(t);
+			// print_token(t);
 			*head = balancing(*head, t);
 			return (i + (i == 0 && token[i]) + start);
 		}

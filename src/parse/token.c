@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:32:12 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:52:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:57:19 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ bool	free_token(t_token *token)
 	free_token(token->left);
 	free_token(token->right);
 	free(token);
+	terminal()->token = NULL;
 	return (true);
 }
