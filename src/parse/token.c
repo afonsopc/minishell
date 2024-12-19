@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:32:12 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:17:34 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:27:54 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,6 @@ t_token	*new_token(char *type, t_cmd *cmd)
 	else
 		t->type = CMD;
 	return (t);
-}
-
-void	print_token(t_token	*t)
-{
-	if (!t)
-		return ;
-	printf("type: %i\n", t->type);
-	// if (t->args)
-	// {
-	// 	printf("ARGS:\n");
-	// 	for (int i=0; t->args[i] != NULL; i++)
-	// 		printf("      %s\n", t->args[i]);
-	// }
-	// else
-	// 	printf("ARGS: NULL\n");
-	// if (t->left)
-	// 	printf("left: %s / %s\n", t->left->type, t->left->args ? t->left->args[0] : "NULL");
-	// else
-	// 	printf("left: NULL\n");
-	// if (t->right)
-	// 	printf("right: %s / %s\n", t->right->type, t->right->args ? t->right->args[0] : "NULL");
-	// else
-	// 	printf("right: NULL\n");
-	printf("balancing: %i\n", t->balancing);
-	printf("===============\n");
 }
 
 static t_token	*swap(t_token *s1, t_token *s2)
@@ -95,4 +70,14 @@ t_token	*balancing(t_token	*head, t_token *new)
 	else
 		balancing(head->right, new);
 	return (head);
+}
+
+bool	free_token(t_token *token)
+{
+	if (!token)
+		return (false);
+	free_cmd(token->cmd);
+	free_token(token->left);
+	free_token(token->right);
+	free(token);
 }

@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:23:20 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:37:01 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:30:57 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 void	ft_exit()
 {
 	hashmap(terminal()->env)->destroy();
+	free_token(terminal()->token);
 }
