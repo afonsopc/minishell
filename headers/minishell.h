@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:01:22 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:11:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 # include <termios.h>
 
 typedef long long	t_size_ll;
+
+typedef enum e_cmd_type
+{
+	CMD,
+	PIPE,
+	OR,
+	AND
+}	t_cmd_type;
 
 typedef struct s_terminal
 {
