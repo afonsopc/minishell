@@ -38,7 +38,7 @@ static t_element	*base_add_element(void *value)
 static void	*base_get_element(size_t index)
 {
 	size_t			i;
-	t_element	*e;
+	t_element		*e;
 
 	i = 0;
 	if (!this()->array || index >= this()->array->size)

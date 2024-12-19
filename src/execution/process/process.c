@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 12:23:20 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 17:21:49 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/19 21:24:29 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/19 23:22:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "process.h"
 
-void	ft_exit(void)
+void	process(t_token	*token, bool wait, int fds[2])
 {
-	hashmap(terminal()->env)->destroy();
-	free_token(terminal()->token);
-	exit(terminal()->status);
+	if (!token)
+		return ;
+	if (token->type == CMD)
+		process_cmd(token, fds);
+	else if (token->type == AND)
+		process_and(token, fds);
+	else if (token->type == PIPE)
+		process_pipe(token, fds);
+	if (token->type == CMD && wait)
+		wait_fork();
 }
