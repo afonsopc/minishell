@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:02:58 by edos-san         ###   ########.fr       */
+/*   Created: 2024/12/19 15:58:34 by edos-san          #+#    #+#             */
+/*   Updated: 2024/12/19 15:58:43 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	loop(void)
+void print_list(char **args)
 {
-	char	*line;
-
-	while (1)
+	while (args && *args)
 	{
-		line = readline("minishell: ");
-		if (!line)
-			break ;
-		add_history(line);
-		parse(line);
-		free(line);
+		printf(":%s\n", *args);
+		args++;
 	}
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	(void) argc;
-	(void) argv;
-	init_env(env);
-	loop();
-	ft_exit();
+	
 }
