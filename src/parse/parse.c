@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:17:22 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:34:36 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ t_token	*parse(char *line)
 
 	flag = 0;
 	len = 0;
+	free_token(terminal()->token);
 	new = ft_calloc(str().size(line) * 10);
 	if (!new)
 		return NULL;
@@ -110,5 +111,6 @@ t_token	*parse(char *line)
 			*line = '\2';
 		new[len++] = *line++;
 	}
-	return (parse_tokens(str().split(new, "\2")));
+	terminal()->token = parse_tokens(str().split(new, "\2"));
+	return (free(new), terminal()->token);
 }

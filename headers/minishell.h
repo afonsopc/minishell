@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:13:53 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:32:13 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # include <signal.h>
 # include <termios.h>
 
-typedef long long	t_size_ll;
+typedef long long		t_size_ll;
+typedef struct s_token	t_token;
 
 typedef enum e_cmd_type
 {
@@ -40,6 +41,7 @@ typedef enum e_cmd_type
 typedef struct s_terminal
 {
 	void	*env;
+	t_token *token;
 }	t_terminal;
 
 typedef struct s_cmd
@@ -47,17 +49,18 @@ typedef struct s_cmd
 	char	**args;
 }	t_cmd;
 
-typedef struct s_token
+struct s_token
 {
 	t_cmd_type		type;
 	t_cmd			*cmd;
 	int				balancing;
 	struct s_token	*left;
 	struct s_token	*right;
-}	t_token;
+};
 
 //parse
 t_token		*parse(char *line);
+bool		free_token(t_token *token);
 // env
 void		init_env(char **env);
 // terminal

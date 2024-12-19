@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:58:34 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 15:58:43 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:21:38 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,29 @@ void print_list(char **args)
 		args++;
 	}
 	
+}
+
+void	print_token(t_token	*t)
+{
+	if (!t)
+		return ;
+	printf("type: %i\n", t->type);
+	// if (t->args)
+	// {
+	// 	printf("ARGS:\n");
+	// 	for (int i=0; t->args[i] != NULL; i++)
+	// 		printf("      %s\n", t->args[i]);
+	// }
+	// else
+	// 	printf("ARGS: NULL\n");
+	// if (t->left)
+	// 	printf("left: %s / %s\n", t->left->type, t->left->args ? t->left->args[0] : "NULL");
+	// else
+	// 	printf("left: NULL\n");
+	// if (t->right)
+	// 	printf("right: %s / %s\n", t->right->type, t->right->args ? t->right->args[0] : "NULL");
+	// else
+	// 	printf("right: NULL\n");
+	printf("balancing: %i\n", t->balancing);
+	printf("===============\n");
 }

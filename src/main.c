@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:08:11 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:30:20 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	loop(void)
 		if (!line)
 			break ;
 		add_history(line);
-		parse(line);
+		terminal()->token = parse(line);
 		free(line);
 	}
 }
