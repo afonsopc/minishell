@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/18 17:11:50 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:51:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ char	*get_command_path(char *cmd)
 	return (free(cmd), curr);
 }
 
-int	execute(t_cmd *cmd)
+int	execute(t_cmd *cmd, int in, int out)
 {
 	pid_t	pid;
 	int		ret;
 
+	(void)in;
+	(void)out;
 	pid = fork();
 	if (!pid)
 		(execve(cmd->args[0], cmd->args, NULL), exit(127));
@@ -65,4 +67,16 @@ int	execute(t_cmd *cmd)
 	else
 		printf("no exit\n");
 	return (0);
+}
+
+void	process(t_token	*token)
+{
+	int	fds[2];
+
+	if (!token)
+		return ;
+	fds[0] = 0;
+	fds[1] = 1;
+	if (token->type == CMD)
+		execute(token->cmd, fds[0], fds[1]);
 }
