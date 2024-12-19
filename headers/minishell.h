@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:32:13 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:50:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void		init_env(char **env);
 t_terminal	*terminal(void);
 void		ft_exit(void);
 // execution
-int			execute(t_cmd *cmd);
+int			execute(t_cmd *cmd, int in, int out);
 char		*get_command_path(char *cmd);
+void		process(t_token	*token);
 // cmd
 void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);
