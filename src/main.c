@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:30:20 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:24:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ static void	loop(void)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int _, char **__, char **env)
 {
-	(void) argc;
-	(void) argv;
 	init_env(env);
 	loop();
 	ft_exit();
