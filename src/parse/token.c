@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:32:12 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 17:00:03 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:17:34 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,14 @@ t_token	*new_token(char *type, t_cmd *cmd)
 	else if (str().equals("&&", type))
 		t->balancing = 1;
 	t->cmd = cmd;
-	t->type = type;
+	if (str().equals("|", type))
+		t->type = PIPE;
+	else if (str().equals("||", type))
+		t->type = OR;
+	else if (str().equals("&&", type))
+		t->type = AND;
+	else
+		t->type = CMD;
 	return (t);
 }
 
@@ -36,7 +43,7 @@ void	print_token(t_token	*t)
 {
 	if (!t)
 		return ;
-	printf("type: %s\n", t->type);
+	printf("type: %i\n", t->type);
 	// if (t->args)
 	// {
 	// 	printf("ARGS:\n");
@@ -57,7 +64,7 @@ void	print_token(t_token	*t)
 	printf("===============\n");
 }
 
-t_token	*swap(t_token *s1, t_token *s2)
+static t_token	*swap(t_token *s1, t_token *s2)
 {
 	t_token	tmp1;
 

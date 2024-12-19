@@ -6,13 +6,13 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:02:58 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:08:11 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	loop(void)
+static void	loop(void)
 {
 	char	*line;
 

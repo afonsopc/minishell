@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:11:48 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:13:53 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_cmd
 
 typedef struct s_token
 {
-	char			*type;
+	t_cmd_type		type;
 	t_cmd			*cmd;
 	int				balancing;
 	struct s_token	*left;
