@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 12:23:20 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 17:21:49 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/19 21:26:54 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/19 21:54:06 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-void	ft_exit(void)
-{
-	hashmap(terminal()->env)->destroy();
-	free_token(terminal()->token);
-	exit(terminal()->status);
-}
+# include <minishell.h>
+
+void	wait_fork(void);
+char	*path_join(char *str1, char *str2);
+char	*get_command_path(char *cmd);
+pid_t	execute(t_cmd *cmd, int fds[2]);
+
+#endif

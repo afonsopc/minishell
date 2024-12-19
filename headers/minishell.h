@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:50:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:27:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef enum e_cmd_type
 typedef struct s_terminal
 {
 	void	*env;
-	t_token *token;
+	t_token	*token;
+	int		status;
 }	t_terminal;
 
 typedef struct s_cmd
@@ -67,13 +68,12 @@ void		init_env(char **env);
 t_terminal	*terminal(void);
 void		ft_exit(void);
 // execution
-int			execute(t_cmd *cmd, int in, int out);
 char		*get_command_path(char *cmd);
-void		process(t_token	*token);
+void		process(t_token	*token, bool wait, int fds[2]);
 // cmd
 void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);
 //utils
-void 		print_list(char **args);
+void		print_list(char **args);
 
 #endif
