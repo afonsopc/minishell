@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:55 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/19 21:58:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:27:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "../execution.h"
 
-void	process_and(t_token *token, int fds[2]);
-void	process_cmd(t_token	*token, int fds[2]);
-void	process_pipe(t_token *token, int fds[2]);
+void	process(t_token	*token, int in, int out);
+void	process_and(t_token *token, int in, int out);
+void	process_cmd(t_token	*token, int in, int out);
+void	process_or(t_token *token, int in, int out);
+void	process_pipe(t_token *token, int in, int out);
 
 #endif

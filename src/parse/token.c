@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:32:12 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:57:19 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:59:43 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_token	*new_token(char *type, t_cmd *cmd)
 		t->type = AND;
 	else
 		t->type = CMD;
+	t->pid = 0;
 	return (t);
 }
 

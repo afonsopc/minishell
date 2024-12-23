@@ -6,13 +6,13 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/19 22:06:14 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:19:31 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process.h"
 
-void	process_cmd(t_token	*token, int fds[2])
+void	process_cmd(t_token	*token, int in, int out)
 {
-	execute(token->cmd, fds);
+	token->pid = execute(token->cmd, in, out);
 }

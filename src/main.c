@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 16:09:51 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:12:26 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	loop(void)
 			break	;
 		if (str().size(line))
 			add_history(line);
-		process(parse(line), true, (int [2]){0, 1});
+		process_token(parse(line));
 		free(line);
 	}
 }
