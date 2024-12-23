@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/19 21:57:06 by afpachec         ###   ########.fr       */
+/*   Created: 2024/12/19 21:24:29 by afpachec          #+#    #+#             */
+/*   Updated: 2024/12/19 23:22:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "process.h"
 
-pid_t	execute(t_cmd *cmd, int fds[2])
+void	process(t_token	*token, bool wait, int fds[2])
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (!pid)
-	{
-		dup2(fds[0], 0);
-		dup2(fds[1], 1);
-		execve(cmd->args[0], cmd->args, NULL);
-		exit(127);
-	}
-	return (pid);
+	if (!token)
+		return ;
+	if (token->type == CMD)
+		process_cmd(token, fds);
+	else if (token->type == AND)
+		process_and(token, fds);
+	else if (token->type == PIPE)
+		process_pipe(token, fds);
+	if (token->type == CMD && wait)
+		wait_fork();
 }

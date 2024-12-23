@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:50:46 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:08:37 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,30 @@ typedef enum e_cmd_type
 	AND
 }	t_cmd_type;
 
+typedef enum	e_redirect_type
+{
+	IN,
+	OUT
+} t_redirect_type;
+
 typedef struct s_terminal
 {
 	void	*env;
-	t_token *token;
+	t_token	*token;
+	int		status;
 }	t_terminal;
+
+typedef struct s_redirect
+{
+	t_redirect_type		type;
+	char				**args;
+	struct s_redirect	*next;
+}	t_redirect;
 
 typedef struct s_cmd
 {
-	char	**args;
+	char		**args;
+	t_redirect	*redirect;
 }	t_cmd;
 
 struct s_token
@@ -61,19 +76,19 @@ struct s_token
 //parse
 t_token		*parse(char *line);
 bool		free_token(t_token *token);
+void		free_redirect(t_redirect *r);
 // env
 void		init_env(char **env);
 // terminal
 t_terminal	*terminal(void);
 void		ft_exit(void);
 // execution
-int			execute(t_cmd *cmd, int in, int out);
 char		*get_command_path(char *cmd);
-void		process(t_token	*token);
+void		process(t_token	*token, bool wait, int fds[2]);
 // cmd
 void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);
 //utils
-void 		print_list(char **args);
+void		print_list(char **args);
 
 #endif
