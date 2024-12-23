@@ -6,13 +6,16 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 18:34:40 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 18:03:39 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_base_array_util.h>
 #include <ft_util.h>
 #include <ft_string.h>
+
+t_element	*__get_element_index_hasmap(size_t index);
+t_element	*__get_element_hasmap(char *key);
 
 char	**__to_str_hashmpa(void)
 {
@@ -34,7 +37,8 @@ char	**__to_str_hashmpa(void)
 	while (temp)
 	{
 		str_temp = str().join(temp->key, "=");
-		(this()->hashmapp)->array[i++] = str().join(str_temp, temp->value);
+		if (temp->value)
+			(this()->hashmapp)->array[i++] = str().join(str_temp, temp->value);
 		free(str_temp);
 		temp = temp->next;
 	}
@@ -90,6 +94,8 @@ void	*new_hashmap(void)
 		a->for_each = __base_for_each;
 		a->size = base_size_hashmap;
 		a->to_array = __to_str_hashmpa;
+		a->get_element_index = __get_element_index_hasmap;
+		a->get_element_key = __get_element_hasmap;
 		hashmap(a);
 	}
 	return (a);

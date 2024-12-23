@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   base_hasmap_util.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 14:42:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:53:08 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_util.h>
 #include <ft_string.h>
 
+t_element	*__get_element_hasmap(char *key);
+
 t_element	*__put_hasmap(char *key, void	*value)
 {
 	t_element	*v;
 
 	this()->hashmapp->update_array = false;
-	v = hashmap(this()->hashmap)->get_key(key);
+	v = __get_element_hasmap(key);
 	if (!v)
 		v = array(this()->array)->add("");
 	else
@@ -64,7 +66,7 @@ void	__remove_element_hasmap(char	*key)
 	if (!key || !this()->hashmap)
 		return ;
 	this()->hashmapp->update_array = false;
-	array(this()->array)->remove(__get_key_hasmap(key));
+	array(this()->array)->remove(__get_element_hasmap(key));
 }
 
 void	__remove_index_hasmap(size_t index)

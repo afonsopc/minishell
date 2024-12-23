@@ -14,6 +14,9 @@
 
 pid_t		execute(t_cmd *cmd, int in, int out);
 pid_t		execute_echo(t_cmd *cmd, int in, int out);
+pid_t		execute_export(t_cmd *cmd, int in, int out);
+pid_t		execute_env(t_cmd *cmd, int in, int out);
+pid_t		execute_unset(t_cmd *cmd, int in, int out);
 
 static t_redirect	*new_redirect(char	**args)
 {
@@ -73,6 +76,12 @@ static	void	init_fun(t_cmd	*cmd)
 {
 	if (str().equals(*cmd->args, "echo"))
 		cmd->execute = execute_echo;
+	else if (str().equals(*cmd->args, "export"))
+		cmd->execute = execute_export;
+	else if (str().equals(*cmd->args, "env"))
+		cmd->execute = execute_env;
+	else if (str().equals(*cmd->args, "unset"))
+		cmd->execute = execute_unset;
 	else
 		cmd->execute = execute;
 }

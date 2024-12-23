@@ -56,6 +56,8 @@ typedef struct s_hasmap
 	int				(*destroy)();
 	void			(*for_each)(void (*fun)(t_element *e, void *v), void *o);
 	char			**(*to_array)(void);
+	t_element		*(*get_element_index)(size_t	index);
+	t_element		*(*get_element_key)(char *key);
 }	t_hashmap;
 
 typedef struct s_hasmap_p
@@ -70,6 +72,8 @@ typedef struct s_hasmap_p
 	int				(*destroy)();
 	void			(*for_each)(void (*fun)(t_element *e, void *v), void *o);
 	char			**(*to_str)(void);
+	t_element		*(*get_element_index)(size_t	index);
+	t_element		*(*get_element_key)(char *key);
 	char			**array;
 	bool			update_array;
 }	t_hashmap_p;

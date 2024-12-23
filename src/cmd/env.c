@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:46:41 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 17:14:47 by edos-san         ###   ########.fr       */
+/*   Created: 2024/12/23 16:55:27 by edos-san          #+#    #+#             */
+/*   Updated: 2024/12/23 18:13:12 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool	check_flag(char	*str)
+pid_t	execute_env(t_cmd *cmd, int in, int out)
 {
-	if (!str || *str != '-')
-		return (false);
-	str++;
-	while (*str == 'n')
-		str++;
-	return ((*str == '\0'));
-}
-
-pid_t	execute_echo(t_cmd *cmd, int in, int out)
-{
-	bool	flag;
 	size_t	i;
+	char	**args;
 
-	flag = check_flag(cmd->args[1]);
-	i = flag;
-	while (cmd->args[++i])
-	{
-		write(out, cmd->args[i], str().size(cmd->args[i]));
-		if (cmd->args[i + 1])
-			write(out, " ", 1);
-	}
-	if (!flag)
+	i = -1;
+	args = hashmap(terminal()->env)->to_array();
+	while (args[++i])
+	{	
+		write(out, args[i], str().size(args[i]));
 		write(out, "\n", 1);
+	}
 	ft_close(out);
 	ft_close(in);
 	return (0);
