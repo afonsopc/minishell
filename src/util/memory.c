@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:15:49 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/17 12:42:00 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:08:53 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,12 @@ void	*ft_realloc(void *ptr, size_t newsize)
 		newptr[i] = tmp[i];
 	free(ptr);
 	return (newptr);
+}
+void	free_redirect(t_redirect *r)
+{
+	if (!r)
+		return ;
+	free_redirect(r->next);
+	free_list(r->args);
+	free(r);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 23:29:06 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:09:51 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	loop(void)
 	{
 		line = prompt();
 		if (!line)
-			continue ;
+			break	;
 		if (str().size(line))
 			add_history(line);
 		process(parse(line), true, (int [2]){0, 1});
