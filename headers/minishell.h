@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 23:27:59 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:22:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ struct s_token
 	int				balancing;
 	struct s_token	*left;
 	struct s_token	*right;
+	pid_t	pid;
 };
 
 //parse
@@ -69,7 +70,7 @@ t_terminal	*terminal(void);
 void		ft_exit(void);
 // execution
 char		*get_command_path(char *cmd);
-void		process(t_token	*token, bool wait, int fds[2]);
+void		process_token(t_token	*token);
 // cmd
 void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);

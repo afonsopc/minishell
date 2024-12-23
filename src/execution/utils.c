@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/19 21:29:58 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:56:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,17 @@ char	*get_command_path(char *cmd)
 	return (free(cmd), curr);
 }
 
-void	wait_fork(void)
+void	wait_token(t_token *token)
 {
 	int		ret;
 
-	waitpid(-1, &ret, 0);
+	if (token->type != CMD)
+		(wait_token(token->left), wait_token(token->right));
+	if (!token->pid)
+		return ;
+	waitpid(token->pid, &ret, 0);
 	terminal()->status = WEXITSTATUS(ret);
 	if (!WIFEXITED(ret))
 		terminal()->status = 130;
+	token->pid = 0;
 }
