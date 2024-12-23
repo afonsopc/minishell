@@ -6,11 +6,18 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:58:34 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:21:38 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:28:17 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	ft_close(int fd)
+{
+	if (fd > 2)
+		return (close(fd));
+	return (-1);
+}
 
 void print_list(char **args)
 {

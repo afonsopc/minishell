@@ -6,7 +6,7 @@
 /*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 14:22:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:40:01 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 typedef long long		t_size_ll;
 typedef struct s_token	t_token;
+typedef struct s_cmd	t_cmd;
 
 typedef enum e_cmd_type
 {
@@ -58,11 +59,12 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }	t_redirect;
 
-typedef struct s_cmd
+struct s_cmd
 {
 	char		**args;
+	pid_t		(*execute)(t_cmd *cmd, int in, int out);
 	t_redirect	*redirect;
-}	t_cmd;
+};
 
 struct s_token
 {
@@ -91,5 +93,6 @@ void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);
 //utils
 void		print_list(char **args);
+int			ft_close(int fd);
 
 #endif

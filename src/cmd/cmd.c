@@ -12,6 +12,9 @@
 
 #include <minishell.h>
 
+pid_t		execute(t_cmd *cmd, int in, int out);
+pid_t		execute_echo(t_cmd *cmd, int in, int out);
+
 static t_redirect	*new_redirect(char	**args)
 {
 	t_redirect	*r;
@@ -66,6 +69,14 @@ static void init_redirect(t_cmd	*cmd)
 	}
 }
 
+static	void	init_fun(t_cmd	*cmd)
+{
+	if (str().equals(*cmd->args, "echo"))
+		cmd->execute = execute_echo;
+	else
+		cmd->execute = execute;
+}
+
 t_cmd	*new_cmd(char **args)
 {
 	t_cmd	*cmd;
@@ -75,16 +86,8 @@ t_cmd	*new_cmd(char **args)
 		return (NULL);
 	cmd->args = args;
 	init_redirect(cmd);
+	init_fun(cmd);
 	if (cmd->args && *cmd->args);
 		cmd->args[0] = get_command_path(cmd->args [0]);
 	return (cmd);
-}
-
-void	free_cmd(t_cmd *cmd)
-{
-	if (!cmd)
-		return ;
-	free_list(cmd->args);
-	free_redirect(cmd->redirect);
-	free(cmd);
 }

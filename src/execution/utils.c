@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/23 14:56:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:35:51 by edos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,12 @@ void	wait_token(t_token *token)
 	if (!WIFEXITED(ret))
 		terminal()->status = 130;
 	token->pid = 0;
+}
+void	free_cmd(t_cmd *cmd)
+{
+	if (!cmd)
+		return ;
+	free_list(cmd->args);
+	free_redirect(cmd->redirect);
+	free(cmd);
 }
