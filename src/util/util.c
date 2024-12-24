@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:58:34 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/19 16:21:38 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:57:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void print_list(char **args)
+void	print_list(char **args)
 {
 	while (args && *args)
 	{
 		printf(":%s\n", *args);
 		args++;
 	}
-	
 }
 
 void	print_token(t_token	*t)

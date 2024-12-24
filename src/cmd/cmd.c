@@ -75,7 +75,7 @@ t_cmd	*new_cmd(char **args)
 		return (NULL);
 	cmd->args = args;
 	init_redirect(cmd);
-	if (cmd->args && *cmd->args);
+	if (cmd->args && *cmd->args)
 		cmd->args[0] = get_command_path(cmd->args [0]);
 	return (cmd);
 }

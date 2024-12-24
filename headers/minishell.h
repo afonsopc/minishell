@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 14:22:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:57:56 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ typedef enum	e_redirect_type
 
 typedef struct s_terminal
 {
-	void	*env;
-	t_token	*token;
-	int		status;
+	void				*env;
+	t_token				*token;
+	int					status;
+	struct sigaction	sa;
 }	t_terminal;
 
 typedef struct s_redirect
@@ -86,6 +87,7 @@ void		ft_exit(void);
 // execution
 char		*get_command_path(char *cmd);
 void		process_token(t_token	*token);
+void		loop(void);
 // cmd
 void		free_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(char **args);

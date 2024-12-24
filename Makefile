@@ -1,15 +1,15 @@
 NAME = minishell
 CC = cc
-CFLAGS =  #-g -fsanitize=address #-Wall -Wextra -Werror
-INCLUDES = -I headers
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+INCLUDES = -I headers -I /opt/homebrew/opt/readline/include -I .brew/opt/readline/include
 SRCS =   $(shell find . -type f -name "*.c")
 OBJS = 	$(SRCS:.c=.o)
-READLINE_FLAGS = -lreadline -lncurses -L .brew/opt/readline/lib -I .brew/opt/readline/include
+READLINE_FLAGS = -L /opt/homebrew/opt/readline/lib -lreadline -lncurses -L .brew/opt/readline/lib
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(READLINE_FLAGS)  $(INCLUDES)
+	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(READLINE_FLAGS) $(INCLUDES)
 
 $(OBJS_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)

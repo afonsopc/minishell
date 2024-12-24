@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:26:54 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/23 14:18:12 by afpachec         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:57:42 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ void	wait_token(t_token *token);
 char	*path_join(char *str1, char *str2);
 char	*get_command_path(char *cmd);
 pid_t	execute(t_cmd *cmd, int in, int out);
+void	unmask_signals(void);
+void	mask_signals(void);
 
 #endif
