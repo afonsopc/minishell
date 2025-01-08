@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:58:34 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 16:28:17 by edos-san         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:57:02 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void print_list(char **args)
 		printf(":%s\n", *args);
 		args++;
 	}
-	
 }
 
 void	print_token(t_token	*t)
