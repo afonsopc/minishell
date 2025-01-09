@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_util4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 12:23:17 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/09 01:55:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,32 @@ char	**__copy_array_n(char **values, long long n)
 	while (++i < n)
 		args[i] = str().copy(values[i]);
 	return (args);
+}
+
+long long	__atoll(const char *v)
+{
+	int					i;
+	unsigned long long	n;
+	long long			result;
+
+	n = 0;
+	if (!v)
+		return (set_errno(EINVAL), 0);
+	i = (v[0] != '-') - (v[0] == '-');
+	if (v[0] == '-' || v[0] == '+')
+		v++;
+	while (*v)
+	{
+		if (*v < '0' || *v > '9')
+			return (set_errno(EINVAL), 0);
+		else if ((n > (n * 10) + (*v - '0')))
+			return (set_errno(ERANGE), 0);
+		else
+			n = (n * 10) + (*v - '0');
+		v++;
+	}
+	result = n * i;
+	if (result < INT64_MIN || result > INT64_MAX)
+		return (set_errno(ERANGE), 0);
+	return (result);
 }

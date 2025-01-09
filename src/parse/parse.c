@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:39:36 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 17:41:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:46:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,17 @@ static bool	check(char **line, char *new, size_t *len)
 		(line[0][0] == '|' && line[0][1] == '|') ||
 		(line[0][0] == '&' && line[0][1] == '&'))
 	{
-		new[len[0]++] = '2';
+		new[len[0]++] = '\f';
 		new[len[0]++] = *line[0]++;
 		if (new[len[0] - 1] == *line[0])
 			new[len[0]++] = *line[0]++;
-		new[len[0]++] = '2';
+		new[len[0]++] = '\f';
 	}
 	else if (line[0][0] == ')' || line[0][0] == '(' || line[0][0] == '|')
 	{
-		new[len[0]++] = '2';
+		new[len[0]++] = '\f';
 		new[len[0]++] = *line[0]++;
-		new[len[0]++] = '2';
+		new[len[0]++] = '\f';
 	}
 	return (l != *len);
 }
@@ -98,7 +98,7 @@ t_token	*parse(char *line)
 	free_token(terminal()->token);
 	new = ft_calloc(str().size(line) * 10);
 	if (!new)
-		return NULL;
+		return (NULL);
 	while (*line)
 	{
 		if (flag == 0 && (*line == '\'' || *line == '\"'))
@@ -108,9 +108,9 @@ t_token	*parse(char *line)
 		if (check(&line, new, &len))
 			continue ;
 		if (!flag && str().is_space(*line))
-			*line = '2';
+			*line = '\f';
 		new[len++] = *line++;
 	}
-	terminal()->token = parse_tokens(str().split(new, "2"));
+	terminal()->token = parse_tokens(str().split(new, "\f"));
 	return (free(new), terminal()->token);
 }

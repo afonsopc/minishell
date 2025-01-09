@@ -1,42 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:46:41 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:51:42 by afpachec         ###   ########.fr       */
+/*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
+/*   Updated: 2025/01/08 22:02:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool	check_flag(char	*str)
+pid_t	execute_pwd(t_cmd *cmd, int in, int out)
 {
-	if (!str || *str != '-')
-		return (false);
-	str++;
-	while (*str == 'n')
-		str++;
-	return ((*str == '\0'));
-}
-
-pid_t	execute_echo(t_cmd *cmd, int in, int out)
-{
-	bool	flag;
-	size_t	i;
-
-	flag = check_flag(cmd->args[1]);
-	i = flag;
-	while (cmd->args[++i])
-	{
-		(str().fputstr)(out, cmd->args[i]);
-		if (cmd->args[i + 1])
-			(str().fputstr)(out, " ");
-	}
-	if (!flag)
-		(str().fputstr)(out, "\n");
+	(void)cmd;
+	printf("%s\n", (char *)hashmap(terminal()->env)->get_key("PWD"));
 	ft_close(out);
 	ft_close(in);
 	return (0);

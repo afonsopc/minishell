@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:46:41 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:51:42 by afpachec         ###   ########.fr       */
+/*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
+/*   Updated: 2025/01/09 02:58:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <execution.h>
 
-static bool	check_flag(char	*str)
+pid_t	execute_cd(t_cmd *cmd, int in, int out)
 {
-	if (!str || *str != '-')
-		return (false);
-	str++;
-	while (*str == 'n')
-		str++;
-	return ((*str == '\0'));
-}
+	char	*dir;
 
-pid_t	execute_echo(t_cmd *cmd, int in, int out)
-{
-	bool	flag;
-	size_t	i;
-
-	flag = check_flag(cmd->args[1]);
-	i = flag;
-	while (cmd->args[++i])
-	{
-		(str().fputstr)(out, cmd->args[i]);
-		if (cmd->args[i + 1])
-			(str().fputstr)(out, " ");
-	}
-	if (!flag)
-		(str().fputstr)(out, "\n");
+	if (cmd->args[1])
+		dir = cmd->args[1];
+	else
+		dir = hashmap(terminal()->env)->get_key("HOME");
+	if (chdir(dir) == -1)
+		printf("cd: %s: %s\n", dir, strerror(errno));
+	(hashmap(terminal()->env))->put(str().copy("PWD"), get_cwd());
 	ft_close(out);
 	ft_close(in);
 	return (0);

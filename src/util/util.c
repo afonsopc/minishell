@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:58:34 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 17:57:02 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:43:12 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_close(int fd)
 	return (-1);
 }
 
-void print_list(char **args)
+void	print_list(char **args)
 {
 	while (args && *args)
 	{
@@ -42,13 +42,20 @@ void	print_token(t_token	*t)
 	// else
 	// 	printf("ARGS: NULL\n");
 	// if (t->left)
-	// 	printf("left: %s / %s\n", t->left->type, t->left->args ? t->left->args[0] : "NULL");
+	// 	printf("left: %s / %s\n", t->left->type,
+	// 		t->left->args ? t->left->args[0] : "NULL");
 	// else
 	// 	printf("left: NULL\n");
 	// if (t->right)
-	// 	printf("right: %s / %s\n", t->right->type, t->right->args ? t->right->args[0] : "NULL");
+	// 	printf("right: %s / %s\n", t->right->type,
+	// 		t->right->args ? t->right->args[0] : "NULL");
 	// else
 	// 	printf("right: NULL\n");
 	printf("balancing: %i\n", t->balancing);
 	printf("===============\n");
+}
+
+void	set_errno(int err)
+{
+	errno = err;
 }

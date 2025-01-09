@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   string_util5.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/08 23:53:38 by afpachec         ###   ########.fr       */
+/*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
+/*   Updated: 2025/01/09 02:07:54 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <ft_string.h>
+#include <string_util.h>
+#include <stdio.h>
+#include <ft_util.h>
 
-int	main(int argc, char **argv, char **env)
+ssize_t	__fputstr(int fd, char *string)
 {
-	((void)argc, (void)argv);
-	init_env(env);
-	loop();
-	ft_exit();
+	return (write(fd, string, str().size(string)));
+}
+
+ssize_t	__fputnbr(int fd, long long number)
+{
+	char	*string;
+
+	string = str().itoa(number);
+	if (!string)
+		return (-1);
+	return (__fputstr(fd, string));
 }

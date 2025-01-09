@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 16:40:01 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:55:03 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef enum e_cmd_type
 	AND
 }	t_cmd_type;
 
-typedef enum	e_redirect_type
+typedef enum e_redirect_type
 {
 	IN,
 	OUT
-} t_redirect_type;
+}	t_redirect_type;
 
 typedef struct s_terminal
 {
@@ -63,7 +63,7 @@ typedef struct s_redirect
 struct s_cmd
 {
 	char		**args;
-	pid_t		(*execute)(t_cmd *cmd, int in, int out);
+	pid_t		(*execute)(t_cmd * cmd, int in, int out);
 	t_redirect	*redirect;
 };
 
@@ -74,7 +74,7 @@ struct s_token
 	int				balancing;
 	struct s_token	*left;
 	struct s_token	*right;
-	pid_t	pid;
+	pid_t			pid;
 };
 
 //parse

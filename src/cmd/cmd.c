@@ -13,6 +13,9 @@
 #include <minishell.h>
 
 pid_t		execute(t_cmd *cmd, int in, int out);
+pid_t		execute_cd(t_cmd *cmd, int in, int out);
+pid_t		execute_pwd(t_cmd *cmd, int in, int out);
+pid_t		execute_exit(t_cmd *cmd, int in, int out);
 pid_t		execute_echo(t_cmd *cmd, int in, int out);
 pid_t		execute_export(t_cmd *cmd, int in, int out);
 pid_t		execute_env(t_cmd *cmd, int in, int out);
@@ -33,7 +36,7 @@ static t_redirect	*new_redirect(char	**args)
 	return (r);
 }
 
-static int organizar(char	**args, size_t i)
+static int	organizar(char	**args, size_t i)
 {
 	size_t	start;
 
@@ -46,7 +49,7 @@ static int organizar(char	**args, size_t i)
 	return (0);
 }
 
-static void init_redirect(t_cmd	*cmd)
+static void	init_redirect(t_cmd	*cmd)
 {
 	size_t		i;
 	t_redirect	*end;
@@ -82,6 +85,12 @@ static	void	init_fun(t_cmd	*cmd)
 		cmd->execute = execute_env;
 	else if (str().equals(*cmd->args, "unset"))
 		cmd->execute = execute_unset;
+	else if (str().equals(*cmd->args, "cd"))
+		cmd->execute = execute_cd;
+	else if (str().equals(*cmd->args, "pwd"))
+		cmd->execute = execute_pwd;
+	else if (str().equals(*cmd->args, "exit"))
+		cmd->execute = execute_exit;
 	else
 		cmd->execute = execute;
 }
@@ -96,7 +105,7 @@ t_cmd	*new_cmd(char **args)
 	cmd->args = args;
 	init_redirect(cmd);
 	init_fun(cmd);
-	if (cmd->args && *cmd->args);
+	if (cmd->args && *cmd->args)
 		cmd->args[0] = get_command_path(cmd->args [0]);
 	return (cmd);
 }

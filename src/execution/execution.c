@@ -6,11 +6,11 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/23 18:03:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:58:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include <execution.h>
 
 pid_t	execute(t_cmd *cmd, int in, int out)
 {

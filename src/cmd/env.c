@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:55:27 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 18:13:12 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:51:52 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ pid_t	execute_env(t_cmd *cmd, int in, int out)
 	size_t	i;
 	char	**args;
 
+	(void)cmd;
 	i = -1;
 	args = hashmap(terminal()->env)->to_array();
 	while (args[++i])
-	{	
-		write(out, args[i], str().size(args[i]));
-		write(out, "\n", 1);
+	{
+		(str().fputstr)(out, args[i]);
+		(str().fputstr)(out, "\n");
 	}
 	ft_close(out);
 	ft_close(in);

@@ -6,32 +6,22 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/24 14:39:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:57:17 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include <execution.h>
+
+char	*get_prompt(void);
 
 static char	*prompt(void)
 {
-	char	*s1;
-	char	*s2;
-	char	*s3;
+	char	*prompt_str;
 	char	*line;
 
-	if (terminal()->status == 0)
-		return (readline("[mini@shell]: "));
-	s1 = str().itoa(terminal()->status);
-	if (!s1)
-		return (NULL);
-	s2 = str().join("[mini@shell [", s1);
-	if (!s2)
-		return (free(s1), NULL);
-	s3 = str().join(s2, "]]: ");
-	if (!s3)
-		return (free(s1), free(s2), NULL);
-	line = readline(s3);
-	(free(s1), free(s2), free(s3));
+	prompt_str = get_prompt();
+	line = readline(prompt_str);
+	(free(prompt_str));
 	return (line);
 }
 
@@ -74,3 +64,7 @@ void	unmask_signals(void)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }
+
+// TODO: A biblioteca da str() pode ter uma lista global com
+// todas as strings que foram alocadas para que caso algum malloc
+// falhe sejam todas libertadas antes de fechar.

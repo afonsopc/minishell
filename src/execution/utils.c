@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/23 17:09:27 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:56:33 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include <execution.h>
 
 char	*path_join(char *str1, char *str2)
 {
@@ -65,6 +65,7 @@ void	wait_token(t_token *token)
 		terminal()->status = 130;
 	token->pid = 0;
 }
+
 void	free_cmd(t_cmd *cmd)
 {
 	if (!cmd)
@@ -72,4 +73,11 @@ void	free_cmd(t_cmd *cmd)
 	free_list(cmd->args);
 	free_redirect(cmd->redirect);
 	free(cmd);
+}
+
+char	*get_cwd(void)
+{
+	char	buff[70000];
+
+	return (str().copy(getcwd(buff, 70000)));
 }

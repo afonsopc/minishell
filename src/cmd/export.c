@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:55:27 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 18:12:50 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:52:39 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	__isalnum(char c);
 
-static bool check_key(char *value)
+static bool	check_key(char *value)
 {
 	if (!value)
 		return (false);
 	while (__isalnum(*value))
-		value++;	
+		value++;
 	return (*value == '\0');
 }
 
-static void export_str(char *value)
+static void	export_str(char *value)
 {
 	char	**args;
 	size_t	len;
@@ -31,9 +31,9 @@ static void export_str(char *value)
 	args = str().split(value, "=");
 	if (!check_key(args[0]))
 	{
-		write(2, "export: `", 10);
-		write(2, args[0], str().size(args[0]));
-		write(2, "': not a valid identifier\n", 27); 
+		(str().fputstr)(2, "export: `");
+		(str().fputstr)(2, args[0]);
+		(str().fputstr)(2, "': not a valid identifier\n");
 		free_list(args);
 		return ;
 	}
@@ -44,25 +44,25 @@ static void export_str(char *value)
 		len++;
 	if (args[1])
 		args[1][len] = 0;
-	hashmap(terminal()->env)->put(str().copy(args[0]), str().copy(args[1]));
+	(hashmap(terminal()->env)->put)(str().copy(args[0]), str().copy(args[1]));
 	free_list(args);
 }
 
-static void print_export(int out)
+static void	print_export(int out)
 {
 	t_element	*tmp;
 
 	tmp = hashmap(terminal()->env)->get_element_index(0);
 	while (tmp)
 	{
-		write(out, "declare -x ", 12);
-		write(out, tmp->key, str().size(tmp->key));
+		(str().fputstr)(out, "declare -x ");
+		(str().fputstr)(out, tmp->key);
 		if (tmp->value)
 		{
-			write(out, "=", 1);
-			write(out, tmp->value, str().size(tmp->value));
+			(str().fputstr)(out, "=");
+			(str().fputstr)(out, tmp->value);
 		}
-		write(out, "\n", 1);
+		(str().fputstr)(out, "\n");
 		tmp = tmp->next;
 	}
 }

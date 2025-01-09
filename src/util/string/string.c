@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/18 12:12:53 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/09 02:06:08 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int	__isnumber(const char *s)
 {
 	if (!s)
 		return (0);
+	if (*s == '-')
+		s++;
 	while (*s)
 	{
 		if (!(*s >= '0' && *s <= '9'))
@@ -86,7 +88,8 @@ t_string	str(void)
 	static t_string	s = {
 		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
-		__isalnum, __split_spacer, __itoa, __atoi, __isnumber, __copy_array_n
+		__isalnum, __split_spacer, __itoa, __atoi, __atoll,
+		__isnumber, __copy_array_n, __fputstr, __fputnbr
 	};
 
 	return (s);
