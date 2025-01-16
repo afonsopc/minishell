@@ -16,11 +16,13 @@ static char	*get_status_bracket(void)
 {
 	char	*tmp;
 	char	*final;
+	char	*status;
 
 	final = str().copy("[");
 	tmp = final;
-	final = str().join(final, str().itoa(terminal()->status));
-	free(tmp);
+	status = str().itoa(terminal()->status);
+	final = str().join(final, status);
+	(free(status), free(tmp));
 	tmp = final;
 	final = str().join(final, "]");
 	free(tmp);
@@ -57,8 +59,9 @@ static char	*get_right_half(void)
 		final = str().join(final, " ");
 		free(tmp);
 		tmp2 = get_status_bracket();
+		tmp = final;
 		final = str().join(final, tmp2);
-		free(tmp2);
+		(free(tmp), free(tmp2));
 	}
 	tmp = final;
 	final = str().join(final, "] ");
