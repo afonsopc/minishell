@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:55:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:07:07 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ struct s_cmd
 {
 	char		**args;
 	pid_t		(*execute)(t_cmd * cmd, int in, int out);
+	int			in;
+	int			out;
 	t_redirect	*redirect;
 };
 

@@ -6,18 +6,21 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 02:56:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:20:53 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <execution.h>
 
-char	*get_cwd_short(void)
+char	*get_curr_dir(void)
 {
-	char	*full_cwd;
-	char	*home;
+	char	*cwd;
+	char	**dirs;
+	char	*curr_dir;
 
-	full_cwd = get_cwd();
-	home = hashmap(terminal()->env)->get_key("HOME");
-	return ((str().replace)(full_cwd, "~", home));
+	cwd = get_cwd();
+	dirs = (str().split)(cwd, "/");
+	curr_dir = str().copy(dirs[str().size_list(dirs) - 1]);
+	(free(cwd), free_list(dirs));
+	return (curr_dir);
 }

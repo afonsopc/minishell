@@ -6,11 +6,11 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:23 by afpachec          #+#    #+#             */
-/*   Updated: 2024/12/23 15:26:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:33:50 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process.h"
+#include <execution.h>
 
 void	process_or(t_token *token, int in, int out)
 {

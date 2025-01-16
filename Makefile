@@ -3,23 +3,22 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 INCLUDES = -I headers -I /opt/homebrew/opt/readline/include -I .brew/opt/readline/include
 SRCS =   $(shell find . -type f -name "*.c")
-OBJS = 	$(SRCS:.c=.o)
+OBJ_DIR = obj/
+OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 READLINE_FLAGS = -L /opt/homebrew/opt/readline/lib -lreadline -lncurses -L .brew/opt/readline/lib
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(READLINE_FLAGS) $(INCLUDES)
 
-$(OBJS_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: %.c
+	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(dir $@)
-	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
-
-$(LIBFT):
-	@make -s -C $(LIBFT_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJS) valgrind_log.txt readline.supp
+	@rm -rf $(OBJ_DIR) valgrind_log.txt readline.supp
 
 fclean: clean
 	@rm -rf $(NAME)

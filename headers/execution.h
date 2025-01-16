@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 02:57:52 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:33:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ char		*path_join(char *str1, char *str2);
 char		*get_command_path(char *cmd);
 pid_t		execute(t_cmd *cmd, int in, int out);
 char		*get_cwd(void);
-char		*get_cwd_short(void);
+char		*get_curr_dir(void);
+void		process_redirections(t_token *token);
+
+void		process(t_token	*token, int in, int out);
+void		process_and(t_token *token, int in, int out);
+void		process_cmd(t_token	*token, int in, int out);
+void		process_or(t_token *token, int in, int out);
+void		process_pipe(t_token *token, int in, int out);
 
 #endif

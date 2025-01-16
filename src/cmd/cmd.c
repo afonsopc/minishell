@@ -107,5 +107,7 @@ t_cmd	*new_cmd(char **args)
 	init_fun(cmd);
 	if (cmd->args && *cmd->args)
 		cmd->args[0] = get_command_path(cmd->args [0]);
+	cmd->in = -2;
+	cmd->out = -2;
 	return (cmd);
 }

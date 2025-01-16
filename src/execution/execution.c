@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 02:58:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:31:22 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ pid_t	execute(t_cmd *cmd, int in, int out)
 		execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
 		exit(127);
 	}
+	ft_close(in);
+	ft_close(out);
 	return (pid);
 }
