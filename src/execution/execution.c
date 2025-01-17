@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 18:31:22 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:06:38 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ pid_t	execute(t_cmd *cmd, int in, int out)
 
 	pid = fork();
 	if (!pid)
-	{
-		unmask_signals();
-		dup2(in, 0);
-		dup2(out, 1);
-		execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
-		exit(127);
-	}
+		(dup2(in, 0), dup2(out, 1));
 	ft_close(in);
 	ft_close(out);
-	return (pid);
+	if (pid)
+		return (pid);
+	unmask_signals();
+	execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
+	exit(127);
 }
