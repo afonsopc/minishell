@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g # -fsanitize=address
 INCLUDES = -I headers -I /opt/homebrew/opt/readline/include -I .brew/opt/readline/include
 SRCS =   $(shell find . -type f -name "*.c")
 OBJ_DIR = obj/

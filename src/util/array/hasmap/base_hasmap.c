@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_hasmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:13:48 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 18:03:39 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:45:48 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ char	**__to_str_hashmpa(void)
 	while (temp)
 	{
 		str_temp = str().join(temp->key, "=");
-		if (temp->value)
-			(this()->hashmapp)->array[i++] = str().join(str_temp, temp->value);
+		(this()->hashmapp)->array[i++] = str().join(str_temp, temp->value);
 		free(str_temp);
 		temp = temp->next;
 	}

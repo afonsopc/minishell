@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:44:16 by amaria-m          #+#    #+#             */
-/*   Updated: 2024/12/23 17:37:20 by edos-san         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:46:09 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*__join(const char *str1, const char *str2)
 	char	*s;
 	int		i;
 
+	if (!str2)
+		return (str().copy(str1));
 	s = ft_calloc(str().size((char *) str1) \
 	+ str().size((char *) str2) + 1);
 	if (!s)
