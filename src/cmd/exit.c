@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 03:06:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/19 12:33:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ pid_t	execute_exit(t_cmd *cmd, int in, int out)
 		(str().fputstr)(2, cmd->args[1]);
 		(str().fputstr)(2, ": numeric argument required\n");
 	}
-	(str().fputstr)(1, "exit\n");
 	ft_exit();
 	return (0);
 }
