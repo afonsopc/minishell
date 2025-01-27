@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/27 14:21:25 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:54:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,13 @@ void	kill_token(t_token *token)
 	if (!WIFEXITED(ret))
 		terminal()->status = 130;
 	token->pid = 0;
+}
+
+void	close_all_non_standart_fds(void)
+{
+	int	fd;
+
+	fd = 2;
+	while (++fd <= 1024)
+		ft_close(fd);
 }
