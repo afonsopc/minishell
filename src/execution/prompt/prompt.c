@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 02:57:17 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:42:57 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void	loop(void)
 	{
 		line = prompt();
 		if (!line)
-			break ;
+			ft_exit();
 		if (str().size(line))
 			add_history(line);
-		process_token(parse(line));
+		terminal()->token = parse(line);
+		process_token(terminal()->token);
 		free(line);
 	}
 }
@@ -46,6 +47,7 @@ void	handle_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
+		kill_token(terminal()->token);
 		rl_replace_line("", 0);
 		printf("\n");
 		rl_on_new_line();
