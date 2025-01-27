@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 18:33:50 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:38:30 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	process_cmd(t_token	*token, int in, int out)
 {
 	update_fd(&in, token->cmd->in);
 	update_fd(&out, token->cmd->out);
-	if (token->cmd->execute)
-		token->pid = token->cmd->execute(token->cmd, in, out);
+	if (!token->cmd->execute)
+		return ;
+	token->pid = token->cmd->execute(token->cmd, in, out);
 }
