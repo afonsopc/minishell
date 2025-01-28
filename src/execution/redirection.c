@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/28 00:14:40 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:55:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_redirect_fd(t_redirect *redirect)
 	else if (redirect->type == IN)
 		return (open(redirect->args[1], O_RDONLY));
 	else
-		return (open(redirect->args[1], O_WRONLY | O_CREAT, 0644));
+		return (open(redirect->args[1], O_WRONLY | O_CREAT | O_TRUNC, 0644));
 }
 
 static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
