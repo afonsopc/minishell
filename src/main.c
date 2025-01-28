@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:55:26 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/27 15:55:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:57:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv, char **env)
 {
+	((void)argc, (void)argv);
 	init_env(env);
 	loop();
 	ft_exit();

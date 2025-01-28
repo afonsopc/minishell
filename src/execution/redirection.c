@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 18:38:49 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/28 00:14:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,40 @@
 
 static int	get_redirect_fd(t_redirect *redirect)
 {
-	if (redirect->type == IN)
-		return (open(redirect->args[1], O_RDONLY));
+	char	*redirect_in_content;
+	int		pipe_fds[2];
+
 	if (str().size(redirect->args[0]) == 2)
-		return (open(redirect->args[1], O_WRONLY | O_CREAT | O_APPEND, 0644));
-	return (open(redirect->args[1], O_WRONLY | O_CREAT, 0644));
+	{
+		if (redirect->type == IN)
+		{
+			redirect_in_content = redirect_in_loop(redirect->args[1]);
+			if (!redirect_in_content)
+				return (-1);
+			pipe(pipe_fds);
+			(str().fputstr)(pipe_fds[1], redirect_in_content);
+			free(redirect_in_content);
+			ft_close(pipe_fds[1]);
+			return (pipe_fds[0]);
+		}
+		else
+			return (open(redirect->args[1],
+					O_WRONLY | O_CREAT | O_APPEND, 0644));
+	}
+	else if (redirect->type == IN)
+		return (open(redirect->args[1], O_RDONLY));
+	else
+		return (open(redirect->args[1], O_WRONLY | O_CREAT, 0644));
 }
 
-static void	process_redirection(t_cmd *cmd, t_redirect *redirect)
+static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 {
-	int	*fd;
+	int		*fd;
+	char	*error_prompt;
+	char	*tmp;
 
 	if (!cmd || !redirect)
-		return ;
+		return (true);
 	if (redirect->type == IN)
 		fd = &cmd->in;
 	else
@@ -35,24 +56,23 @@ static void	process_redirection(t_cmd *cmd, t_redirect *redirect)
 	*fd = get_redirect_fd(redirect);
 	if (*fd == -1 && cmd->args[0])
 	{
-		(str().fputstr)(2, redirect->args[1]);
-		(str().fputstr)(2, ": ");
-		(str().fputstr)(2, strerror(errno));
-		(str().fputstr)(2, "\n");
+		error_prompt = str().join("minishell: ", cmd->args[0]);
+		tmp = error_prompt;
+		error_prompt = str().join(error_prompt, ": ");
+		free(tmp);
+		perror(error_prompt);
 		terminal()->status = 1;
+		return (false);
 	}
-	process_redirection(cmd, redirect->next);
+	return (true && process_redirection(cmd, redirect->next));
 }
 
-// TODO: o doc cenas é quando o redirect é 2 pra esquerda e o argumento é o terminator do doc
-
-void	process_redirections(t_token *token)
+bool	process_redirections(t_token *token)
 {
 	if (!token)
-		return ;
-	process_redirections(token->left);
-	process_redirections(token->right);
+		return (true);
 	if (token->type != CMD)
-		return ;
-	process_redirection(token->cmd, token->cmd->redirect);
+		return (process_redirections(token->left)
+			&& process_redirections(token->right));
+	return (process_redirection(token->cmd, token->cmd->redirect));
 }

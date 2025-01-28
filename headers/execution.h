@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/27 14:54:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:23:44 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ char		*get_command_path(char *cmd);
 pid_t		execute(t_cmd *cmd, int in, int out);
 char		*get_cwd(void);
 char		*get_curr_dir(void);
-void		process_redirections(t_token *token);
+bool		process_redirections(t_token *token);
 void		close_all_non_standart_fds(void);
+char		*redirect_in_loop(char *terminator);
 
 void		process(t_token	*token, int in, int out);
 void		process_and(t_token *token, int in, int out);

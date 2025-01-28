@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 17:07:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/01/27 22:31:04 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <termios.h>
+# include <dirent.h>
+# include <sys/stat.h>
 
 typedef long long		t_size_ll;
 typedef struct s_token	t_token;
