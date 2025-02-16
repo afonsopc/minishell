@@ -42,6 +42,8 @@ typedef struct s_string
 	char		**(*copy_array_n)(char **values, long long n);
 	ssize_t		(*fputstr)(int fd, char *string);
 	ssize_t		(*fputnbr)(int fd, long long number);
+	ssize_t	    (*count_list)(char **lst);
+	char	    **(*join_list)(char **lst1, char **lst2);
 }	t_string;
 
 t_string	str(void);

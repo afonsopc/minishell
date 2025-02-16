@@ -14,6 +14,7 @@
 # define EXECUTION_H
 
 # include <minishell.h>
+# include <dirent.h>
 
 void		unmask_signals(void);
 void		mask_signals(void);

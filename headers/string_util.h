@@ -33,5 +33,7 @@ int			__atoi(const char *v);
 long long	__atoll(const char *v);
 ssize_t		__fputstr(int fd, char *string);
 ssize_t		__fputnbr(int fd, long long number);
+ssize_t	    __count_list(char **lst);
+char	    **__join_list(char **lst1, char **lst2);
 
 #endif

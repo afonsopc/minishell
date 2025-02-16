@@ -88,8 +88,8 @@ t_string	str(void)
 	static t_string	s = {
 		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
-		__isalnum, __split_spacer, __itoa, __atoi, __atoll,
-		__isnumber, __copy_array_n, __fputstr, __fputnbr
+		__isalnum, __split_spacer, __itoa, __atoi, __atoll, __isnumber,
+		__copy_array_n, __fputstr, __fputnbr, __count_list, __join_list
 	};
 
 	return (s);
