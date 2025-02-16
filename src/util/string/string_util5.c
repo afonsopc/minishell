@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:07:54 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 21:52:35 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ ssize_t	__count_list(char **lst)
 	if (!lst)
 		return (count);
 	while (lst[++count])
-		;;
+		;
 	return (count);
 }
 
-// TODO: NOT WORKING :(
+void	print_list(char **lst);
+
 char	**__join_list(char **lst1, char **lst2)
 {
 	char	**new_lst;
@@ -52,14 +53,16 @@ char	**__join_list(char **lst1, char **lst2)
 
 	lst1_size = __count_list(lst1);
 	lst2_size = __count_list(lst2);
-	((lst1_size == -1 && ++lst1_size) || (lst2_size == -1 && ++lst2_size));
-	printf("%li, %li\n", lst1_size, lst1_size);
+	if (lst1_size == -1)
+		lst1_size = 0;
+	if (lst2_size == -1)
+		lst2_size = 0;
 	new_lst = ft_calloc(sizeof(char *) * (lst1_size + lst2_size + 1));
 	i = -1;
 	while (++i < lst1_size)
 		new_lst[i] = str().copy(lst1[i]);
-	i = lst1_size - 1;
-	while (++i - lst1_size < lst2_size)
-		new_lst[i] = str().copy(lst2[i]);
+	i = -1;
+	while (++i < lst2_size)
+		new_lst[i + lst1_size] = str().copy(lst2[i]);
 	return (new_lst);
 }
