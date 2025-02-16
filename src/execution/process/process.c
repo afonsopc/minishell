@@ -28,7 +28,17 @@ void	process(t_token	*token, int in, int out)
 
 void	process_token(t_token	*token)
 {
-	if (!token || !process_redirections(token))
+	pid_t	pid;
+	int		ret;
+
+	if (!token)
+		return ;
+	pid = fork();
+	if (!pid)
+		exit(process_redirections(token));
+	waitpid(pid, &ret, 0);
+	ret = WEXITSTATUS(ret);
+	if (!ret)
 		return ;
 	process(token, 0, 1);
 	wait_token(token);

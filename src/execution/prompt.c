@@ -16,9 +16,9 @@ void	loop(void)
 {
 	char	*line;
 
-	mask_signals();
 	while (1)
 	{
+		mask_signals();
 		line = readline("minishell$ ");
 		if (!line)
 			ft_exit();
@@ -37,6 +37,7 @@ char	*redirect_in_loop(char *terminator)
 	char	*tmp;
 
 	lines = NULL;
+	unmask_signals();
 	while (1)
 	{
 		line = readline("> ");

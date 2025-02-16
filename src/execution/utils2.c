@@ -35,7 +35,7 @@ void	kill_token(t_token *token)
 		(kill_token(token->left), kill_token(token->right));
 	if (!token->pid)
 		return ;
-	kill(token->pid, SIGINT);
+	ret = kill(token->pid, SIGINT);
 	terminal()->status = WEXITSTATUS(ret);
 	if (!WIFEXITED(ret))
 		terminal()->status = 130;
