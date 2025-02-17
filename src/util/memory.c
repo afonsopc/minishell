@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 22:15:49 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:46:24 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:11:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	*ft_realloc(void *ptr, size_t newsize)
 	free(ptr);
 	return (newptr);
 }
+
 void	free_redirect(t_redirect *r)
 {
 	if (!r)
