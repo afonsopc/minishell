@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2025/02/16 21:52:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:40:28 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ ssize_t	__count_list(char **lst)
 		;
 	return (count);
 }
-
-void	print_list(char **lst);
 
 char	**__join_list(char **lst1, char **lst2)
 {

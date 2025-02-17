@@ -6,30 +6,38 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/28 16:55:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:29:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <execution.h>
 
-static int	get_redirect_fd(t_redirect *redirect)
+static int	get_heredoc(char *terminator)
 {
 	char	*redirect_in_content;
 	int		pipe_fds[2];
+	pid_t	pid;
 
+	pipe(pipe_fds);
+	pid = fork();
+	if (!pid)
+	{
+		redirect_in_content = redirect_in_loop(terminator);
+		(str().fputstr)(pipe_fds[1], redirect_in_content);
+		free(redirect_in_content);
+		ft_close(pipe_fds[1]);
+		exit(0);
+	}
+	ft_close(pipe_fds[1]);
+	return (pipe_fds[0]);
+}
+
+static int	get_redirect_fd(t_redirect *redirect)
+{
 	if (str().size(redirect->args[0]) == 2)
 	{
 		if (redirect->type == IN)
-		{
-			redirect_in_content = redirect_in_loop(redirect->args[1]);
-			if (!redirect_in_content)
-				return (-1);
-			pipe(pipe_fds);
-			(str().fputstr)(pipe_fds[1], redirect_in_content);
-			free(redirect_in_content);
-			ft_close(pipe_fds[1]);
-			return (pipe_fds[0]);
-		}
+			return (get_heredoc(redirect->args[1]));
 		else
 			return (open(redirect->args[1],
 					O_WRONLY | O_CREAT | O_APPEND, 0644));

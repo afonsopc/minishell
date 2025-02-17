@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:38:14 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 03:02:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:42:18 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_string
 	int			(*size_list)(char **list);
 	char		*(*replace)(const char *str1,
 			const char *str2, const char *hey);
+	int			(*isalpha)(char c);
+	int			(*isnumeric)(char c);
 	int			(*isalnum)(char c);
 	char		**(*split)(char const *s, char *spacer);
 	char		*(*itoa)(long long n);
@@ -42,8 +44,8 @@ typedef struct s_string
 	char		**(*copy_array_n)(char **values, long long n);
 	ssize_t		(*fputstr)(int fd, char *string);
 	ssize_t		(*fputnbr)(int fd, long long number);
-	ssize_t	    (*count_list)(char **lst);
-	char	    **(*join_list)(char **lst1, char **lst2);
+	ssize_t		(*count_list)(char **lst);
+	char		**(*join_list)(char **lst1, char **lst2);
 }	t_string;
 
 t_string	str(void);

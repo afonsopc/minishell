@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:06:08 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:39:59 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,9 @@ t_string	str(void)
 	static t_string	s = {
 		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
-		__isalnum, __split_spacer, __itoa, __atoi, __atoll, __isnumber,
-		__copy_array_n, __fputstr, __fputnbr, __count_list, __join_list
+		__isalpha, __isnumeric, __isalnum, __split_spacer, __itoa, __atoi,
+		__atoll, __isnumber, __copy_array_n, __fputstr, __fputnbr, __count_list,
+		__join_list
 	};
 
 	return (s);

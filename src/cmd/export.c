@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:55:27 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:52:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:46:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@ int	__isalnum(char c);
 
 static bool	check_key(char *value)
 {
+	size_t	alpha_count;
+
 	if (!value)
 		return (false);
-	while (__isalnum(*value))
+	alpha_count = 0;
+	while ((str().isalnum)(*value))
+	{
+		alpha_count += (str().isalpha)(*value);
 		value++;
-	return (*value == '\0');
+	}
+	return (!*value && alpha_count);
 }
 
 static void	export_str(char *value)
@@ -35,6 +41,7 @@ static void	export_str(char *value)
 		(str().fputstr)(2, args[0]);
 		(str().fputstr)(2, "': not a valid identifier\n");
 		free_list(args);
+		terminal()->status = 1;
 		return ;
 	}
 	if (str().contains(value, "=") && !args[1])

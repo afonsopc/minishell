@@ -33,6 +33,11 @@ v: re readline.supp
 vv: $(NAME) readline.supp
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=readline.supp ./minishell
 
+test: re
+	@git clone https://github.com/LucasKuhn/minishell_tester
+	@cd minishell_tester && ./tester && cd ..
+	@rm -rf minishell_tester
+
 readline.supp:
 	@wget https://raw.githubusercontent.com/benjaminbrassart/minishell/master/readline.supp 2> /dev/null 1> /dev/null
 

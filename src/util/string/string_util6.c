@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   string_util6.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/16 23:22:04 by afpachec         ###   ########.fr       */
+/*   Created: 2025/02/16 23:40:35 by afpachec          #+#    #+#             */
+/*   Updated: 2025/02/16 23:40:46 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <execution.h>
+#include <ft_string.h>
+#include <string_util.h>
+#include <stdio.h>
+#include <ft_util.h>
 
-void	update_fd(int *fd, int new_fd)
+int	__isalpha(char c)
 {
-	if (new_fd == -2)
-		return ;
-	ft_close(*fd);
-	*fd = new_fd;
+	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
 
-void	process_cmd(t_token	*token, int in, int out)
+int	__isnumeric(char c)
 {
-	update_fd(&in, token->cmd->in);
-	update_fd(&out, token->cmd->out);
-	process_wildcards(token->cmd);
-	if (!token->cmd->execute)
-		return ;
-	token->pid = token->cmd->execute(token->cmd, in, out);
+	return ((c >= '0' && c <= '9'));
+}
+
+int	__isalnum(char c)
+{
+	return (__isalpha(c) || __isnumeric(c));
 }

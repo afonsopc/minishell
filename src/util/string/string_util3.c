@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 15:38:15 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/09 02:03:53 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:40:14 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ static char	*convert_base(char *s, long long n, char *base, int size_base)
 	*s++ = base[(n % size_base) * ((n > 0) - (n < 0))];
 	*s = 0;
 	return (s);
-}
-
-int	__isalnum(char c)
-{
-	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') \
-	|| (c >= '0' && c <= '9'));
 }
 
 char	**__split_spacer(char const *str1, char *spacer)

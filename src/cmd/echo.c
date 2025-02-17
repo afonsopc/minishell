@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:46:41 by edos-san          #+#    #+#             */
-/*   Updated: 2025/01/28 00:15:57 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 22:13:24 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ pid_t	execute_echo(t_cmd *cmd, int in, int out)
 	bool	flag;
 	size_t	i;
 
-	// if (str().equals(cmd->args[1], "$?"))
-	// {
-	// 	(str().fputnbr)(out, terminal()->status);
-	// 	(str().fputstr)(out, "\n");
-	// 	ft_close(out);
-	// 	ft_close(in);
-	// 	return (0);
-	// }
+	if (str().equals(cmd->args[1], "$?"))
+	{
+		(str().fputnbr)(out, terminal()->status);
+		(str().fputstr)(out, "\n");
+		ft_close(out);
+		ft_close(in);
+		return (0);
+	}
 	flag = check_flag(cmd->args[1]);
 	i = flag;
 	while (cmd->args[++i])

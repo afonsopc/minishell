@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/09 02:56:33 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:50:01 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*get_command_path(char *cmd)
 	if (access(cmd, X_OK) != -1)
 		return (cmd);
 	i = -1;
+	if (!hashmap(terminal()->env)->get_key("PATH"))
+		return (cmd);
 	path = str().split(hashmap(terminal()->env)->get_key("PATH"), ":");
 	if (!path)
 		return (cmd);
