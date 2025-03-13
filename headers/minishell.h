@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 14:55:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/13 19:37:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void					advance_lexer(t_lexer *lexer);
 void					skip_whitespace(t_lexer *lexer);
 char					*read_operator(t_lexer *lexer);
 char					*read_redirection(t_lexer *lexer);
-char					*read_string(t_lexer *lexer, char quote);
+char					*read_single_quote(t_lexer *lexer);
+char					*read_double_quote(t_lexer *lexer);
 char					*read_word(t_lexer *lexer);
 char					*read_parenthesis(t_lexer *lexer);
 char					*handle_special_char(t_lexer *lexer);
@@ -128,5 +129,6 @@ t_cmd					*new_cmd(char **args);
 // utils
 void					print_list(char **args);
 int						ft_close(int fd);
+void					*ft_memset(void *s, int c, size_t n);
 
 #endif

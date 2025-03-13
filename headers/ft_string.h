@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:27:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:11:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_string
 	ssize_t		(*fputnbr)(int fd, long long number);
 	ssize_t		(*count_list)(char **lst);
 	char		**(*join_list)(char **lst1, char **lst2);
+	int			(*starts_with)(const char *str, const char *prefix);
 }	t_string;
 
 t_string	str(void);

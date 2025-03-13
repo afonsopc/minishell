@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:42:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 13:42:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:25:10 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 char	**__copy_array_n(char **values, long long n);
 
-static size_t	ft_size(const char *s)
+size_t	ft_size(const char *s)
 {
 	int	i;
 
@@ -90,7 +90,7 @@ t_string	str(void)
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
 		__isalpha, __isnumeric, __isalnum, __split_spacer, __itoa, __atoi,
 		__atoll, __isnumber, __copy_array_n, __fputstr, __fputnbr, __count_list,
-		__join_list
+		__join_list, __starts_with
 	};
 
 	return (s);
