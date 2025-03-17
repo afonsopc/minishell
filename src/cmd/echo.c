@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 13:54:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:51:03 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ pid_t	execute_echo(t_cmd *cmd, int in, int out)
     int i;
 
     flag = check_flag(cmd->args[1]);
+	i = 0;
     if (flag)
-		i = 1;
-	else
-		i = 0;
+		i++;
     while (cmd->args[++i])
     {
         (str().fputstr)(out, cmd->args[i]);
         if (cmd->args[i + 1])
             (str().fputstr)(out, " ");
     }
-    if (!flag)
-        (str().fputstr)(out, "\n");
+    if (flag)
+		printf("\033[7m%%\033[0m\n");
+	else
+		(str().fputstr)(out, "\n");
     ft_close(out);
     ft_close(in);
     return (0);
