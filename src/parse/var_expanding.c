@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:05:50 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 13:48:41 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:00:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*process_arg_expansion(char *arg)
 	if (str().equals(arg, "$?"))
 		return (expand_exit_status());
 	if (str().starts_with(arg, "sq:"))
-		return (str().copy(arg));
+		return (str().copy(arg + 3));
 	if (str().starts_with(arg, "dq:"))
 		return (expand_arg(arg, 1));
 	if (str().contains(arg, "$"))

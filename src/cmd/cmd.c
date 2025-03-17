@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:36:49 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:51:37 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,23 @@ static	void	init_fun(t_cmd	*cmd)
 t_cmd	*new_cmd(char **args)
 {
 	t_cmd	*cmd;
+	int		i;
+	char	*expanded;
 
 	cmd = ft_calloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
+	i = 0;
+	while (args[i])
+	{
+		if (i > 0)
+		{
+			expanded = process_arg_expansion(args[i]);
+			free(args[i]);
+			args[i] = expanded;
+		}
+		i++;
+	}
 	cmd->args = args;
 	init_redirect(cmd);
 	init_fun(cmd);
