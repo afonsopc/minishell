@@ -6,16 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:05:50 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 15:20:38 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:26:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*expand_exit_status(void)
-{
-	return (str().itoa(terminal()->status));
-}
 
 char	*expand_env_variable(char *var_name)
 {
@@ -67,7 +62,7 @@ char	*expand_arg(char *arg, int quoted)
 			ft_memset(var_name, 0, 256);
 			if (arg[i] == '?')
 			{
-				value = expand_exit_status();
+				value = str().itoa(terminal()->status);
 				i++;
 			}
 			else
@@ -93,7 +88,7 @@ char	*process_arg_expansion(char *arg)
 	if (!arg || !*arg)
 		return (str().copy(""));
 	if (str().equals(arg, "$?"))
-		return (expand_exit_status());
+		return (str().itoa(terminal()->status));
 	if (str().starts_with(arg, "sq:"))
 		return (str().copy(arg + 3));
 	if (str().starts_with(arg, "dq:"))
