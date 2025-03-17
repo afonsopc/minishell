@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 19:27:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:03:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ ssize_t		__fputnbr(int fd, long long number);
 ssize_t		__count_list(char **lst);
 char		**__join_list(char **lst1, char **lst2);
 int			__starts_with(const char *str, const char *prefix);
-size_t		ft_size(const char *s);
+size_t		ft_strlen(const char *s);
+size_t		ft_strlcat(char *dst, const char *src, size_t size);
 
 #endif

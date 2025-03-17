@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:42:16 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 18:25:10 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:29:06 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 char	**__copy_array_n(char **values, long long n);
 
-size_t	ft_size(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ char	*ft_copy(const char *s)
 	if (!s)
 		return (NULL);
 	i = -1;
-	copy = ft_calloc(ft_size(s) + 1);
+	copy = ft_calloc(str().size(s) + 1);
 	while (copy && s[++i])
 		copy[i] = s[i];
 	copy[i] = 0;
@@ -86,7 +86,7 @@ static int	__isnumber(const char *s)
 t_string	str(void)
 {
 	static t_string	s = {
-		ft_contains, ft_size, ft_copy, __join, __copy_n, __str_trim,
+		ft_contains, ft_strlen, ft_copy, __join, __copy_n, __str_trim,
 		__equals, __equals_n, __is_space, __strnstr, __size_list, __replace,
 		__isalpha, __isnumeric, __isalnum, __split_spacer, __itoa, __atoi,
 		__atoll, __isnumber, __copy_array_n, __fputstr, __fputnbr, __count_list,

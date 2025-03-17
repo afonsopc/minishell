@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:41:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 13:41:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:26:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,24 @@ char	**__join_list(char **lst1, char **lst2)
 	while (++i < lst2_size)
 		new_lst[i + lst1_size] = str().copy(lst2[i]);
 	return (new_lst);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
+
+	i = 0;
+	dst_len = str().size(dst);
+	src_len = str().size(src);
+	if (size <= dst_len)
+		return (size + src_len);
+	while (src[i] && dst_len + i < size - 1)
+	{
+		dst[dst_len + i] = src[i];
+		i++;
+	}
+	dst[dst_len + i] = '\0';
+	return (dst_len + src_len);
 }
