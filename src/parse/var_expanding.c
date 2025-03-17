@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:05:50 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 14:00:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:20:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ char	*expand_arg(char *arg, int quoted)
 	j = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '$' && arg[i + 1])
+		if (arg[i] == '\\' && arg[i + 1] == '$')
+		{
+			result[j++] = '$';
+			i += 2;
+		}
+		else if (arg[i] == '$' && arg[i + 1])
 		{
 			i++;
 			ft_memset(var_name, 0, 256);
