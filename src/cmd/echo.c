@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 14:51:03 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:33:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ pid_t	execute_echo(t_cmd *cmd, int in, int out)
 		(str().fputstr)(out, "\n");
     ft_close(out);
     ft_close(in);
+	terminal()->status = 0;
     return (0);
 }
