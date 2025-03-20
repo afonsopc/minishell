@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 14:20:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:54:24 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,12 @@ t_cmd	*new_cmd(char **args)
 	cmd = ft_calloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
+    if (args[0] && str().starts_with(args[0], "$"))
+    {
+        expanded = process_arg_expansion(args[0]);
+        free(args[0]);
+        args[0] = expanded;
+    }
 	i = 0;
 	while (args[i])
 	{
