@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:36:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:12:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ static bool	check_key(char *value)
 
 	if (!value)
 		return (false);
-	alpha_count = 0;
-	while ((str().isalnum)(*value))
+	if (!((str().isalpha)(*value) || *value == '_'))
+		return (false);
+	alpha_count = (str().isalpha)(*value);
+	value++;
+	while (*value && ((str().isalnum)(*value) || *value == '_'))
 	{
 		alpha_count += (str().isalpha)(*value);
 		value++;
@@ -37,9 +40,10 @@ static void	export_str(char *value)
 	args = str().split(value, "=");
 	if (!check_key(args[0]))
 	{
-		(str().fputstr)(2, "export: `");
+		(str().fputstr)(2, "export: ");
+		(str().fputstr)(2, "not an identifier: ");
 		(str().fputstr)(2, args[0]);
-		(str().fputstr)(2, "': not a valid identifier\n");
+		(str().fputstr)(2, "\n");
 		free_list(args);
 		terminal()->status = 1;
 		return ;

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 13:49:49 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:20:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ t_cmd	*new_cmd(char **args)
 		}
 		i++;
 	}
+	process_env_assignments(args);
 	cmd->args = args;
 	init_redirect(cmd);
 	init_fun(cmd);

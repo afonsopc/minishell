@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 13:46:21 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:20:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void					free_redirect(t_redirect *r);
 t_token					*new_token(char *type, t_cmd *cmd);
 // env
 void					init_env(char **env);
+void					process_env_assignments(char **args);
 // terminal
 t_terminal				*terminal(void);
 void					ft_exit(void);
