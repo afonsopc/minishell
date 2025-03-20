@@ -76,6 +76,7 @@ static void	base_remove_element(t_element	*e)
 			if (e->destroy)
 				e->destroy(e);
 			(this()->array)->size--;
+			return ;
 		}
 		prev = atual;
 		atual = atual->next;
