@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:32:12 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 14:55:19 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:46:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,11 @@
 static void	set_token_type(t_token *t, char *type)
 {
 	if (str().equals("|", type))
-	{
 		t->type = PIPE;
-		t->balancing = 1;
-	}
 	else if (str().equals("||", type))
-	{
 		t->type = OR;
-		t->balancing = 1;
-	}
 	else if (str().equals("&&", type))
-	{
 		t->type = AND;
-		t->balancing = 1;
-	}
 	else
 		t->type = CMD;
 }

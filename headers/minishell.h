@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 13:48:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:46:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ struct					s_token
 {
 	t_cmd_type			type;
 	t_cmd				*cmd;
-	int					balancing;
 	struct s_token		*left;
 	struct s_token		*right;
 	pid_t				pid;
