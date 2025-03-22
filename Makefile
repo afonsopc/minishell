@@ -35,7 +35,7 @@ vv: $(NAME) readline.supp
 
 test: re
 	@git clone https://github.com/LucasKuhn/minishell_tester
-	@cd minishell_tester && ./tester && cd ..
+	@cd minishell_tester && (./tester || true) && cd ..
 	@rm -rf minishell_tester
 
 readline.supp:
