@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:31:20 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 13:59:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 13:51:24 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*read_double_quote(t_lexer *lexer)
 	content = str().copy_n(lexer->input + start, lexer->pos - start);
 	if (lexer->curr_char == '"')
 		advance_lexer(lexer);
-	result = str().join("dq:", content);
+	result = str().join("\f\f", content);
 	free(content);
 	return (result);
 }
@@ -85,7 +85,7 @@ char	*read_single_quote(t_lexer *lexer)
 	content = str().copy_n(lexer->input + start, lexer->pos - start);
 	if (lexer->curr_char == '\'')
 		advance_lexer(lexer);
-	result = str().join("sq:", content);
+	result = str().join("\f", content);
 	free(content);
 	return (result);
 }

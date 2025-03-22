@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/16 23:50:01 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/22 13:21:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_command_path(char *cmd)
 	char	*curr;
 	size_t	i;
 
-	if (access(cmd, X_OK) != -1)
+	if (!cmd[0] || access(cmd, X_OK) != -1)
 		return (cmd);
 	i = -1;
 	if (!hashmap(terminal()->env)->get_key("PATH"))

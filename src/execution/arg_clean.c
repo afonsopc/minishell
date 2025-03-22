@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   arg_clean.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 21:24:25 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/22 13:14:00 by paude-so         ###   ########.fr       */
+/*   Created: 2025/03/22 13:30:29 by paude-so          #+#    #+#             */
+/*   Updated: 2025/03/22 13:45:03 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <execution.h>
 
-void	process_pipe(t_token *token, int in, int out)
+void	arg_clean(t_cmd *cmd)
 {
-	int	pipe_fds[2];
-
-	pipe(pipe_fds);
-	process(token->left, in, pipe_fds[1]);
-	process(token->right, pipe_fds[0], out);
-	wait_token(token);
+	if (!cmd->args || !cmd->args[0] || cmd->args[0][0])
+		return ;
+	printf("args[0] = %s\n", cmd->args[0]);
+	free(cmd->args[0]);
+	++cmd->args;
+	arg_clean(cmd);
 }

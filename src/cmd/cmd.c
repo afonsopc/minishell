@@ -6,11 +6,12 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 14:54:24 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 13:48:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <execution.h>
 
 pid_t		execute(t_cmd *cmd, int in, int out);
 pid_t		execute_cd(t_cmd *cmd, int in, int out);
@@ -104,27 +105,19 @@ t_cmd	*new_cmd(char **args)
 	cmd = ft_calloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-    if (args[0] && str().starts_with(args[0], "$"))
-    {
-        expanded = process_arg_expansion(args[0]);
-        free(args[0]);
-        args[0] = expanded;
-    }
 	i = 0;
 	while (args[i])
 	{
-		if (i > 0)
-		{
-			expanded = process_arg_expansion(args[i]);
-			free(args[i]);
-			args[i] = expanded;
-		}
+		expanded = process_arg_expansion(args[i]);
+		free(args[i]);
+		args[i] = expanded;
 		i++;
 	}
 	process_env_assignments(args);
 	cmd->args = args;
 	init_redirect(cmd);
 	init_fun(cmd);
+	arg_clean(cmd);
 	if (cmd->args && *cmd->args)
 		cmd->args[0] = get_command_path(cmd->args [0]);
 	cmd->in = -2;

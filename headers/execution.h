@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/16 21:55:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/22 13:37:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool		process_redirections(t_token *token);
 void		close_all_non_standart_fds(void);
 char		*redirect_in_loop(char *terminator);
 void		process_wildcards(t_cmd *cmd);
+void		arg_clean(t_cmd *cmd);
 
 void		process(t_token	*token, int in, int out);
 void		process_and(t_token *token, int in, int out);

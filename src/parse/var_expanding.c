@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:05:50 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/17 15:26:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:10:31 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	copy_variable_name(char *dest, char *src, int i)
 	return (i);
 }
 
-char	*expand_arg(char *arg, int quoted)
+char	*expand_arg(char *arg)
 {
 	char	*result;
 	char	*value;
@@ -44,10 +44,7 @@ char	*expand_arg(char *arg, int quoted)
 	result = ft_calloc(1000);
 	if (!result)
 		return (NULL);
-	if (quoted)
-		i = 3;
-	else
-		i = 0;
+	i = 0;
 	j = 0;
 	while (arg[i])
 	{
@@ -89,11 +86,11 @@ char	*process_arg_expansion(char *arg)
 		return (str().copy(""));
 	if (str().equals(arg, "$?"))
 		return (str().itoa(terminal()->status));
-	if (str().starts_with(arg, "sq:"))
-		return (str().copy(arg + 3));
-	if (str().starts_with(arg, "dq:"))
-		return (expand_arg(arg, 1));
+	if (str().starts_with(arg, "\f\f"))
+		return (expand_arg(arg + 2));
+	if (str().starts_with(arg, "\f"))
+		return (str().copy(arg + 1));
 	if (str().contains(arg, "$"))
-		return (expand_arg(arg, 0));
+		return (expand_arg(arg));
 	return (str().copy(arg));
 }

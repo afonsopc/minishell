@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:41 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:05:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	*parse_pipe(char **tokens, size_t *pos)
 	while (tokens[*pos] && str().equals(tokens[*pos], "|"))
 	{
 		(*pos)++;
-		right = parse_simple_command(tokens, pos);
+		right = parse_pipe(tokens, pos);
 		if (!right)
 			return (free_token(left), NULL);
 		result = new_token("|", NULL);

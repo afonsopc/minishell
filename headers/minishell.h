@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 14:20:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 13:56:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_token					*parse(char *line);
 char					*expand_exit_status(void);
 char					*expand_env_variable(char *var_name);
 int						copy_variable_name(char *dest, char *src, int i);
-char					*expand_arg(char *arg, int quoted);
+char					*expand_arg(char *arg);
 char					*process_arg_expansion(char *arg);
 // token
 char					**tokenize(char *input);
