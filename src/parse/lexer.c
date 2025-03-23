@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/22 15:48:10 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:33:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ char	*handle_special_char(t_lexer *lexer)
 		token = read_operator(lexer);
 	else if (lexer->curr_char == '<' || lexer->curr_char == '>')
 		token = read_redirection(lexer);
-	else if (lexer->curr_char == '\'')
-		token = read_single_quote(lexer);
-	else if (lexer->curr_char == '\"')
-		token = read_double_quote(lexer);
-	else if (lexer->curr_char == '(' || lexer->curr_char == ')')
-		token = read_parenthesis(lexer);
 	else
 		token = read_word(lexer);
 	return (token);
@@ -78,9 +72,7 @@ char	*read_word(t_lexer *lexer)
 	start = lexer->pos;
 	while (lexer->curr_char && !str().is_space(lexer->curr_char)
 		&& lexer->curr_char != '|' && lexer->curr_char != '&'
-		&& lexer->curr_char != '<' && lexer->curr_char != '>'
-		&& lexer->curr_char != '\'' && lexer->curr_char != '\"'
-		&& lexer->curr_char != '(' && lexer->curr_char != ')')
+		&& lexer->curr_char != '<' && lexer->curr_char != '>')
 		advance_lexer(lexer);
 	return (str().copy_n(lexer->input + start, lexer->pos - start));
 }

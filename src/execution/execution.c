@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/23 11:11:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:08:03 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	is_directory(char *path)
 
 char	*handle_contains_slash(struct stat stat_struct, char *path)
 {
-	terminal()->status = 126;
+	terminal()->status = 127;
 	if (is_directory(path))
 		return (str().copy(": Is a directory\n"));
 	else if (stat(path, &stat_struct) == -1)

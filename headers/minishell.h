@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 10:33:44 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:13:19 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,6 @@ t_token					*parse_simple_command(char **tokens, size_t *pos);
 t_token					*parse_pipe(char **tokens, size_t *pos);
 t_token					*parse_and_or(char **tokens, size_t *pos);
 t_token					*parse(char *line);
-// expand args
-char					*expand_exit_status(void);
-char					*expand_env_variable(char *var_name);
-int						copy_variable_name(char *dest, char *src, int i);
-char					*expand_arg(char *arg);
-char					*process_arg_expansion(char *arg);
 // token
 char					**tokenize(char *input);
 bool					free_token(t_token *token);
