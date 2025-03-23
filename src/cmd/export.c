@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 11:21:29 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 15:08:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	export_str(char *value)
 	{
 		(str().fputstr)(2, "export: ");
 		(str().fputstr)(2, "not a valid identifier\n");
-		// TODO quote handling here
 		free_list(args);
 		terminal()->status = 1;
 		return ;
