@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/17 00:16:10 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:21:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	too_many_args_error(void)
 	(str().fputstr)(2, "cd: too many arguments\n");
 }
 
-pid_t	execute_cd(t_cmd *cmd, int in, int out)
+void	execute_cd(t_cmd *cmd)
 {
 	char	*dir;
 
@@ -57,7 +57,6 @@ pid_t	execute_cd(t_cmd *cmd, int in, int out)
 		}
 		(hashmap(terminal()->env))->put(str().copy("PWD"), get_cwd());
 	}
-	ft_close(out);
-	ft_close(in);
-	return (0);
+	terminal()->status = 0;
+	ft_exit_free();
 }

@@ -6,13 +6,13 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:55:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:31:29 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:38:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-pid_t	execute_env(t_cmd *cmd, int in, int out)
+void	execute_env(t_cmd *cmd)
 {
 	size_t	i;
 	char	**args;
@@ -22,10 +22,9 @@ pid_t	execute_env(t_cmd *cmd, int in, int out)
 	args = hashmap(terminal()->env)->to_array();
 	while (args[++i])
 	{
-		(str().fputstr)(out, args[i]);
-		(str().fputstr)(out, "\n");
+		(str().fputstr)(1, args[i]);
+		(str().fputstr)(1, "\n");
 	}
-	ft_close(out);
-	ft_close(in);
-	return (0);
+	terminal()->status = 0;
+	ft_exit_free();
 }

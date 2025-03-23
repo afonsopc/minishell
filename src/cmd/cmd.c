@@ -6,21 +6,21 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/22 15:02:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 10:32:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <execution.h>
 
-pid_t		execute(t_cmd *cmd, int in, int out);
-pid_t		execute_cd(t_cmd *cmd, int in, int out);
-pid_t		execute_pwd(t_cmd *cmd, int in, int out);
-pid_t		execute_exit(t_cmd *cmd, int in, int out);
-pid_t		execute_echo(t_cmd *cmd, int in, int out);
-pid_t		execute_export(t_cmd *cmd, int in, int out);
-pid_t		execute_env(t_cmd *cmd, int in, int out);
-pid_t		execute_unset(t_cmd *cmd, int in, int out);
+void		execute(t_cmd *cmd);
+void		execute_cd(t_cmd *cmd);
+void		execute_pwd(t_cmd *cmd);
+void		execute_exit(t_cmd *cmd);
+void		execute_echo(t_cmd *cmd);
+void		execute_export(t_cmd *cmd);
+void		execute_env(t_cmd *cmd);
+void		execute_unset(t_cmd *cmd);
 
 static t_redirect	*new_redirect(char	**args)
 {

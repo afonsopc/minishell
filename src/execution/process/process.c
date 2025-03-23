@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/22 15:16:25 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:49:54 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	process_token(t_token	*token)
 {
 	if (!token || !process_redirections(token))
 		return ;
-	print_token2(token, 0);
+	// print_token2(token, 0);
 	process(token, 0, 1);
 	wait_token(token);
 }

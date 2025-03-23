@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/16 23:29:47 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:35:06 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 		terminal()->status = 1;
 		return (false);
 	}
+	printf("Redirecting %s to %d\n", redirect->args[1], *fd);
 	return (true && process_redirection(cmd, redirect->next));
 }
 

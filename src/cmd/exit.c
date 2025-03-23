@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/20 14:42:40 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:21:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ int	str_to_status(char *string)
 	return (legal_number(string) & 255);
 }
 
-pid_t	execute_exit(t_cmd *cmd, int in, int out)
+void	execute_exit(t_cmd *cmd)
 {
-	ft_close(out);
-	ft_close(in);
 	errno = 0;
-	if (cmd->args[2])
+	if (cmd->args[1] && cmd->args[2])
 	{
 		terminal()->status = 1;
 		(str().fputstr)(2, "exit: too many arguments\n");
@@ -52,5 +50,4 @@ pid_t	execute_exit(t_cmd *cmd, int in, int out)
 		(str().fputstr)(2, ": numeric argument required\n");
 	}
 	ft_exit();
-	return (0);
 }

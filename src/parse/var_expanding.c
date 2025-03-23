@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 13:05:50 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/22 14:42:42 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:54:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ char	*expand_arg(char *arg)
 			if (arg[i] == '?')
 			{
 				value = str().itoa(terminal()->status);
+				i++;
+			}
+			else if (arg[i] == ' ')
+			{
+				value = str().copy("$ ");
 				i++;
 			}
 			else

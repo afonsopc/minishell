@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 14:12:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:21:29 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ static void	export_str(char *value)
 	if (!check_key(args[0]))
 	{
 		(str().fputstr)(2, "export: ");
-		(str().fputstr)(2, "not an identifier: ");
-		(str().fputstr)(2, args[0]);
-		(str().fputstr)(2, "\n");
+		(str().fputstr)(2, "not a valid identifier\n");
+		// TODO quote handling here
 		free_list(args);
 		terminal()->status = 1;
 		return ;
@@ -78,19 +77,18 @@ static void	print_export(int out)
 	}
 }
 
-pid_t	execute_export(t_cmd *cmd, int in, int out)
+void	execute_export(t_cmd *cmd)
 {
 	size_t	i;
 
 	i = 1;
 	if (str().size_list(cmd->args) == 1)
-		print_export(out);
+		print_export(0);
 	else
 	{
 		while (cmd->args[i])
 			export_str(cmd->args[i++]);
 	}
-	ft_close(out);
-	ft_close(in);
-	return (0);
+	terminal()->status = 0;
+	ft_exit_free();
 }
