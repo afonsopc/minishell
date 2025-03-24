@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 13:49:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:52:22 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static t_redirect	*new_redirect(char	**args)
 
 	if (!args)
 		return (NULL);
-	r = ft_calloc(sizeof(t_redirect));
+	r = ft_calloc(1, sizeof(t_redirect));
 	if (!r)
-		return (free_list(args), NULL);
+		return (ft_strvfree(args), NULL);
 	r->args = args;
-	if (str().equals(args[0], ">") || str().equals(args[0], ">>"))
+	if (ft_strcmp(args[0], ">") || ft_strcmp(args[0], ">>"))
 		r->type = OUT;
 	return (r);
 }
@@ -60,10 +60,10 @@ static void	init_redirect(t_cmd	*cmd)
 	end = NULL;
 	while (cmd->args[i])
 	{
-		if (str().equals(cmd->args[i], ">") || str().equals(cmd->args[i], "<") \
-		|| str().equals(cmd->args[i], ">>") || str().equals(cmd->args[i], "<<"))
+		if (ft_strcmp(cmd->args[i], ">") || ft_strcmp(cmd->args[i], "<") \
+		|| ft_strcmp(cmd->args[i], ">>") || ft_strcmp(cmd->args[i], "<<"))
 		{
-			new = new_redirect(str().copy_array_n(cmd->args + i, 2));
+			new = new_redirect(ft_strvndup(cmd->args + i, 2));
 			if (cmd->redirect == NULL)
 				cmd->redirect = new;
 			else
@@ -78,19 +78,19 @@ static void	init_redirect(t_cmd	*cmd)
 
 static	void	init_fun(t_cmd	*cmd)
 {
-	if (str().equals(*cmd->args, "echo"))
+	if (ft_strcmp(*cmd->args, "echo"))
 		cmd->execute = execute_echo;
-	else if (str().equals(*cmd->args, "export"))
+	else if (ft_strcmp(*cmd->args, "export"))
 		cmd->execute = execute_export;
-	else if (str().equals(*cmd->args, "env"))
+	else if (ft_strcmp(*cmd->args, "env"))
 		cmd->execute = execute_env;
-	else if (str().equals(*cmd->args, "unset"))
+	else if (ft_strcmp(*cmd->args, "unset"))
 		cmd->execute = execute_unset;
-	else if (str().equals(*cmd->args, "cd"))
+	else if (ft_strcmp(*cmd->args, "cd"))
 		cmd->execute = execute_cd;
-	else if (str().equals(*cmd->args, "pwd"))
+	else if (ft_strcmp(*cmd->args, "pwd"))
 		cmd->execute = execute_pwd;
-	else if (str().equals(*cmd->args, "exit"))
+	else if (ft_strcmp(*cmd->args, "exit"))
 		cmd->execute = execute_exit;
 	else
 		cmd->execute = execute;
@@ -100,7 +100,7 @@ t_cmd	*new_cmd(char **args)
 {
 	t_cmd	*cmd;
 
-	cmd = ft_calloc(sizeof(t_cmd));
+	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
 	process_env_assignments(args);

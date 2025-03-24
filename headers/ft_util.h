@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_util.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:28:41 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:57:55 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "ft_string.h"
 # include "array_list.h"
 # include <stdbool.h>
+# include <utils.h>
 
 typedef struct s_this
 {
@@ -29,9 +29,5 @@ typedef struct s_this
 }	t_this;
 
 t_this	*this(void);
-void	*ft_calloc(size_t __size);
-void	*ft_realloc(void *ptr, size_t newsize);
-int		free_list(char **str);
-void	set_errno(int err);
 
 #endif

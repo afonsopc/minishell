@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/22 15:02:58 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:52:58 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char	*path_join(char *str1, char *str2)
 	char	*tmp;
 	char	*final;
 
-	tmp = str().join(str1, "/");
+	tmp = ft_strjoin(str1, "/");
 	if (!tmp)
 		return (NULL);
-	final = str().join(tmp, str2);
+	final = ft_strjoin(tmp, str2);
 	free(tmp);
 	return (final);
 }
@@ -36,7 +36,7 @@ char	*get_command_path(char *cmd)
 	i = -1;
 	if (!hashmap(terminal()->env)->get_key("PATH"))
 		return (cmd);
-	path = str().split(hashmap(terminal()->env)->get_key("PATH"), ":");
+	path = ft_split(hashmap(terminal()->env)->get_key("PATH"), ":");
 	if (!path)
 		return (cmd);
 	while (path[++i])
@@ -47,7 +47,7 @@ char	*get_command_path(char *cmd)
 		free(curr);
 		curr = NULL;
 	}
-	free_list(path);
+	ft_strvfree(path);
 	if (curr == NULL)
 		return (cmd);
 	return (free(cmd), curr);
@@ -72,7 +72,7 @@ void	free_cmd(t_cmd *cmd)
 {
 	if (!cmd)
 		return ;
-	free_list(cmd->args);
+	ft_strvfree(cmd->args);
 	free_redirect(cmd->redirect);
 	free(cmd);
 }
@@ -81,5 +81,5 @@ char	*get_cwd(void)
 {
 	char	buff[70000];
 
-	return (str().copy(getcwd(buff, 70000)));
+	return (ft_strdup(getcwd(buff, 70000)));
 }

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   base_hasmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:34:59 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:35:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:58:04 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_base_array_util.h>
 #include <ft_util.h>
-#include <ft_string.h>
 
 t_element	*__get_element_index_hasmap(size_t index);
 t_element	*__get_element_hasmap(char *key);
@@ -27,17 +26,16 @@ char	**__to_str_hashmpa(void)
 		return (NULL);
 	if (this()->hashmapp->update_array)
 		return (this()->hashmapp->array);
-	free_list(this()->hashmapp->array);
-	this()->hashmapp->array = ft_calloc(((this()->array)->size + 1)
-		* sizeof(char *));
+	ft_strvfree(this()->hashmapp->array);
+	this()->hashmapp->array = ft_calloc((this()->array)->size + 1, sizeof(char *));
 	if (!this()->hashmapp->array)
 		return (NULL);
 	i = 0;
 	temp = (this()->array)->begin;
 	while (temp)
 	{
-		str_temp = str().join(temp->key, "=");
-		(this()->hashmapp)->array[i++] = str().join(str_temp, temp->value);
+		str_temp = ft_strjoin(temp->key, "=");
+		(this()->hashmapp)->array[i++] = ft_strjoin(str_temp, temp->value);
 		free(str_temp);
 		temp = temp->next;
 	}
@@ -49,7 +47,7 @@ static int	base_destroy_hashmap(void)
 {
 	if (!this()->hashmap)
 		return (0);
-	free_list(this()->hashmapp->array);
+	ft_strvfree(this()->hashmapp->array);
 	if (this()->hashmap->list)
 	{
 		array(this()->hashmap->list)->destroy();
@@ -80,7 +78,7 @@ void	*new_hashmap(void)
 {
 	t_hashmap	*a;
 
-	a = ft_calloc(sizeof(t_hashmap_p));
+	a = ft_calloc(1, sizeof(t_hashmap_p));
 	if (a)
 	{
 		a->list = new_array();

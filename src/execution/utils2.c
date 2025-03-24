@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/23 11:28:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:53:02 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*get_curr_dir(void)
 	char	*curr_dir;
 
 	cwd = get_cwd();
-	dirs = (str().split)(cwd, "/");
-	curr_dir = str().copy(dirs[str().size_list(dirs) - 1]);
-	(free(cwd), free_list(dirs));
+	dirs = ft_split(cwd, "/");
+	curr_dir = ft_strdup(dirs[ft_strvlen(dirs) - 1]);
+	(free(cwd), ft_strvfree(dirs));
 	return (curr_dir);
 }
 

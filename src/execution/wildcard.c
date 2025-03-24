@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 21:54:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/16 21:55:03 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:53:06 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static bool	match_every_file(t_array *arr, char *arg)
 	while (entry)
 	{
 		if (match_wildcard(arg, entry->d_name))
-			array(arr)->add(str().copy(entry->d_name));
+			array(arr)->add(ft_strdup(entry->d_name));
 		entry = readdir(curr_dir);
 	}
 	closedir(curr_dir);
@@ -61,8 +61,8 @@ static char	**process_wildcard(char *arg)
 		expanded_arg = array(arr)->to_str();
 	else
 	{
-		expanded_arg = ft_calloc(sizeof(char *) * 2);
-		expanded_arg[0] = str().copy(arg);
+		expanded_arg = ft_calloc(2, sizeof(char *));
+		expanded_arg[0] = ft_strdup(arg);
 	}
 	return (array(arr)->destroy(), expanded_arg);
 }
@@ -75,18 +75,18 @@ void	process_wildcards(t_cmd *cmd)
 	char	**expanded_arg;
 
 	i = 0;
-	new_args = ft_calloc(sizeof(char *) * 2);
-	new_args[0] = str().copy(cmd->args[0]);
+	new_args = ft_calloc(2, sizeof(char *));
+	new_args[0] = ft_strdup(cmd->args[0]);
 	while (cmd->args[++i])
 	{
 		expanded_arg = process_wildcard(cmd->args[i]);
 		tmp_args = new_args;
-		new_args = str().join_list(new_args, expanded_arg);
-		free_list(tmp_args);
-		free_list(expanded_arg);
+		new_args = ft_strvjoin(new_args, expanded_arg);
+		ft_strvfree(tmp_args);
+		ft_strvfree(expanded_arg);
 	}
 	if (i == 1)
 		return ;
-	free_list(cmd->args);
+	ft_strvfree(cmd->args);
 	cmd->args = new_args;
 }

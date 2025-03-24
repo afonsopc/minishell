@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/23 14:08:03 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:06:32 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ char	*handle_contains_slash(struct stat stat_struct, char *path)
 {
 	terminal()->status = 127;
 	if (is_directory(path))
-		return (str().copy(": Is a directory\n"));
+		return (ft_strdup(": Is a directory\n"));
 	else if (stat(path, &stat_struct) == -1)
 	{
 		terminal()->status = 127;
-		return (str().copy(": No such file or directory\n"));
+		return (ft_strdup(": No such file or directory\n"));
 	}
 	else if (access(path, X_OK) == -1)
-		return (str().copy(": Permission denied\n"));
+		return (ft_strdup(": Permission denied\n"));
 	terminal()->status = 0;
 	return (NULL);
 }
@@ -45,9 +45,9 @@ char	*handle_doesnt_contain_slash(struct stat stat_struct, char *path)
 {
 	terminal()->status = 127;
 	if (is_directory(path) || access(path, X_OK) == -1)
-		return (str().copy(": command not found\n"));
+		return (ft_strdup(": command not found\n"));
 	else if (stat(path, &stat_struct) == -1)
-		return (str().copy(": No such file or directory\n"));
+		return (ft_strdup(": No such file or directory\n"));
 	terminal()->status = 0;
 	return (NULL);
 }
@@ -61,15 +61,15 @@ bool	assert_cmd(t_cmd *cmd)
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (false);
 	error_message = NULL;
-	if (str().contains(cmd->args[0], "/"))
+	if (ft_strstr(cmd->args[0], "/"))
 		error_message = handle_contains_slash(stat_struct, cmd->args[0]);
 	else
 		error_message = handle_doesnt_contain_slash(stat_struct, cmd->args[0]);
 	if (error_message)
 	{
-		error_prompt = str().join("minishell: ", cmd->args[0]);
-		(str().fputstr)(2, error_prompt);
-		(str().fputstr)(2, error_message);
+		error_prompt = ft_strjoin("minishell: ", cmd->args[0]);
+		ft_fputstr(2, error_prompt);
+		ft_fputstr(2, error_message);
 		free(error_prompt);
 		free(error_message);
 		return (false);

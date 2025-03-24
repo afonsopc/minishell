@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 14:13:19 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 01:07:37 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "ft_string.h"
 # include "ft_util.h"
 # include "string_util.h"
 # include <dirent.h>
@@ -29,6 +28,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+# include <utils.h>
 
 typedef long long		t_size_ll;
 typedef struct s_token	t_token;
@@ -133,5 +133,10 @@ t_cmd					*new_cmd(char **args);
 void					print_list(char **args);
 int						ft_close(int fd);
 void					*ft_memset(void *s, int c, size_t n);
+
+
+
+
+void print_token2(t_token *t, int nivel);
 
 #endif
