@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/23 11:21:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:53:59 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ long	legal_number(char *string)
 	long long	value;
 
 	if (!string || !*string)
-		return (set_errno(EINVAL), 0);
+		return (ft_set_errno(EINVAL), 0);
 	errno = 0;
-	value = str().atoll(string);
+	value = ft_atoll(string);
 	if (errno)
-		return (set_errno(EINVAL), 0);
+		return (ft_set_errno(EINVAL), 0);
 	return (value);
 }
 
@@ -38,16 +38,16 @@ void	execute_exit(t_cmd *cmd)
 	if (cmd->args[1] && cmd->args[2])
 	{
 		terminal()->status = 1;
-		(str().fputstr)(2, "exit: too many arguments\n");
+		ft_fputstr(2, "exit: too many arguments\n");
 		ft_exit();
 	}
 	terminal()->status = str_to_status(cmd->args[1]);
 	if (errno)
 	{
 		terminal()->status = 255;
-		(str().fputstr)(2, "exit: ");
-		(str().fputstr)(2, cmd->args[1]);
-		(str().fputstr)(2, ": numeric argument required\n");
+		ft_fputstr(2, "exit: ");
+		ft_fputstr(2, cmd->args[1]);
+		ft_fputstr(2, ": numeric argument required\n");
 	}
 	ft_exit();
 }

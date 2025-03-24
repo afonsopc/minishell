@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_creat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:17:42 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 15:24:09 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:53:09 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static bool is_env_assignment(char *arg)
     
     if (!arg || !*arg)
         return (false);
-    if (!((str().isalpha)(arg[i]) || arg[i] == '_'))
+    if (!(ft_isalpha(arg[i]) || arg[i] == '_'))
         return (false);
     i++;
-    while (arg[i] && ((str().isalnum)(arg[i]) || arg[i] == '_'))
+    while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
         i++;
     return (arg[i] == '=');
 }
@@ -33,14 +33,14 @@ void process_env_assignments(char **args)
     
     while (args[i] && is_env_assignment(args[i]))
     {
-        env_var = str().split(args[i], "=");
+        env_var = ft_split(args[i], "=");
         if (env_var && env_var[0])
         {
             if (!env_var[1])
-                env_var[1] = str().copy("");
-            (hashmap(terminal()->env)->put)(str().copy(env_var[0]), 
-                                            str().copy(env_var[1]));
-            free_list(env_var);
+                env_var[1] = ft_strdup("");
+            (hashmap(terminal()->env)->put)(ft_strdup(env_var[0]), 
+                                            ft_strdup(env_var[1]));
+                                            ft_strvfree(env_var);
         }
         i++;
     }

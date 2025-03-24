@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   base_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:34:34 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:34:35 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:58:21 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_util.h>
-#include <ft_string.h>
 
 void	__base_for_each(void (*fun)(t_element *e, void *v), void *o)
 {
@@ -88,14 +87,14 @@ char	**__to_str(void)
 
 	if (!this()->array)
 		return (NULL);
-	list = ft_calloc(sizeof(char *) * ((this()->array)->size + 1));
+	list = ft_calloc(1, sizeof(char *) * ((this()->array)->size + 1));
 	if (!list)
 		return (NULL);
 	i = 0;
 	temp = (this()->array)->begin;
 	while (temp)
 	{
-		list[i++] = str().copy(temp->value);
+		list[i++] = ft_strdup(temp->value);
 		temp = temp->next;
 	}
 	list[i] = NULL;

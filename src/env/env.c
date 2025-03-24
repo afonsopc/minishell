@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:18 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 12:36:19 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:52:55 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	init_env(char **env)
 	terminal()->env = new_hashmap();
 	while (env && *env)
 	{
-		separator = str().strnstr(*env, "=", str().size(*env));
-		values = ft_calloc(3 * sizeof(char *));
-		values[0] = str().copy_n(*env, separator - *env);
-		values[1] = str().copy(separator + 1);
+		separator = ft_strnstr(*env, "=", ft_strlen(*env));
+		values = ft_calloc(3, sizeof(char *));
+		values[0] = ft_strndup(*env, separator - *env);
+		values[1] = ft_strdup(separator + 1);
 		if (values && values[0] && *values[0])
 		{
-			(hashmap(terminal()->env)->put)(str().copy(values[0]),
-				str().copy(values[1]));
+			(hashmap(terminal()->env)->put)(ft_strdup(values[0]),
+				ft_strdup(values[1]));
 		}
-		free_list(values);
+		ft_strvfree(values);
 		env++;
 	}
 }

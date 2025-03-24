@@ -19,7 +19,7 @@ static t_element	*base_add_element(void *value)
 
 	if (!this()->array || !value)
 		return (NULL);
-	e = ft_calloc(sizeof(t_element));
+	e = ft_calloc(1, sizeof(t_element));
 	if (!e)
 		return (NULL);
 	e->key = NULL;
@@ -110,7 +110,7 @@ void	*new_array(void)
 {
 	t_array	*a;
 
-	a = ft_calloc(sizeof(t_array));
+	a = ft_calloc(1, sizeof(t_array));
 	if (a)
 	{
 		a->size = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 11:38:40 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:39:05 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	execute_echo(t_cmd *cmd)
 		i++;
     while (cmd->args[++i])
     {
-        (str().fputstr)(1, cmd->args[i]);
+        ft_fputstr(1, cmd->args[i]);
         if (cmd->args[i + 1])
-            (str().fputstr)(1, " ");
+            ft_fputstr(1, " ");
     }
     if (!flag)
-		(str().fputstr)(1, "\n");
+		ft_fputstr(1, "\n");
 	terminal()->status = 0;
 	ft_exit_free();
 }

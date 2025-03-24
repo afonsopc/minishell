@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:58:34 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/13 19:45:59 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:53:55 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,4 @@ void	print_list(char **args)
 		printf(":%s\n", *args);
 		args++;
 	}
-}
-
-void	set_errno(int err)
-{
-	errno = err;
 }

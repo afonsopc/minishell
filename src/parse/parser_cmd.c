@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:00 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/22 16:44:16 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 01:11:13 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	**collect_cmd_args(char **tokens, size_t start, size_t end)
 	while (i < end)
 	{
 		if (should_add_arg(tokens, i, start))
-			array(cmd_args)->add(str().copy(tokens[i]));
+			array(cmd_args)->add(ft_strdup(tokens[i]));
 		i++;
 	}
 	args = array(cmd_args)->to_str();
@@ -59,13 +59,13 @@ t_token	*parse_simple_command(char **tokens, size_t *pos)
 	char	**args;
 
 	start = *pos;
-	cmd = ft_calloc(sizeof(t_cmd));
+	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
 	cmd->in = -2;
 	cmd->out = -2;
-	while (tokens[*pos] && !str().equals(tokens[*pos], "|")
-		&& !str().equals(tokens[*pos], "||") && !str().equals(tokens[*pos],
+	while (tokens[*pos] && !ft_strcmp(tokens[*pos], "|")
+		&& !ft_strcmp(tokens[*pos], "||") && !ft_strcmp(tokens[*pos],
 			"&&"))
 		process_redirections(cmd, tokens, pos);
 	if (*pos <= start)

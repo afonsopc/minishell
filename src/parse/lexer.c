@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 13:33:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:59:55 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ char	*read_word(t_lexer *lexer)
 	size_t	start;
 
 	start = lexer->pos;
-	while (lexer->curr_char && !str().is_space(lexer->curr_char)
+	while (lexer->curr_char && !ft_isspace(lexer->curr_char)
 		&& lexer->curr_char != '|' && lexer->curr_char != '&'
 		&& lexer->curr_char != '<' && lexer->curr_char != '>')
 		advance_lexer(lexer);
-	return (str().copy_n(lexer->input + start, lexer->pos - start));
+	return (ft_strndup(lexer->input + start, lexer->pos - start));
 }

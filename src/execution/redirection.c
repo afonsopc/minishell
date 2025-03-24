@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/22 16:35:06 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:42:38 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	get_heredoc(char *terminator)
 	if (!pid)
 	{
 		redirect_in_content = redirect_in_loop(terminator);
-		(str().fputstr)(pipe_fds[1], redirect_in_content);
+		ft_fputstr(pipe_fds[1], redirect_in_content);
 		free(redirect_in_content);
 		ft_close(pipe_fds[1]);
 		exit(0);
@@ -34,7 +34,7 @@ static int	get_heredoc(char *terminator)
 
 static int	get_redirect_fd(t_redirect *redirect)
 {
-	if (str().size(redirect->args[0]) == 2)
+	if (ft_strlen(redirect->args[0]) == 2)
 	{
 		if (redirect->type == IN)
 			return (get_heredoc(redirect->args[1]));
@@ -64,9 +64,9 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 	*fd = get_redirect_fd(redirect);
 	if (*fd == -1 && cmd->args[0])
 	{
-		error_prompt = str().join("minishell: ", cmd->args[0]);
+		error_prompt = ft_strjoin("minishell: ", cmd->args[0]);
 		tmp = error_prompt;
-		error_prompt = str().join(error_prompt, ": ");
+		error_prompt = ft_strjoin(error_prompt, ": ");
 		free(tmp);
 		perror(error_prompt);
 		terminal()->status = 1;

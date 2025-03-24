@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_ops.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/22 12:05:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 01:08:24 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token	*parse_pipe(char **tokens, size_t *pos)
 	left = parse_simple_command(tokens, pos);
 	if (!left)
 		return (NULL);
-	while (tokens[*pos] && str().equals(tokens[*pos], "|"))
+	while (tokens[*pos] && ft_strcmp(tokens[*pos], "|"))
 	{
 		(*pos)++;
 		right = parse_pipe(tokens, pos);
@@ -47,8 +47,8 @@ t_token	*parse_and_or(char **tokens, size_t *pos)
 	left = parse_pipe(tokens, pos);
 	if (!left)
 		return (NULL);
-	while (tokens[*pos] && (str().equals(tokens[*pos], "&&")
-			|| str().equals(tokens[*pos], "||")))
+	while (tokens[*pos] && (ft_strcmp(tokens[*pos], "&&")
+			|| ft_strcmp(tokens[*pos], "||")))
 	{
 		op_type = tokens[*pos];
 		(*pos)++;

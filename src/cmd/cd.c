@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/23 11:21:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:38:02 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ static void	chdir_error(char *dir)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp = str().join("cd: ", dir);
+	tmp = ft_strjoin("cd: ", dir);
 	tmp2 = tmp;
-	tmp = str().join(tmp, ": ");
+	tmp = ft_strjoin(tmp, ": ");
 	free(tmp2);
 	tmp2 = tmp;
-	tmp = str().join(tmp, strerror(errno));
+	tmp = ft_strjoin(tmp, strerror(errno));
 	free(tmp2);
 	tmp2 = tmp;
-	tmp = str().join(tmp, "\n");
+	tmp = ft_strjoin(tmp, "\n");
 	free(tmp2);
-	(str().fputstr)(2, tmp);
+	ft_fputstr(2, tmp);
 	free(tmp);
 }
 
 static void	too_many_args_error(void)
 {
 	terminal()->status = 1;
-	(str().fputstr)(2, "cd: too many arguments\n");
+	ft_fputstr(2, "cd: too many arguments\n");
 }
 
 void	execute_cd(t_cmd *cmd)
@@ -55,7 +55,7 @@ void	execute_cd(t_cmd *cmd)
 			chdir_error(dir);
 			terminal()->status = 1;
 		}
-		(hashmap(terminal()->env))->put(str().copy("PWD"), get_cwd());
+		(hashmap(terminal()->env))->put(ft_strdup("PWD"), get_cwd());
 	}
 	terminal()->status = 0;
 	ft_exit_free();

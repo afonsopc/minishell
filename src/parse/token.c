@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:32:12 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/20 13:46:12 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:49:30 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	set_token_type(t_token *t, char *type)
 {
-	if (str().equals("|", type))
+	if (ft_strcmp("|", type))
 		t->type = PIPE;
-	else if (str().equals("||", type))
+	else if (ft_strcmp("||", type))
 		t->type = OR;
-	else if (str().equals("&&", type))
+	else if (ft_strcmp("&&", type))
 		t->type = AND;
 	else
 		t->type = CMD;
@@ -30,7 +30,7 @@ t_token	*new_token(char *type, t_cmd *cmd)
 
 	if (!type)
 		return (NULL);
-	t = ft_calloc(sizeof(t_token));
+	t = ft_calloc(1, sizeof(t_token));
 	if (!t)
 		return (NULL);
 	t->cmd = cmd;

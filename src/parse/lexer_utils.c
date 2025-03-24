@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:31:00 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 13:33:35 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:49:12 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ t_lexer	*init_lexer(char *input)
 {
 	t_lexer	*lexer;
 
-	lexer = ft_calloc(sizeof(t_lexer));
+	lexer = ft_calloc(1, sizeof(t_lexer));
 	if (!lexer)
 		return (NULL);
 	lexer->input = input;
 	lexer->pos = 0;
-	lexer->len = str().size(input);
+	lexer->len = ft_strlen(input);
 	lexer->curr_char = input[0];
 	return (lexer);
 }
@@ -39,6 +39,6 @@ void	advance_lexer(t_lexer *lexer)
 
 void	skip_whitespace(t_lexer *lexer)
 {
-	while (lexer->curr_char && str().is_space(lexer->curr_char))
+	while (lexer->curr_char && ft_isspace(lexer->curr_char))
 		advance_lexer(lexer);
 }
