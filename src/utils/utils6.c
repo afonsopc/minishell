@@ -6,7 +6,7 @@
 /*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:46:10 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 00:57:19 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/24 09:42:06 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char    **ft_strvndup(char **v, size_t n)
     char    **new;
     size_t  i;
 
+    if (!v || !n)
+        return (NULL);
     new = ft_calloc(n + 1, sizeof(char *));
     if (!new)
         return (NULL);
@@ -48,6 +50,8 @@ void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*ptr;
 
+    if (!s)
+        return ;
 	ptr = s;
 	while (n > 0)
 	{

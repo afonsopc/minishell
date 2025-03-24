@@ -6,7 +6,7 @@
 /*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:32:15 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 00:51:07 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/24 09:40:28 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-ssize_t ft_strvlen(char **v)
+size_t ft_strvlen(char **v)
 {
-    ssize_t i;
+    size_t i;
 
     if (!v)
-        return (-1);
+        return (0);
     i = 0;
     while (v[i])
         i++;
@@ -60,6 +60,8 @@ char    **ft_strvjoin(char **v1, char **v2)
     ssize_t i;
     ssize_t j;
 
+    if (!v1 || !v2)
+        return (NULL);
     i = ft_strvlen(v1);
     j = ft_strvlen(v2);
     new = ft_calloc(i + j + 1, sizeof(char *));

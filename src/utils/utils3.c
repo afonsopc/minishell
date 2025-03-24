@@ -6,7 +6,7 @@
 /*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:49:43 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 01:12:51 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/24 09:35:38 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (n == 0)
+	if (!n || !s1 || !s2)
 		return (0);
 	n--;
 	while (n && *s1 && *s1 == *s2)
@@ -28,14 +28,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-
-	if (!s1 || !s2)
-		return (0);
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] == s2[i]);
+	return (ft_strncmp(s1, s2, -1));
 }
 
 void    ft_set_errno(int error)

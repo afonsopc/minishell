@@ -6,7 +6,7 @@
 /*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:29:52 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 00:57:24 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/24 09:39:52 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool        ft_isspace(char c);
 bool        ft_isalnum(int c);
 char    	*ft_strchr(const char *s, int c);
 void    	*ft_calloc(size_t count, size_t size);
-ssize_t     ft_strvlen(char **v);
+size_t      ft_strvlen(char **v);
 char        **ft_strvjoin(char **v1, char **v2);
 
 char	    **ft_split(const char *s, const char *c);

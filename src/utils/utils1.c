@@ -6,7 +6,7 @@
 /*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:28:14 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 00:51:07 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/24 09:32:26 by afonsocouti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	count;
 
+	if (!s)
+		return (0);
 	count = 0;
 	while (s[count])
 		count++;
@@ -27,6 +29,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t	src_len;
 	size_t	i;
 
+	if (!dst || !src)
+		return (0);
 	i = 0;
 	src_len = ft_strlen(src);
 	if (dstsize == 0)
@@ -46,7 +50,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	src_len;
 	size_t	i;
 
-	src_len = ft_strlen(src);
+	if (!dst || !src)
+		return (0);
 	if (dstsize == 0)
 		return (src_len);
 	dst_len = ft_strlen(dst);
