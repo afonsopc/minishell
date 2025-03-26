@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:32:12 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:49:30 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:13:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	set_token_type(t_token *t, char *type)
 {
-	if (ft_strcmp("|", type))
+	if (ft_strcmp("|", type) == 0)
 		t->type = PIPE;
-	else if (ft_strcmp("||", type))
+	else if (ft_strcmp("||", type) == 0)
 		t->type = OR;
-	else if (ft_strcmp("&&", type))
+	else if (ft_strcmp("&&", type) == 0)
 		t->type = AND;
 	else
 		t->type = CMD;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_hasmap_util2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:34:50 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:58:16 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:20:24 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_element	*__get_element_hasmap(char *key)
 	e = (this()->array)->begin;
 	while (e)
 	{
-		if (ft_strcmp(key, e->key))
+		if (ft_strcmp(key, e->key) == 0)
 			return (e);
 		e = e->next;
 	}

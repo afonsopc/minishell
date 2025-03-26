@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:00 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 01:11:13 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:01:32 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ t_token	*parse_simple_command(char **tokens, size_t *pos)
 		return (NULL);
 	cmd->in = -2;
 	cmd->out = -2;
-	while (tokens[*pos] && !ft_strcmp(tokens[*pos], "|")
-		&& !ft_strcmp(tokens[*pos], "||") && !ft_strcmp(tokens[*pos],
-			"&&"))
+	while (tokens[*pos] && ft_strcmp(tokens[*pos], "|") != 0
+    && ft_strcmp(tokens[*pos], "||") != 0 && ft_strcmp(tokens[*pos], "&&") != 0)
 		process_redirections(cmd, tokens, pos);
 	if (*pos <= start)
 		return (free_cmd(cmd), NULL);

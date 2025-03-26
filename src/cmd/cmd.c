@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:52:22 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:21:26 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_redirect	*new_redirect(char	**args)
 	if (!r)
 		return (ft_strvfree(args), NULL);
 	r->args = args;
-	if (ft_strcmp(args[0], ">") || ft_strcmp(args[0], ">>"))
+	if (ft_strcmp(args[0], ">") == 0 || ft_strcmp(args[0], ">>") == 0)
 		r->type = OUT;
 	return (r);
 }
@@ -60,8 +60,8 @@ static void	init_redirect(t_cmd	*cmd)
 	end = NULL;
 	while (cmd->args[i])
 	{
-		if (ft_strcmp(cmd->args[i], ">") || ft_strcmp(cmd->args[i], "<") \
-		|| ft_strcmp(cmd->args[i], ">>") || ft_strcmp(cmd->args[i], "<<"))
+		if (ft_strcmp(cmd->args[i], ">") == 0 || ft_strcmp(cmd->args[i], "<") == 0 \
+		|| ft_strcmp(cmd->args[i], ">>") == 0 || ft_strcmp(cmd->args[i], "<<") == 0)
 		{
 			new = new_redirect(ft_strvndup(cmd->args + i, 2));
 			if (cmd->redirect == NULL)
@@ -78,19 +78,19 @@ static void	init_redirect(t_cmd	*cmd)
 
 static	void	init_fun(t_cmd	*cmd)
 {
-	if (ft_strcmp(*cmd->args, "echo"))
+	if (ft_strcmp(*cmd->args, "echo") == 0)
 		cmd->execute = execute_echo;
-	else if (ft_strcmp(*cmd->args, "export"))
+	else if (ft_strcmp(*cmd->args, "export") == 0)
 		cmd->execute = execute_export;
-	else if (ft_strcmp(*cmd->args, "env"))
+	else if (ft_strcmp(*cmd->args, "env") == 0)
 		cmd->execute = execute_env;
-	else if (ft_strcmp(*cmd->args, "unset"))
+	else if (ft_strcmp(*cmd->args, "unset") == 0)
 		cmd->execute = execute_unset;
-	else if (ft_strcmp(*cmd->args, "cd"))
+	else if (ft_strcmp(*cmd->args, "cd") == 0)
 		cmd->execute = execute_cd;
-	else if (ft_strcmp(*cmd->args, "pwd"))
+	else if (ft_strcmp(*cmd->args, "pwd") == 0)
 		cmd->execute = execute_pwd;
-	else if (ft_strcmp(*cmd->args, "exit"))
+	else if (ft_strcmp(*cmd->args, "exit") == 0)
 		cmd->execute = execute_exit;
 	else
 		cmd->execute = execute;

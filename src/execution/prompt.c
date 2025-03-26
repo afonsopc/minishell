@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/24 01:13:19 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:23:38 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	loop(void)
 {
 	char	*line;
 
+	// printf("Terminal initialized: %p\n", (void*)terminal());
 	while (1)
 	{
 		mask_signals();
@@ -129,6 +130,8 @@ void	loop(void)
 		if (ft_strlen(line))
 			add_history(line);
 		terminal()->token = parse(line);
+		// printf("Token stored at: %p\n", (void*)terminal()->token);
+		// printf("Token accessed: %p\n", (void*)terminal()->token);
 		// print_token2(terminal()->token, 0);
 		process_token(terminal()->token);
 		free(line);
@@ -148,7 +151,7 @@ char	*redirect_in_loop(char *terminator)
 		line = readline("> ");
 		if (!line)
 			ft_exit();
-		if (ft_strcmp(line, terminator))
+		if (ft_strcmp(line, terminator) == 0)
 		{
 			free(line);
 			break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:48 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 01:03:58 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 16:15:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	is_redirection(char *token)
 {
-	return (ft_strcmp(token, "<") || ft_strcmp(token, ">")
-		|| ft_strcmp(token, "<<") || ft_strcmp(token, ">>"));
+	return (ft_strcmp(token, "<") == 0 || ft_strcmp(token, ">") == 0
+		|| ft_strcmp(token, "<<") == 0|| ft_strcmp(token, ">>") == 0);
 }
 
 t_redirect	*create_redirection(char **tokens, size_t *pos)
@@ -65,15 +65,17 @@ t_token	*parse(char *line)
 	size_t	pos;
 	t_token	*result;
 
+	// printf("Starting parser\n");
 	if (!line || !*line)
 		return (NULL);
 	free_token(terminal()->token);
 	tokens = tokenize(line);
 	if (!tokens)
 		return (NULL);
+	// printf("Token created: %p\n", (void*)tokens);
 	pos = 0;
 	result = parse_and_or(tokens, &pos);
 	ft_strvfree(tokens);
-	terminal()->token = result;
+	// printf("Parser returning %p\n", (void *)result);
 	return (result);
 }
