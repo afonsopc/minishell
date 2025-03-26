@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:32:15 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 09:40:28 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:11:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	ft_isalnum(int c)
 char	*ft_strchr(const char *s, int c)
 {
     if (!s)
-        return (NULL);
+		return (NULL);
 	while (*s && *s != (char)c)
 		s++;
 	if (*s == (char)c)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:46:10 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 09:42:06 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:10:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,26 @@ void	ft_bzero(void *s, size_t n)
 	unsigned char	*ptr;
 
     if (!s)
-        return ;
+		return ;
 	ptr = s;
 	while (n > 0)
 	{
 		ptr[n - 1] = 0;
 		n--;
 	}
+}
+
+char	*ft_charjoin(char *str, char c)
+{
+	char	*result;
+	int		len;
+
+	len = ft_strlen(str);
+	result = ft_calloc(sizeof(char), (len + 2));
+	if (!result)
+		return (NULL);
+	ft_memcpy(result, str, len);
+	result[len] = c;
+	result[len + 1] = '\0';
+	return (result);
 }

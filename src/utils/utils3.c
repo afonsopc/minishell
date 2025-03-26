@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:49:43 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 09:35:38 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 14:37:26 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:29:52 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 09:39:52 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:07:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <stdint.h>
 
 size_t	    ft_strlen(const char *s);
 size_t	    ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -43,10 +44,14 @@ size_t      ft_strvlen(char **v);
 char        **ft_strvjoin(char **v1, char **v2);
 
 char	    **ft_split(const char *s, const char *c);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+char		*ft_charjoin(char *str, char c);
+char		*ft_itoa(int n);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 
-char    **ft_strvndup(char **v, size_t n);
-char    **ft_strvdup(char **v);
-void    ft_strvfree(char **v);
-void	ft_bzero(void *s, size_t n);
+char    	**ft_strvndup(char **v, size_t n);
+char    	**ft_strvdup(char **v);
+void    	ft_strvfree(char **v);
+void		ft_bzero(void *s, size_t n);
 
 #endif

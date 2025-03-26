@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:28:14 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 09:32:26 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/26 15:10:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 	if (!dst || !src)
 		return (0);
+	src_len = ft_strlen(src);
 	if (dstsize == 0)
 		return (src_len);
 	dst_len = ft_strlen(dst);
