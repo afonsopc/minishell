@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/28 14:54:54 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 10:33:36 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ char	*handle_contains_slash(struct stat stat_struct, char *path)
 	if (is_directory(path))
 		return (ft_strdup(": Is a directory\n"));
 	else if (stat(path, &stat_struct) == -1)
-	{
-		terminal()->status = 127;
 		return (ft_strdup(": No such file or directory\n"));
-	}
 	else if (access(path, X_OK) == -1)
+	{
+		terminal()->status = 126;
 		return (ft_strdup(": Permission denied\n"));
+	}
 	terminal()->status = 0;
 	return (NULL);
 }
@@ -44,12 +44,9 @@ char	*handle_contains_slash(struct stat stat_struct, char *path)
 char	*handle_doesnt_contain_slash(struct stat stat_struct, char *path)
 {
 	terminal()->status = 127;
-	if (is_directory(path) || access(path, X_OK) == -1)
-		return (ft_strdup(": command not found\n"));
-	else if (stat(path, &stat_struct) == -1)
+	if (!(is_directory(path) || access(path, X_OK) == -1) && stat(path, &stat_struct) == -1)
 		return (ft_strdup(": No such file or directory\n"));
-	terminal()->status = 0;
-	return (NULL);
+	return (ft_strdup(": command not found\n"));
 }
 
 bool	assert_cmd(t_cmd *cmd)
