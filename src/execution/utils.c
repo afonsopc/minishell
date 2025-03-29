@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 14:58:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 20:35:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_command_path(char *cmd)
 
 void	wait_token(t_token *token)
 {
-	int		ret;
+	pid_t		ret;
 
 	if (token->type != CMD)
 		(wait_token(token->left), wait_token(token->right));
@@ -63,7 +63,7 @@ void	wait_token(t_token *token)
 		return ;
 	waitpid(token->pid, &ret, 0);
 	terminal()->status = WEXITSTATUS(ret);
-	if (!WIFEXITED(ret))
+	if (WTERMSIG(ret) == SIGINT)
 		terminal()->status = 130;
 	token->pid = 0;
 }
