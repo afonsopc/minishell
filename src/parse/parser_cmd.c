@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:00 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 16:41:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:03:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ t_token	*parse_simple_command(char **tokens, size_t *pos)
 	while (curr && !ft_strequal(curr, "|") && !ft_strequal(curr, "&&")
 		&& !ft_strequal(curr, "||"))
 		curr = tokens[++*pos];
-	return (new_token("CMD", new_cmd(ft_strvndup(tokens, *pos - init_pos))));
+	return (new_token("CMD", new_cmd(ft_strvndup(&tokens[init_pos], *pos - init_pos))));
 }

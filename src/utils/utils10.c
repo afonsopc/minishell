@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:18:01 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:23:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:01:17 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	ft_fprint_strv(int fd, char **strv)
 	int	i;
 
 	i = 0;
+	ft_fputstr(fd, "[");
 	while (strv && strv[i])
 	{
 		ft_fputstr(fd, strv[i]);
 		if (strv[i + 1])
-			ft_fputstr(fd, " ");
+			ft_fputstr(fd, ", ");
 		i++;
 	}
+	ft_fputstr(fd, "]\n");
 }

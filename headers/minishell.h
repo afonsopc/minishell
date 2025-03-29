@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:55:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:09:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct					s_cmd
 	pid_t				(*execute)(struct s_cmd * cmd);
 	int					in;
 	int					out;
+	bool				loser;
 	t_redirect			*redirect;
 } 						t_cmd;
 
