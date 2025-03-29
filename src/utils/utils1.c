@@ -6,11 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:28:14 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/28 14:51:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <utils.h>
+#include <ft_utils.h>
 
 size_t	ft_strlen(const char *s)
 {

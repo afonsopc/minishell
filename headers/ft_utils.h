@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:29:52 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/26 15:07:23 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <stdint.h>
+
+typedef struct s_element
+{
+	char			*key;
+	void			*value;
+	struct s_element	*next;
+	void				(*value_free)(void *value);
+	void			(*destroy)(struct s_element *e);
+}	t_element;
+
+typedef struct s_hashmap
+{
+	t_element	**table;
+}	t_hashmap;
 
 size_t	    ft_strlen(const char *s);
 size_t	    ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -53,5 +67,7 @@ char    	**ft_strvndup(char **v, size_t n);
 char    	**ft_strvdup(char **v);
 void    	ft_strvfree(char **v);
 void		ft_bzero(void *s, size_t n);
+
+bool		ft_strequal(char *s1, char *s2);
 
 #endif

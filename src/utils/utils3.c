@@ -6,11 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:49:43 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/26 14:37:26 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <utils.h>
+#include <ft_utils.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

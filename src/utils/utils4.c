@@ -6,11 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 00:32:15 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/26 15:11:11 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <utils.h>
+#include <ft_utils.h>
 
 bool	ft_isalnum(int c)
 {

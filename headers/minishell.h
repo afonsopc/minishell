@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 12:54:02 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
-# include <utils.h>
+# include <ft_utils.h>
 
 typedef long long		t_size_ll;
 typedef struct s_token	t_token;

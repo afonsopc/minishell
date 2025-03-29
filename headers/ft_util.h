@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_util.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:57:55 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include "array_list.h"
 # include <stdbool.h>
-# include <utils.h>
+# include <ft_utils.h>
 
 typedef struct s_this
 {

@@ -6,11 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:49:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/26 15:04:49 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <utils.h>
+#include <ft_utils.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -80,4 +80,9 @@ char	*ft_itoa(int n)
     if (sign)
         str[0] = '-';
     return (str);
+}
+
+bool	ft_strequal(char *s1, char *s2)
+{
+	return (ft_strcmp(s1, s2) == 0);
 }
