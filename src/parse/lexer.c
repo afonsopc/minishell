@@ -77,7 +77,7 @@ char	*read_word(t_lexer *lexer)
 	if (quote)
 	{
 		advance_lexer(lexer);
-		while (lexer->curr_char && lexer->curr_char != quote)
+		while (lexer->curr_char && !(lexer->curr_char == quote && (!lexer->input[lexer->pos + 1] || ft_isspace(lexer->input[lexer->pos + 1]))))
 			advance_lexer(lexer);
 		advance_lexer(lexer);
 	}
