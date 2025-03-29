@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 16:46:55 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ pid_t	execute_echo(t_cmd *cmd)
     {
         ft_fputstr(cmd->out, cmd->args[i]);
         if (cmd->args[i + 1])
-            ft_fputstr(1, " ");
+            ft_fputstr(cmd->out, " ");
     }
     if (!flag)
 		ft_fputstr(cmd->out, "\n");
