@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:46:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:52:32 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void					loop(void);
 // cmd
 void					free_cmd(t_cmd *cmd);
 t_cmd					*new_cmd(char **args);
+
 
 
 void print_token2(t_token *t, int nivel);
