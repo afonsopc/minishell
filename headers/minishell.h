@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 17:09:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 18:01:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct					s_cmd
 	int					in;
 	int					out;
 	bool				loser;
+	int					loser_status;
 	t_redirect			*redirect;
 } 						t_cmd;
 

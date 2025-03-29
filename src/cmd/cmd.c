@@ -6,66 +6,12 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 12:31:08 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 18:09:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <execution.h>
-
-static t_redirect	*new_redirect(char	**args)
-{
-	t_redirect	*r;
-
-	if (!args)
-		return (NULL);
-	r = ft_calloc(1, sizeof(t_redirect));
-	if (!r)
-		return (ft_strvfree(args), NULL);
-	r->args = args;
-	if (ft_strcmp(args[0], ">") == 0 || ft_strcmp(args[0], ">>") == 0)
-		r->type = OUT;
-	return (r);
-}
-
-static int	organizar(char	**args, size_t i)
-{
-	size_t	start;
-
-	start = i + (args[i + 1] != NULL);
-	free(args[i]);
-	free(args[i + 1]);
-	while (args[++start])
-		args[i++] = args[start];
-	args[i] = NULL;
-	return (0);
-}
-
-static void	init_redirect(t_cmd	*cmd)
-{
-	size_t		i;
-	t_redirect	*end;
-	t_redirect	*new;
-
-	i = 0;
-	end = NULL;
-	while (cmd->args[i])
-	{
-		if (ft_strcmp(cmd->args[i], ">") == 0 || ft_strcmp(cmd->args[i], "<") == 0 \
-		|| ft_strcmp(cmd->args[i], ">>") == 0 || ft_strcmp(cmd->args[i], "<<") == 0)
-		{
-			new = new_redirect(ft_strvndup(cmd->args + i, 2));
-			if (cmd->redirect == NULL)
-				cmd->redirect = new;
-			else
-				end->next = new;
-			end = new;
-			i = organizar(cmd->args, i);
-		}
-		else
-			i++;
-	}
-}
 
 static	void	init_fun(t_cmd	*cmd)
 {
@@ -96,7 +42,6 @@ t_cmd	*new_cmd(char **args)
 		return (NULL);
 	process_env_assignments(args);
 	cmd->args = args;
-	init_redirect(cmd);
 	init_fun(cmd);
 	cmd->in = -2;
 	cmd->out = -2;

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 17:19:28 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 18:07:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void	update_fd(int *fd, int new_fd)
 void	process_cmd(t_token	*token, int in, int out)
 {
 	if (token->cmd->loser)
+	{
+		terminal()->status = token->cmd->loser_status;
 		return (ft_close2(in, out), ft_close2(token->cmd->in, token->cmd->out));
+	}
 	update_fd(&in, token->cmd->in);
 	update_fd(&out, token->cmd->out);
 	token->cmd->in = in;
 	token->cmd->out = out;
-	process_args_expansions(token->cmd);
 	arg_clean(token->cmd);
 	if (token->cmd->args && *token->cmd->args)
 		token->cmd->args[0] = get_command_path(token->cmd->args [0]);
