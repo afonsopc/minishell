@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 10:33:36 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 10:37:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ bool	is_directory(char *path)
 
 char	*handle_contains_slash(struct stat stat_struct, char *path)
 {
-	terminal()->status = 127;
+	terminal()->status = 126;
 	if (is_directory(path))
 		return (ft_strdup(": Is a directory\n"));
 	else if (stat(path, &stat_struct) == -1)
-		return (ft_strdup(": No such file or directory\n"));
-	else if (access(path, X_OK) == -1)
 	{
-		terminal()->status = 126;
-		return (ft_strdup(": Permission denied\n"));
+		terminal()->status = 127;
+		return (ft_strdup(": No such file or directory\n"));
 	}
+	else if (access(path, X_OK) == -1)
+		return (ft_strdup(": Permission denied\n"));
 	terminal()->status = 0;
 	return (NULL);
 }
@@ -77,10 +77,7 @@ bool	assert_cmd(t_cmd *cmd)
 void	execute(t_cmd *cmd)
 {
 	if (!assert_cmd(cmd))
-	{
-		terminal()->status = 127;
 		ft_exit_free();
-	}
 	close_all_non_standart_fds();
 	unmask_signals();
 	execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
