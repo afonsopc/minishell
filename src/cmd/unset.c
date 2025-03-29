@@ -17,9 +17,10 @@ pid_t	execute_unset(t_cmd *cmd)
 	size_t	i;
 
 	ft_close2(cmd->in, cmd->out);
-	i = 1;
-	while (cmd->args[i])
-		ft_hashmap_del(terminal()->env, cmd->args[i++]);
+	i = 0;
+	while (cmd->args[++i])
+		if (cmd->in != 0 && cmd->out != 1)
+			ft_hashmap_del(terminal()->env, cmd->args[i]);
 	terminal()->status = 0;
 	return (0);
 }

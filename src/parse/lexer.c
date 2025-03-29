@@ -65,29 +65,31 @@ char	**tokenize(char *input)
 	return (lexer_tokenize(input));
 }
 
+bool	can_move(char *quote, char curr)
+{
+	if (curr == *quote)
+	{
+		*quote = 0;
+		return (true);
+	}
+	else if (curr == '\'' || curr == '"')
+	{
+		*quote = curr;
+		return (true);
+	}
+	else if (*quote == '\'' || *quote == '"')
+		return (true);
+	return (!ft_isspace(curr) && curr != '|' && curr != '&' && curr != '<' && curr != '>');
+}
+
 char	*read_word(t_lexer *lexer)
 {
 	size_t	start;
 	char	quote;
 
 	quote = 0;
-	if (lexer->curr_char == '\'' || lexer->curr_char == '"')
-		quote = lexer->curr_char;
 	start = lexer->pos;
-	if (quote)
-	{
+	while (lexer->curr_char && can_move(&quote, lexer->curr_char))
 		advance_lexer(lexer);
-		while (lexer->curr_char && !(lexer->curr_char == quote && (!lexer->input[lexer->pos + 1] || ft_isspace(lexer->input[lexer->pos + 1]))))
-			advance_lexer(lexer);
-		advance_lexer(lexer);
-	}
-	else
-	{
-		while (lexer->curr_char && !ft_isspace(lexer->curr_char)
-			&& lexer->curr_char != '|' && lexer->curr_char != '&'
-			&& lexer->curr_char != '<' && lexer->curr_char != '>'
-			&& lexer->curr_char != '\'' && lexer->curr_char != '"')
-			advance_lexer(lexer);
-	}
 	return (ft_strndup(lexer->input + start, lexer->pos - start));
 }

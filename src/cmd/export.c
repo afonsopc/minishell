@@ -30,7 +30,7 @@ static bool	check_key(char *value)
 	return (!*value && alpha_count);
 }
 
-static void	export_str(char *value)
+static void	export_str(t_cmd *cmd, char *value)
 {
 	char	**args;
 	size_t	len;
@@ -51,7 +51,8 @@ static void	export_str(char *value)
 		len++;
 	if (args[1])
 		args[1][len] = 0;
-	ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]), free);
+	if (cmd->in != 0 && cmd->out != 1)
+		ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]), free);
 	ft_strvfree(args);
 }
 
@@ -78,15 +79,15 @@ pid_t	execute_export(t_cmd *cmd)
 {
 	size_t	i;
 
+	terminal()->status = 0;
 	i = 1;
 	if (ft_strvlen(cmd->args) == 1)
 		print_export(cmd->out);
 	else
 	{
 		while (cmd->args[i])
-			export_str(cmd->args[i++]);
+			export_str(cmd, cmd->args[i++]);
 	}
-	terminal()->status = 0;
 	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

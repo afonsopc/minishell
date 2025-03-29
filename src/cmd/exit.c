@@ -45,7 +45,7 @@ pid_t	execute_exit(t_cmd *cmd)
 	terminal()->status = str_to_status(cmd->args[1]);
 	if (errno)
 	{
-		terminal()->status = 255;
+		terminal()->status = 2;
 		ft_fputstr(2, "exit: ");
 		ft_fputstr(2, cmd->args[1]);
 		ft_fputstr(2, ": numeric argument required\n");
