@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 17:14:24 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:19:28 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	update_fd(int *fd, int new_fd)
 
 void	process_cmd(t_token	*token, int in, int out)
 {
-	/* if (token->cmd->loser)
-		ft_close2(in, out); */
+	if (token->cmd->loser)
+		return (ft_close2(in, out), ft_close2(token->cmd->in, token->cmd->out));
 	update_fd(&in, token->cmd->in);
 	update_fd(&out, token->cmd->out);
 	token->cmd->in = in;
