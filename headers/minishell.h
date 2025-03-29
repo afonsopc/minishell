@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:52:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:55:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@ typedef enum e_redirect_type
 	OUT
 }						t_redirect_type;
 
-typedef struct s_terminal
-{
-	t_hashmap				*env;
-	void				*new_env;
-	t_token				*token;
-	int					status;
-	struct sigaction	sa;
-}						t_terminal;
-
 typedef struct s_redirect
 {
 	t_redirect_type		type;
@@ -76,6 +67,15 @@ typedef struct					s_token
 	struct s_token		*right;
 	pid_t				pid;
 } 						t_token;
+
+typedef struct s_terminal
+{
+	t_hashmap				*env;
+	void				*new_env;
+	t_token				*token;
+	int					status;
+	struct sigaction	sa;
+}						t_terminal;
 
 typedef struct s_lexer
 {
