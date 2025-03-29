@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:58:45 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 12:49:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	__isalnum(char c);
 
 static bool	check_key(char *value)
 {
@@ -76,18 +74,19 @@ static void	print_export(int out)
 	}
 }
 
-void	execute_export(t_cmd *cmd)
+pid_t	execute_export(t_cmd *cmd)
 {
 	size_t	i;
 
 	i = 1;
 	if (ft_strvlen(cmd->args) == 1)
-		print_export(0);
+		print_export(cmd->out);
 	else
 	{
 		while (cmd->args[i])
 			export_str(cmd->args[i++]);
 	}
 	terminal()->status = 0;
-	ft_exit_free();
+	(ft_close(cmd->in), ft_close(cmd->out));
+	return (0);
 }

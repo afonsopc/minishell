@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 11:41:58 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 12:40:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	process_cmd(t_token	*token, int in, int out)
 {
 	update_fd(&in, token->cmd->in);
 	update_fd(&out, token->cmd->out);
+	token->cmd->in = in;
+	token->cmd->out = out;
 	process_args_expansions(token->cmd);
 	arg_clean(token->cmd);
 	if (token->cmd->args && *token->cmd->args)
@@ -31,16 +33,5 @@ void	process_cmd(t_token	*token, int in, int out)
 	process_wildcards(token->cmd);
 	if (!token->cmd->execute || !token->cmd->args[0])
 		return ;
-	token->pid = fork();
-	if (!token->pid)
-	{
-        if (out != -2)
-            dup2(out, STDOUT_FILENO);
-        if (in != -2)
-            dup2(in, STDIN_FILENO);
-	}
-	ft_close(in);
-	ft_close(out);
-	if (!token->pid)
-		token->cmd->execute(token->cmd);
+	token->pid = token->cmd->execute(token->cmd);
 }

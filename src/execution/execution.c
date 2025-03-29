@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 10:37:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 12:29:58 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,17 @@ bool	assert_cmd(t_cmd *cmd)
 	return (true);
 }
 
-void	execute(t_cmd *cmd)
+pid_t	execute(t_cmd *cmd)
 {
+	pid_t	pid;
+
+	pid = fork();
+	if (pid)
+		return (ft_close(cmd->in), ft_close(cmd->out), pid);
+	if (cmd->in != -2)
+		dup2(cmd->in, STDIN_FILENO);
+	if (cmd->out != -2)
+		dup2(cmd->out, STDOUT_FILENO);
 	if (!assert_cmd(cmd))
 		ft_exit_free();
 	close_all_non_standart_fds();
@@ -83,4 +92,5 @@ void	execute(t_cmd *cmd)
 	execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
 	terminal()->status = 127;
 	ft_exit_free();
+	return (0);
 }

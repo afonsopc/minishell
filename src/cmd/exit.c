@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/24 00:53:59 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 12:48:01 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	str_to_status(char *string)
 	return (legal_number(string) & 255);
 }
 
-void	execute_exit(t_cmd *cmd)
+pid_t	execute_exit(t_cmd *cmd)
 {
+	(ft_close(cmd->in), ft_close(cmd->out));
 	errno = 0;
 	if (cmd->args[1] && cmd->args[2])
 	{
@@ -50,4 +51,5 @@ void	execute_exit(t_cmd *cmd)
 		ft_fputstr(2, ": numeric argument required\n");
 	}
 	ft_exit();
+	return (0);
 }

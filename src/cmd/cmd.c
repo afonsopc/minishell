@@ -6,21 +6,12 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 11:41:23 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 12:31:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <execution.h>
-
-void		execute(t_cmd *cmd);
-void		execute_cd(t_cmd *cmd);
-void		execute_pwd(t_cmd *cmd);
-void		execute_exit(t_cmd *cmd);
-void		execute_echo(t_cmd *cmd);
-void		execute_export(t_cmd *cmd);
-void		execute_env(t_cmd *cmd);
-void		execute_unset(t_cmd *cmd);
 
 static t_redirect	*new_redirect(char	**args)
 {

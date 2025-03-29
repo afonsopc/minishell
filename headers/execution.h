@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/28 14:29:13 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 12:31:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void		wait_token(t_token *token);
 void		kill_token(t_token *token);
 char		*path_join(char *str1, char *str2);
 char		*get_command_path(char *cmd);
-void		execute(t_cmd *cmd);
 char		*get_cwd(void);
 char		*get_curr_dir(void);
 bool		process_redirections(t_token *token);
@@ -40,5 +39,13 @@ void		process_pipe(t_token *token, int in, int out);
 
 void		process_args_expansions(t_cmd *cmd);
 
+pid_t		execute(t_cmd *cmd);
+pid_t		execute_cd(t_cmd *cmd);
+pid_t		execute_pwd(t_cmd *cmd);
+pid_t		execute_exit(t_cmd *cmd);
+pid_t		execute_echo(t_cmd *cmd);
+pid_t		execute_export(t_cmd *cmd);
+pid_t		execute_env(t_cmd *cmd);
+pid_t		execute_unset(t_cmd *cmd);
 
 #endif

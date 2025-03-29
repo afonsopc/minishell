@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/23 23:38:02 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 12:47:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ static void	too_many_args_error(void)
 	ft_fputstr(2, "cd: too many arguments\n");
 }
 
-void	execute_cd(t_cmd *cmd)
+pid_t	execute_cd(t_cmd *cmd)
 {
 	char	*dir;
 
+	(ft_close(cmd->in), ft_close(cmd->out));
 	dir = NULL;
 	if (cmd->args[0] && cmd->args[1] && cmd->args[2])
 		too_many_args_error();
@@ -58,5 +59,5 @@ void	execute_cd(t_cmd *cmd)
 		(hashmap(terminal()->env))->put(ft_strdup("PWD"), get_cwd());
 	}
 	terminal()->status = 0;
-	ft_exit_free();
+	return (0);
 }

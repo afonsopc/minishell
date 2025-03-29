@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 23:39:05 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 12:47:29 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	check_flag(char *str)
 	return ((*str == '\0'));
 }
 
-void	execute_echo(t_cmd *cmd)
+pid_t	execute_echo(t_cmd *cmd)
 {
     bool flag;
     int i;
@@ -33,12 +33,13 @@ void	execute_echo(t_cmd *cmd)
 		i++;
     while (cmd->args[++i])
     {
-        ft_fputstr(1, cmd->args[i]);
+        ft_fputstr(cmd->out, cmd->args[i]);
         if (cmd->args[i + 1])
             ft_fputstr(1, " ");
     }
     if (!flag)
-		ft_fputstr(1, "\n");
+		ft_fputstr(cmd->out, "\n");
 	terminal()->status = 0;
-	ft_exit_free();
+	(ft_close(cmd->in), ft_close(cmd->out));
+	return (0);
 }
