@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:04 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/26 15:52:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 11:41:58 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	process_cmd(t_token	*token, int in, int out)
 	update_fd(&in, token->cmd->in);
 	update_fd(&out, token->cmd->out);
 	process_args_expansions(token->cmd);
+	arg_clean(token->cmd);
+	if (token->cmd->args && *token->cmd->args)
+		token->cmd->args[0] = get_command_path(token->cmd->args [0]);
 	process_wildcards(token->cmd);
 	if (!token->cmd->execute || !token->cmd->args[0])
 		return ;

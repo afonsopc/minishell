@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 23:35:55 by afonsocouti       #+#    #+#             */
-/*   Updated: 2025/03/24 09:34:16 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 11:40:42 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char    *ft_strndup(const char *s1, size_t n)
     char    *dup;
     size_t  i;
 
-	if (!s1 || !n)
+	if (!s1)
 		return (NULL);
     dup = malloc(n + 1);
     if (!dup)

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:47 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/26 16:21:26 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 11:41:23 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ t_cmd	*new_cmd(char **args)
 	cmd->args = args;
 	init_redirect(cmd);
 	init_fun(cmd);
-	arg_clean(cmd);
-	if (cmd->args && *cmd->args)
-		cmd->args[0] = get_command_path(cmd->args [0]);
 	cmd->in = -2;
 	cmd->out = -2;
 	return (cmd);
