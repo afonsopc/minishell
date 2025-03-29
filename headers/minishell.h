@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:42:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:46:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@
 # include <termios.h>
 # include <unistd.h>
 # include <ft_utils.h>
-
-typedef long long		t_size_ll;
-typedef struct s_token	t_token;
-typedef struct s_cmd	t_cmd;
 
 typedef enum e_cmd_type
 {
@@ -63,23 +59,23 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }						t_redirect;
 
-struct					s_cmd
+typedef struct					s_cmd
 {
 	char				**args;
-	pid_t				(*execute)(t_cmd * cmd);
+	pid_t				(*execute)(struct s_cmd * cmd);
 	int					in;
 	int					out;
 	t_redirect			*redirect;
-};
+} 						t_cmd;
 
-struct					s_token
+typedef struct					s_token
 {
 	t_cmd_type			type;
 	t_cmd				*cmd;
 	struct s_token		*left;
 	struct s_token		*right;
 	pid_t				pid;
-};
+} 						t_token;
 
 typedef struct s_lexer
 {
