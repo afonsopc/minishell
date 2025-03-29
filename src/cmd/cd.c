@@ -42,6 +42,7 @@ pid_t	execute_cd(t_cmd *cmd)
 	char	*dir;
 
 	ft_close2(cmd->in, cmd->out);
+	terminal()->status = 0;
 	dir = NULL;
 	if (cmd->args[0] && cmd->args[1] && cmd->args[2])
 		too_many_args_error();
@@ -58,6 +59,5 @@ pid_t	execute_cd(t_cmd *cmd)
 		}
 		ft_hashmap_set(terminal()->env, ft_strdup("PWD"), get_cwd(), free);
 	}
-	terminal()->status = 0;
 	return (0);
 }
