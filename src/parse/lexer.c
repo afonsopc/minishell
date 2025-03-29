@@ -68,11 +68,26 @@ char	**tokenize(char *input)
 char	*read_word(t_lexer *lexer)
 {
 	size_t	start;
+	char	quote;
 
+	quote = 0;
+	if (lexer->curr_char == '\'' || lexer->curr_char == '"')
+		quote = lexer->curr_char;
 	start = lexer->pos;
-	while (lexer->curr_char && !ft_isspace(lexer->curr_char)
-		&& lexer->curr_char != '|' && lexer->curr_char != '&'
-		&& lexer->curr_char != '<' && lexer->curr_char != '>')
+	if (quote)
+	{
 		advance_lexer(lexer);
+		while (lexer->curr_char && lexer->curr_char != quote)
+			advance_lexer(lexer);
+		advance_lexer(lexer);
+	}
+	else
+	{
+		while (lexer->curr_char && !ft_isspace(lexer->curr_char)
+			&& lexer->curr_char != '|' && lexer->curr_char != '&'
+			&& lexer->curr_char != '<' && lexer->curr_char != '>'
+			&& lexer->curr_char != '\'' && lexer->curr_char != '"')
+			advance_lexer(lexer);
+	}
 	return (ft_strndup(lexer->input + start, lexer->pos - start));
 }
