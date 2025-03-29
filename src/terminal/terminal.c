@@ -27,6 +27,7 @@ void	ft_exit(void)
 
 void	ft_exit_free(void)
 {
+	(close(0), close(1), close(2));
 	ft_hashmap_destroy(terminal()->env);
 	free_token(terminal()->token);
 	exit(terminal()->status);

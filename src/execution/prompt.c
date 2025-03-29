@@ -61,7 +61,21 @@ void print_token2(t_token *t, int nivel)
                 printf("  ");
             printf("Argumentos: (nenhum)\n");
         }
-        
+
+        if (t->cmd->loser)
+        {
+            for (int i = 0; i < nivel; i++)
+                printf("  ");
+            printf("Big Loser: %d\n", t->cmd->loser_status);
+        }
+    
+        for (int i = 0; i < nivel; i++)
+            printf("  ");
+        printf("IN: %d\n", t->cmd->in);
+        for (int i = 0; i < nivel; i++)
+            printf("  ");
+        printf("OUT: %d\n", t->cmd->out);
+
         // Print redirections
         if (t->cmd->redirect)
         {

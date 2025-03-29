@@ -76,10 +76,16 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 
 bool	process_redirections(t_token *token)
 {
+	bool	bool1;
+	bool	bool2;
+
 	if (!token)
 		return (true);
 	if (token->type != CMD)
-		return (process_redirections(token->left)
-			&& process_redirections(token->right));
+	{
+		bool1 = process_redirections(token->left);
+		bool2 = process_redirections(token->right);
+		return (bool1 && bool2);
+	}
 	return (process_redirection(token->cmd, token->cmd->redirect));
 }
