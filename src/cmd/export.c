@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 12:49:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	export_str(char *value)
 		len++;
 	if (args[1])
 		args[1][len] = 0;
-	(hashmap(terminal()->env)->put)(ft_strdup(args[0]), ft_strdup(args[1]));
+	ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]), free);
 	ft_strvfree(args);
 }
 
@@ -59,7 +59,7 @@ static void	print_export(int out)
 {
 	t_element	*tmp;
 
-	tmp = hashmap(terminal()->env)->get_element_index(0);
+	tmp = terminal()->env->table[0];
 	while (tmp)
 	{
 		ft_fputstr(out, "declare -x ");
@@ -87,6 +87,6 @@ pid_t	execute_export(t_cmd *cmd)
 			export_str(cmd->args[i++]);
 	}
 	terminal()->status = 0;
-	(ft_close(cmd->in), ft_close(cmd->out));
+	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

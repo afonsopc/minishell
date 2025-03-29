@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:18 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 13:03:38 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:08:30 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_env(char **env)
 	char	*separator;
 	char	**values;
 
-	terminal()->env = new_hashmap();
+	terminal()->env = ft_hashmap_new();
 	while (env && *env)
 	{
 		separator = ft_strnstr(*env, "=", ft_strlen(*env));
@@ -26,8 +26,8 @@ void	init_env(char **env)
 		values[1] = ft_strdup(separator + 1);
 		if (values && values[0] && *values[0])
 		{
-			(hashmap(terminal()->env)->put)(ft_strdup(values[0]),
-				ft_strdup(values[1]));
+			ft_hashmap_set(terminal()->env, ft_strdup(values[0]),
+				ft_strdup(values[1]), free);
 		}
 		ft_strvfree(values);
 		env++;

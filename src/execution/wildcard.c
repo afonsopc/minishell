@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 21:54:23 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/24 00:53:06 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 15:15:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	match_wildcard(char *pattern, char *string)
 	return (false);
 }
 
-static bool	match_every_file(t_array *arr, char *arg)
+static bool	match_every_file(t_list *arr, char *arg)
 {
 	DIR				*curr_dir;
 	struct dirent	*entry;
@@ -42,7 +42,7 @@ static bool	match_every_file(t_array *arr, char *arg)
 	while (entry)
 	{
 		if (match_wildcard(arg, entry->d_name))
-			array(arr)->add(ft_strdup(entry->d_name));
+			ft_list_add(&arr, ft_strdup(entry->d_name), free);
 		entry = readdir(curr_dir);
 	}
 	closedir(curr_dir);
@@ -51,20 +51,20 @@ static bool	match_every_file(t_array *arr, char *arg)
 
 static char	**process_wildcard(char *arg)
 {
-	t_array			*arr;
+	t_list			*arr;
 	char			**expanded_arg;
 
-	arr = new_array();
+	arr = NULL;
 	if (!match_every_file(arr, arg))
-		return (array(arr)->destroy(), NULL);
-	if (array(arr)->size)
-		expanded_arg = array(arr)->to_str();
+		return (NULL);
+	if (ft_list_size(arr))
+		expanded_arg = ft_list_to_strv(arr);
 	else
 	{
 		expanded_arg = ft_calloc(2, sizeof(char *));
 		expanded_arg[0] = ft_strdup(arg);
 	}
-	return (array(arr)->destroy(), expanded_arg);
+	return (ft_list_destroy(&arr), expanded_arg);
 }
 
 void	process_wildcards(t_cmd *cmd)

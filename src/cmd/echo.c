@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 12:47:29 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ pid_t	execute_echo(t_cmd *cmd)
     if (!flag)
 		ft_fputstr(cmd->out, "\n");
 	terminal()->status = 0;
-	(ft_close(cmd->in), ft_close(cmd->out));
+	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

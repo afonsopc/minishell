@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/26 15:40:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:13:20 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*handle_special_char(t_lexer *lexer)
 	return (token);
 }
 
-void	add_token_to_array(t_array *tokens, char *token)
+void	add_token_to_array(t_list **tokens, char *token)
 {
 	if (token && *token)
-		array(tokens)->add(token);
+		ft_list_add(tokens, ft_strdup(token), free);
 	else
 		free(token);
 }
@@ -36,13 +36,13 @@ void	add_token_to_array(t_array *tokens, char *token)
 static char	**lexer_tokenize(char *input)
 {
 	t_lexer	*lexer;
-	t_array	*tokens;
+	t_list	*tokens;
 	char	*token;
 	char	**result;
 
 	lexer = init_lexer(input);
-	tokens = new_array();
-	if (!lexer || !tokens)
+	tokens = NULL;
+	if (!lexer)
 		return (NULL);
 	while (lexer->curr_char)
 	{
@@ -50,11 +50,11 @@ static char	**lexer_tokenize(char *input)
 		if (!lexer->curr_char)
 			break ;
 		token = handle_special_char(lexer);
-		add_token_to_array(tokens, token);
+		add_token_to_array(&tokens, token);
 	}
 	free(lexer);
-	result = array(tokens)->to_str();
-	array(tokens)->destroy();
+	result = ft_list_to_strv(tokens);
+	ft_list_destroy(&tokens);
 	return (result);
 }
 

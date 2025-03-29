@@ -6,15 +6,13 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:22:57 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "ft_util.h"
-# include "string_util.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -50,7 +48,7 @@ typedef enum e_redirect_type
 
 typedef struct s_terminal
 {
-	void				*env;
+	t_hashmap				*env;
 	void				*new_env;
 	t_token				*token;
 	int					status;
@@ -99,9 +97,9 @@ char					*read_redirection(t_lexer *lexer);
 char					*read_single_quote(t_lexer *lexer);
 char					*read_double_quote(t_lexer *lexer);
 char					*read_word(t_lexer *lexer);
-char					*read_parenthesis(t_lexer *lexer);
 char					*handle_special_char(t_lexer *lexer);
-void					add_token_to_array(t_array *tokens, char *token);
+void					add_token_to_array(t_list **tokens, char *token);
+
 // parse
 int						is_redirection(char *token);
 t_redirect				*create_redirection(char **tokens, size_t *pos);
@@ -110,14 +108,17 @@ t_token					*parse_simple_command(char **tokens, size_t *pos);
 t_token					*parse_pipe(char **tokens, size_t *pos);
 t_token					*parse_and_or(char **tokens, size_t *pos);
 t_token					*parse(char *line);
+
 // token
 char					**tokenize(char *input);
 bool					free_token(t_token *token);
 void					free_redirect(t_redirect *r);
 t_token					*new_token(char *type, t_cmd *cmd);
+
 // env
 void					init_env(char **env);
 void					process_env_assignments(char **args);
+
 // terminal
 t_terminal				*terminal(void);
 void					ft_exit(void);
@@ -127,15 +128,10 @@ void					ft_exit_free(void);
 char					*get_command_path(char *cmd);
 void					process_token(t_token *token);
 void					loop(void);
+
 // cmd
 void					free_cmd(t_cmd *cmd);
 t_cmd					*new_cmd(char **args);
-// utils
-void					print_list(char **args);
-int						ft_close(int fd);
-void					*ft_memset(void *s, int c, size_t n);
-
-
 
 
 void print_token2(t_token *t, int nivel);

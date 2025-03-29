@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_creat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:17:42 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:53:09 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 14:39:19 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void process_env_assignments(char **args)
         {
             if (!env_var[1])
                 env_var[1] = ft_strdup("");
-            (hashmap(terminal()->env)->put)(ft_strdup(env_var[0]), 
-                                            ft_strdup(env_var[1]));
+			ft_hashmap_set(terminal()->env, ft_strdup(env_var[0]), 
+                                            ft_strdup(env_var[1]), free);
                                             ft_strvfree(env_var);
         }
         i++;

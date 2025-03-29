@@ -25,13 +25,19 @@ typedef struct s_element
 	void			*value;
 	struct s_element	*next;
 	void				(*value_free)(void *value);
-	void			(*destroy)(struct s_element *e);
 }	t_element;
 
 typedef struct s_hashmap
 {
 	t_element	**table;
 }	t_hashmap;
+
+typedef struct s_list
+{
+	void		*data;
+	struct s_list	*next;
+	void				(*data_free)(void *data);
+}	t_list;
 
 size_t	    ft_strlen(const char *s);
 size_t	    ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -69,5 +75,24 @@ void    	ft_strvfree(char **v);
 void		ft_bzero(void *s, size_t n);
 
 bool		ft_strequal(char *s1, char *s2);
+
+t_list	*ft_list_new(void *data, void (*data_free)(void *data));
+void	ft_list_add(t_list **list, void *data, void (*data_free)(void *data));
+void	ft_list_destroy(t_list **list);
+size_t	ft_list_size(t_list *list);
+char	**ft_list_to_strv(t_list *list);
+
+t_hashmap	*ft_hashmap_new(void);
+t_element	*ft_element_new(char *key, void *value, void (*el_free)(void *value));
+t_element	*ft_hashmap_get(t_hashmap *hashmap, char *key);
+void	*ft_hashmap_get_value(t_hashmap *hashmap, char *key);
+void	ft_hashmap_set(t_hashmap *hashmap, char *key, void *value, void (*el_free)(void *value));
+void	ft_hashmap_destroy(t_hashmap *hashmap);
+char	**ft_hashmap_to_strv(t_hashmap *hashmap);
+void	ft_hashmap_del(t_hashmap *hashmap, char *key);
+
+void	ft_close(int fd);
+void	ft_close2(int fd1, int fd2);
+void	ft_fprint_strv(int fd, char **strv);
 
 #endif

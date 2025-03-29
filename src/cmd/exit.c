@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 12:48:01 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	str_to_status(char *string)
 
 pid_t	execute_exit(t_cmd *cmd)
 {
-	(ft_close(cmd->in), ft_close(cmd->out));
+	ft_close2(cmd->in, cmd->out);
 	errno = 0;
 	if (cmd->args[1] && cmd->args[2])
 	{

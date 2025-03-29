@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 12:29:58 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:52:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ pid_t	execute(t_cmd *cmd)
 		ft_exit_free();
 	close_all_non_standart_fds();
 	unmask_signals();
-	execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
+	execve(cmd->args[0], cmd->args, ft_hashmap_to_strv(terminal()->env));
 	terminal()->status = 127;
 	ft_exit_free();
 	return (0);

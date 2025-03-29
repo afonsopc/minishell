@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:25:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/28 14:52:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:58:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char *expand_variable(char *var_name, int *exit_status)
 		return (ft_strdup("$"));
 	if (ft_strcmp(var_name, "?") == 0)
 		return (ft_itoa(*exit_status));
-	value = hashmap(terminal()->env)->get_key(var_name);
+	value = ft_hashmap_get_value(terminal()->env, var_name);
 	// printf("Expanding $%s = '%s'\n", var_name, value ? value : "(null)");
 	if (!value)
 		return (ft_strdup(""));

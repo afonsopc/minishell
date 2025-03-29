@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/24 00:53:02 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/29 14:16:09 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,13 @@ void	close_all_non_standart_fds(void)
 	fd = 2;
 	while (++fd <= FOPEN_MAX)
 		ft_close(fd);
+}
+
+void	free_redirect(t_redirect *r)
+{
+	if (!r)
+		return ;
+	free_redirect(r->next);
+	ft_strvfree(r->args);
+	free(r);
 }

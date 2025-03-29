@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 10:08:21 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:58:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*get_command_path(char *cmd)
 	if (!cmd[0] || access(cmd, X_OK) != -1)
 		return (cmd);
 	i = -1;
-	if (!hashmap(terminal()->env)->get_key("PATH"))
+	if (!ft_hashmap_get_value(terminal()->env, "PATH"))
 		return (cmd);
-	path = ft_split(hashmap(terminal()->env)->get_key("PATH"), ":");
+	path = ft_split(ft_hashmap_get_value(terminal()->env, "PATH"), ":");
 	if (!path)
 		return (cmd);
 	while (path[++i])

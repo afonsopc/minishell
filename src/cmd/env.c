@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:55:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 12:47:52 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ pid_t	execute_env(t_cmd *cmd)
 
 	(void)cmd;
 	i = -1;
-	args = hashmap(terminal()->env)->to_array();
+	args = ft_hashmap_to_strv(terminal()->env);
 	while (args[++i])
 	{
 		ft_fputstr(cmd->out, args[i]);
 		ft_fputstr(cmd->out, "\n");
 	}
 	terminal()->status = 0;
-	(ft_close(cmd->in), ft_close(cmd->out));
+	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

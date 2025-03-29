@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.h                                          :+:      :+:    :+:   */
+/*   utils10.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 14:10:59 by paude-so         ###   ########.fr       */
+/*   Created: 2025/03/29 15:18:01 by paude-so          #+#    #+#             */
+/*   Updated: 2025/03/29 15:23:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTIL_H
-# define FT_UTIL_H
+#include <ft_utils.h>
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "array_list.h"
-# include <stdbool.h>
-# include <ft_utils.h>
-
-typedef struct s_this
+void	ft_close(int fd)
 {
-	t_array			*array;
-	t_array			*array_main;
-	t_hashmap		*hashmap;
-	t_hashmap_p		*hashmapp;
-}	t_this;
+	if (fd > 2)
+		close(fd);
+}
 
-t_this	*this(void);
+void	ft_close2(int fd1, int fd2)
+{
+	ft_close(fd1);
+	ft_close(fd2);
+}
 
-#endif
+void	ft_fprint_strv(int fd, char **strv)
+{
+	int	i;
+
+	i = 0;
+	while (strv && strv[i])
+	{
+		ft_fputstr(fd, strv[i]);
+		if (strv[i + 1])
+			ft_fputstr(fd, " ");
+		i++;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 12:49:08 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 pid_t	execute_pwd(t_cmd *cmd)
 {
 	(void)cmd;
-	ft_fputstr(cmd->out, (char *)hashmap(terminal()->env)->get_key("PWD"));
+	ft_fputstr(cmd->out, (char *)ft_hashmap_get_value(terminal()->env, "PWD"));
 	ft_fputstr(cmd->out, "\n");
 	terminal()->status = 0;
-	(ft_close(cmd->in), ft_close(cmd->out));
+	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

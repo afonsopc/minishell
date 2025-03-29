@@ -6,11 +6,18 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:34:07 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/23 11:28:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:53:11 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+t_terminal	*terminal(void)
+{
+	static t_terminal	t;
+
+	return (&t);
+}
 
 void	ft_exit(void)
 {
@@ -20,7 +27,7 @@ void	ft_exit(void)
 
 void	ft_exit_free(void)
 {
-	hashmap(terminal()->env)->destroy();
+	ft_hashmap_destroy(terminal()->env);
 	free_token(terminal()->token);
 	exit(terminal()->status);
 }

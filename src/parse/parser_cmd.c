@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:00 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/26 16:01:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:13:56 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,20 @@ static int	should_add_arg(char **tokens, size_t i, size_t start)
 
 static char	**collect_cmd_args(char **tokens, size_t start, size_t end)
 {
-	t_array	*cmd_args;
+	t_list	*cmd_args;
 	char	**args;
 	size_t	i;
 
-	cmd_args = new_array();
-	if (!cmd_args)
-		return (NULL);
+	cmd_args = NULL;
 	i = start;
 	while (i < end)
 	{
 		if (should_add_arg(tokens, i, start))
-			array(cmd_args)->add(ft_strdup(tokens[i]));
+			ft_list_add(&cmd_args, ft_strdup(tokens[i]), free);
 		i++;
 	}
-	args = array(cmd_args)->to_str();
-	array(cmd_args)->destroy();
+	args = ft_list_to_strv(cmd_args);
+	ft_list_destroy(&cmd_args);
 	return (args);
 }
 
