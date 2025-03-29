@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/26 13:39:34 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:29:13 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		process_cmd(t_token	*token, int in, int out);
 void		process_or(t_token *token, int in, int out);
 void		process_pipe(t_token *token, int in, int out);
 
-void 		process_args_expansions(t_cmd *cmd);
+void		process_args_expansions(t_cmd *cmd);
+
 
 #endif
