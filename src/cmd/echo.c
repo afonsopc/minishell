@@ -24,20 +24,20 @@ static bool	check_flag(char *str)
 
 pid_t	execute_echo(t_cmd *cmd)
 {
-    bool flag;
-    int i;
-	
-    flag = check_flag(cmd->args[1]);
+	bool	flag;
+	int		i;
+
+	flag = check_flag(cmd->args[1]);
 	i = 0;
-    if (flag)
+	if (flag)
 		i++;
-    while (cmd->args[++i])
-    {
-        ft_fputstr(cmd->out, cmd->args[i]);
-        if (cmd->args[i + 1])
-            ft_fputstr(cmd->out, " ");
-    }
-    if (!flag)
+	while (cmd->args[++i])
+	{
+		ft_fputstr(cmd->out, cmd->args[i]);
+		if (cmd->args[i + 1])
+			ft_fputstr(cmd->out, " ");
+	}
+	if (!flag)
 		ft_fputstr(cmd->out, "\n");
 	terminal()->status = 0;
 	ft_close2(cmd->in, cmd->out);

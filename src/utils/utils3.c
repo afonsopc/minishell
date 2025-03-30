@@ -31,9 +31,9 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (ft_strncmp(s1, s2, -1));
 }
 
-void    ft_set_errno(int error)
+void	ft_set_errno(int error)
 {
-    errno = error;
+	errno = error;
 }
 
 long long	ft_atoll(const char *v)
@@ -64,7 +64,8 @@ long long	ft_atoll(const char *v)
 	return (result);
 }
 
-bool    ft_isspace(char c)
+bool	ft_isspace(char c)
 {
-    return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r');
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
 }

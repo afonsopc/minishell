@@ -14,14 +14,13 @@
 
 bool	ft_isalnum(int c)
 {
-	return ((c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9'));
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0'
+			&& c <= '9'));
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-    if (!s)
+	if (!s)
 		return (NULL);
 	while (*s && *s != (char)c)
 		s++;
@@ -42,36 +41,36 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-size_t ft_strvlen(char **v)
+size_t	ft_strvlen(char **v)
 {
-    size_t i;
+	size_t	i;
 
-    if (!v)
-        return (0);
-    i = 0;
-    while (v[i])
-        i++;
-    return (i);
+	if (!v)
+		return (0);
+	i = 0;
+	while (v[i])
+		i++;
+	return (i);
 }
 
-char    **ft_strvjoin(char **v1, char **v2)
+char	**ft_strvjoin(char **v1, char **v2)
 {
-    char    **new;
-    ssize_t i;
-    ssize_t j;
+	char	**new;
+	ssize_t	i;
+	ssize_t	j;
 
-    if (!v1 || !v2)
-        return (NULL);
-    i = ft_strvlen(v1);
-    j = ft_strvlen(v2);
-    new = ft_calloc(i + j + 1, sizeof(char *));
-    if (!new)
-        return (NULL);
-    i = -1;
-    while (v1[++i])
-        new[i] = ft_strdup(v1[i]);
-    j = -1;
-    while (v2[++j])
-        new[i + j] = ft_strdup(v2[j]);
-    return (new);
+	if (!v1 || !v2)
+		return (NULL);
+	i = ft_strvlen(v1);
+	j = ft_strvlen(v2);
+	new = ft_calloc(i + j + 1, sizeof(char *));
+	if (!new)
+		return (NULL);
+	i = -1;
+	while (v1[++i])
+		new[i] = ft_strdup(v1[i]);
+	j = -1;
+	while (v2[++j])
+		new[i + j] = ft_strdup(v2[j]);
+	return (new);
 }

@@ -14,9 +14,9 @@
 
 static void	free_all(char **strs)
 {
-    size_t	i;
+	size_t	i;
 
-    i = -1;
+	i = -1;
 	while (strs[++i])
 		free(strs[i]);
 	free(strs);
@@ -27,12 +27,12 @@ static int	count_items(const char *s1, const char *s2)
 	size_t	count;
 
 	count = 0;
-    while (*s1)
-    {
-        if (!ft_strchr(s2, *s1) && (ft_strchr(s2, *(s1 + 1)) || !*(s1 + 1)))
-            count++;
-        s1++;
-    }
+	while (*s1)
+	{
+		if (!ft_strchr(s2, *s1) && (ft_strchr(s2, *(s1 + 1)) || !*(s1 + 1)))
+			count++;
+		s1++;
+	}
 	return (count);
 }
 
@@ -66,7 +66,7 @@ static int	split(const char *s1, const char *s2, char **strs)
 
 char	**ft_split(const char *s1, const char *s2)
 {
-	char		**strs;
+	char	**strs;
 
 	if (!s1 || !s2)
 		return (NULL);

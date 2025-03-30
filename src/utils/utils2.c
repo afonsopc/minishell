@@ -12,21 +12,21 @@
 
 #include <ft_utils.h>
 
-char    *ft_strndup(const char *s1, size_t n)
+char	*ft_strndup(const char *s1, size_t n)
 {
-    char    *dup;
-    size_t  i;
+	char	*dup;
+	size_t	i;
 
 	if (!s1)
 		return (NULL);
-    dup = malloc(n + 1);
-    if (!dup)
-        return (dup);
-    i = -1;
-    while (s1[++i] && i < n)
-        dup[i] = s1[i];
-    dup[i] = '\0';
-    return (dup);
+	dup = malloc(n + 1);
+	if (!dup)
+		return (dup);
+	i = -1;
+	while (s1[++i] && i < n)
+		dup[i] = s1[i];
+	dup[i] = '\0';
+	return (dup);
 }
 
 char	*ft_strdup(const char *s1)
@@ -62,7 +62,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
-char    *ft_strstr(const char *haystack, const char *needle)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-    return (ft_strnstr(haystack, needle, ft_strlen(haystack)));
+	return (ft_strnstr(haystack, needle, ft_strlen(haystack)));
 }

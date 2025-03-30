@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 13:16:34 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 11:24:46 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:12:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_hashmap	*ft_hashmap_new(void)
 	return (hashmap);
 }
 
-t_element	*ft_element_new(char *key, void *value, void (*el_free)(void *value))
+t_element	*ft_element_new(char *key, void *value,
+		void (*el_free)(void *value))
 {
 	t_element	*new_el;
 
@@ -93,8 +94,8 @@ void	ft_hashmap_del(t_hashmap *hashmap, char *key)
 	}
 }
 
-
-void	ft_hashmap_set(t_hashmap *hashmap, char *key, void *value, void (*el_free)(void *value))
+void	ft_hashmap_set(t_hashmap *hashmap, char *key, void *value,
+		void (*el_free)(void *value))
 {
 	t_element	*existing_el;
 	t_element	*new_el;
@@ -168,3 +169,5 @@ char	**ft_hashmap_to_strv(t_hashmap *hashmap)
 	}
 	return (strv);
 }
+
+//TODO norminette

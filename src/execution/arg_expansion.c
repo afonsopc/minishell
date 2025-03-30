@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:25:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 12:05:32 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:12:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static char	*expand_variable(char *var_name, int *exit_status)
 	return (ft_strdup(value));
 }
 
-// se encontrar caracter alfanumérico continuar ate encontrar um caracter que não seja alfanumérico e substituir pela variável de ambiente
-// se encontrar ? substituir pelo valor de $? (exit status)
 static char	*process_dollar_expansion(char *str, int *i, int *exit_status)
 {
 	char	*var_name;
@@ -85,9 +83,6 @@ static char	*expand_variables_in_string(char *str, int *exit_status)
 	return (result);
 }
 
-// se encontrar uma aspa simples, ignorar tudo até encontrar outra aspa simples
-// se encontrar uma aspa dupla,
-// substituir todas as variáveis de ambiente usando process_dollar_expansion em cada
 static char	*process_quotes_expansion(char *str, int *i, int *exit_status)
 {
 	char	quote;
@@ -111,9 +106,6 @@ static char	*process_quotes_expansion(char *str, int *i, int *exit_status)
 	return (result);
 }
 
-// iterar pelos chars e ir juntando para dentro duma string
-// se encontrar $, chamar process_dollar_expansion(char *dollar)
-// se encontrar uma aspa ' ou ", chamar process_quotes_expansion(char quote)
 static char	*process_arg_expansions(char *arg, int *exit_status)
 {
 	int		i;
@@ -154,7 +146,6 @@ static char	*process_arg_expansions(char *arg, int *exit_status)
 	return (result);
 }
 
-// iterar pelos args e chamar process_arg_expansions
 void	process_args_expansions(t_cmd *cmd)
 {
 	int		i;
@@ -184,3 +175,5 @@ void	process_token_expansions(t_token *token)
 	else
 		process_args_expansions(token->cmd);
 }
+
+//TODO norminette
