@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 13:16:34 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:11:29 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 11:24:46 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_element	*ft_element_new(char *key, void *value, void (*el_free)(void *value))
 	new_el = ft_calloc(1, sizeof(t_element));
 	if (!new_el)
 		return (NULL);
-	new_el->key = ft_strdup(key);
+	new_el->key = key;
 	if (!new_el->key)
 		return (free(new_el), NULL);
 	new_el->value = value;
