@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:32:38 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 11:57:01 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ pid_t	execute_unset(t_cmd *cmd)
 	ft_close2(cmd->in, cmd->out);
 	i = 0;
 	while (cmd->args[++i])
-		if (cmd->in != 0 && cmd->out != 1)
+		if (cmd->in != 0 && cmd->out != 1) // TODO fix this, not allowing cmd to work
 			ft_hashmap_del(terminal()->env, cmd->args[i]);
 	terminal()->status = 0;
 	return (0);
