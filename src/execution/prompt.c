@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/30 12:10:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:16:30 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	loop(void)
 		if (ft_strlen(line))
 			add_history(line);
 		terminal()->token = parse(line);
-		// print_token2(terminal()->token, 0);
 		process_token(terminal()->token);
 		free(line);
 	}

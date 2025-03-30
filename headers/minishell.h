@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 12:08:24 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:17:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <ft_utils.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <bits/sigaction.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,7 +27,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
-# include <ft_utils.h>
+# include <bits/sigaction.h>
 
 typedef enum e_cmd_type
 {
@@ -50,7 +50,7 @@ typedef struct s_redirect
 	struct s_redirect	*next;
 }						t_redirect;
 
-typedef struct					s_cmd
+typedef struct s_cmd
 {
 	char				**args;
 	pid_t				(*execute)(struct s_cmd * cmd);
@@ -59,20 +59,20 @@ typedef struct					s_cmd
 	bool				loser;
 	int					loser_status;
 	t_redirect			*redirect;
-} 						t_cmd;
+}						t_cmd;
 
-typedef struct					s_token
+typedef struct s_token
 {
 	t_cmd_type			type;
 	t_cmd				*cmd;
 	struct s_token		*left;
 	struct s_token		*right;
 	pid_t				pid;
-} 						t_token;
+}						t_token;
 
 typedef struct s_terminal
 {
-	t_hashmap				*env;
+	t_hashmap			*env;
 	void				*new_env;
 	t_token				*token;
 	int					status;
@@ -133,8 +133,6 @@ void					loop(void);
 void					free_cmd(t_cmd *cmd);
 t_cmd					*new_cmd(char **args);
 
-
-
-void print_token2(t_token *t, int nivel);
+void					print_token2(t_token *t, int nivel);
 
 #endif
