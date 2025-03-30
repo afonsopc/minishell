@@ -44,7 +44,8 @@ char	*handle_contains_slash(struct stat stat_struct, char *path)
 char	*handle_doesnt_contain_slash(struct stat stat_struct, char *path)
 {
 	terminal()->status = 127;
-	if (!(is_directory(path) || access(path, X_OK) == -1) && stat(path, &stat_struct) == -1)
+	if (!(is_directory(path) || access(path, X_OK) == -1) && stat(path,
+			&stat_struct) == -1)
 		return (ft_strdup(": No such file or directory\n"));
 	return (ft_strdup(": command not found\n"));
 }

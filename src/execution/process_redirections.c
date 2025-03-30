@@ -12,7 +12,7 @@
 
 #include <execution.h>
 
-static t_redirect	*new_redirect(char	**args)
+static t_redirect	*new_redirect(char **args)
 {
 	t_redirect	*r;
 
@@ -27,7 +27,7 @@ static t_redirect	*new_redirect(char	**args)
 	return (r);
 }
 
-static int	organize(char	**args, size_t i)
+static int	organize(char **args, size_t i)
 {
 	size_t	start;
 
@@ -40,7 +40,7 @@ static int	organize(char	**args, size_t i)
 	return (0);
 }
 
-static void	parse_cmd_redirections(t_cmd	*cmd)
+static void	parse_cmd_redirections(t_cmd *cmd)
 {
 	size_t		i;
 	t_redirect	*end;
@@ -50,8 +50,9 @@ static void	parse_cmd_redirections(t_cmd	*cmd)
 	end = NULL;
 	while (cmd->args[i])
 	{
-		if (ft_strcmp(cmd->args[i], ">") == 0 || ft_strcmp(cmd->args[i], "<") == 0 \
-		|| ft_strcmp(cmd->args[i], ">>") == 0 || ft_strcmp(cmd->args[i], "<<") == 0)
+		if (ft_strcmp(cmd->args[i], ">") == 0 || ft_strcmp(cmd->args[i],
+				"<") == 0 || ft_strcmp(cmd->args[i], ">>") == 0
+			|| ft_strcmp(cmd->args[i], "<<") == 0)
 		{
 			new = new_redirect(ft_strvndup(cmd->args + i, 2));
 			if (cmd->redirect == NULL)
@@ -66,7 +67,7 @@ static void	parse_cmd_redirections(t_cmd	*cmd)
 	}
 }
 
-void	parse_token_redirections(t_token	*token)
+void	parse_token_redirections(t_token *token)
 {
 	if (!token)
 		return ;

@@ -52,7 +52,8 @@ static void	export_str(t_cmd *cmd, char *value)
 	if (args[1])
 		args[1][len] = 0;
 	if (cmd->in != 0 && cmd->out != 1) // TODO without this, cmd works
-		ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]), free);
+		ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]),
+			free);
 	ft_strvfree(args);
 }
 

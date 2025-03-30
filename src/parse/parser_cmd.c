@@ -22,5 +22,6 @@ t_token	*parse_simple_command(char **tokens, size_t *pos)
 	while (curr && !ft_strequal(curr, "|") && !ft_strequal(curr, "&&")
 		&& !ft_strequal(curr, "||"))
 		curr = tokens[++*pos];
-	return (new_token("CMD", new_cmd(ft_strvndup(&tokens[init_pos], *pos - init_pos))));
+	return (new_token("CMD", new_cmd(ft_strvndup(&tokens[init_pos], *pos
+					- init_pos))));
 }

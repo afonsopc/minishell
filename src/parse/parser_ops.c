@@ -48,7 +48,7 @@ t_token	*parse_and_or(char **tokens, size_t *pos)
 	if (!left)
 		return (NULL);
 	while (tokens[*pos] && (ft_strcmp(tokens[*pos], "&&") == 0
-        || ft_strcmp(tokens[*pos], "||") == 0))
+			|| ft_strcmp(tokens[*pos], "||") == 0))
 	{
 		op_type = tokens[*pos];
 		(*pos)++;

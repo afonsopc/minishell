@@ -12,20 +12,22 @@
 
 #include <execution.h>
 
-void arg_clean(t_cmd *cmd)
+void	arg_clean(t_cmd *cmd)
 {
-    int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
-    if (!cmd->args)
-        return;
-    while (cmd->args[i])
-    {
-        if (cmd->args[i][0])
-            cmd->args[j++] = cmd->args[i];
-        else
-            free(cmd->args[i]);
-        i++;
-    }
-    cmd->args[j] = NULL;
+	i = 0;
+	j = 0;
+	if (!cmd->args)
+		return ;
+	while (cmd->args[i])
+	{
+		if (cmd->args[i][0])
+			cmd->args[j++] = cmd->args[i];
+		else
+			free(cmd->args[i]);
+		i++;
+	}
+	cmd->args[j] = NULL;
 }

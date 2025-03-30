@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 18:01:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:08:24 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char					*read_double_quote(t_lexer *lexer);
 char					*read_word(t_lexer *lexer);
 char					*handle_special_char(t_lexer *lexer);
 void					add_token_to_array(t_list **tokens, char *token);
+bool					can_move(char *quote, char curr);
 
 // parse
 int						is_redirection(char *token);

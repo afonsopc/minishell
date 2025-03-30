@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:13:20 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:08:00 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,6 @@ char	**tokenize(char *input)
 	if (!input || !*input)
 		return (NULL);
 	return (lexer_tokenize(input));
-}
-
-bool	can_move(char *quote, char curr)
-{
-	if (curr == *quote)
-	{
-		*quote = 0;
-		return (true);
-	}
-	else if (curr == '\'' || curr == '"')
-	{
-		*quote = curr;
-		return (true);
-	}
-	else if (*quote == '\'' || *quote == '"')
-		return (true);
-	return (!ft_isspace(curr) && curr != '|' && curr != '&' && curr != '<' && curr != '>');
 }
 
 char	*read_word(t_lexer *lexer)

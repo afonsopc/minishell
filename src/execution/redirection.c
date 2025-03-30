@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 18:02:06 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:05:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 		cmd->loser_status = 1;
 		return (false);
 	}
-	// printf("Redirecting %s to %d\n", redirect->args[1], *fd);
 	return (true && process_redirection(cmd, redirect->next));
 }
 

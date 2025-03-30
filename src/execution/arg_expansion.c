@@ -6,13 +6,13 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:25:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 18:05:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:05:32 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <execution.h>
 
-static char *expand_variable(char *var_name, int *exit_status)
+static char	*expand_variable(char *var_name, int *exit_status)
 {
 	char	*value;
 
@@ -21,7 +21,6 @@ static char *expand_variable(char *var_name, int *exit_status)
 	if (ft_strcmp(var_name, "?") == 0)
 		return (ft_itoa(*exit_status));
 	value = ft_hashmap_get_value(terminal()->env, var_name);
-	// printf("Expanding $%s = '%s'\n", var_name, value ? value : "(null)");
 	if (!value)
 		return (ft_strdup(""));
 	return (ft_strdup(value));
@@ -50,7 +49,6 @@ static char	*process_dollar_expansion(char *str, int *i, int *exit_status)
 	len = *i - start;
 	var_name = ft_substr(str, start, len);
 	value = expand_variable(var_name, exit_status);
-	// printf("Expanded $%s = '%s'\n", var_name, value ? value : "(null)");
 	free(var_name);
 	return (value);
 }
@@ -88,8 +86,9 @@ static char	*expand_variables_in_string(char *str, int *exit_status)
 }
 
 // se encontrar uma aspa simples, ignorar tudo até encontrar outra aspa simples
-// se encontrar uma aspa dupla, substituir todas as variáveis de ambiente usando process_dollar_expansion em cada
-static char *process_quotes_expansion(char *str, int *i, int *exit_status)
+// se encontrar uma aspa dupla,
+// substituir todas as variáveis de ambiente usando process_dollar_expansion em cada
+static char	*process_quotes_expansion(char *str, int *i, int *exit_status)
 {
 	char	quote;
 	char	*content;
@@ -115,7 +114,7 @@ static char *process_quotes_expansion(char *str, int *i, int *exit_status)
 // iterar pelos chars e ir juntando para dentro duma string
 // se encontrar $, chamar process_dollar_expansion(char *dollar)
 // se encontrar uma aspa ' ou ", chamar process_quotes_expansion(char quote)
-static char *process_arg_expansions(char *arg, int *exit_status)
+static char	*process_arg_expansions(char *arg, int *exit_status)
 {
 	int		i;
 	char	*result;
@@ -132,7 +131,6 @@ static char *process_arg_expansions(char *arg, int *exit_status)
 		{
 			expansion = process_dollar_expansion(arg, &i, exit_status);
 			tmp = ft_strjoin(result, expansion);
-			// printf("tmp '%s'\n", tmp ? tmp : "(null)");
 			free(result);
 			free(expansion);
 			result = tmp;
@@ -157,9 +155,9 @@ static char *process_arg_expansions(char *arg, int *exit_status)
 }
 
 // iterar pelos args e chamar process_arg_expansions
-void process_args_expansions(t_cmd *cmd)
+void	process_args_expansions(t_cmd *cmd)
 {
-    int		i;
+	int		i;
 	char	*expanded;
 
 	if (!cmd || !cmd->args)
@@ -167,9 +165,7 @@ void process_args_expansions(t_cmd *cmd)
 	i = 0;
 	while (cmd->args[i])
 	{
-		// printf("Before expansion: '%s'\n", cmd->args[i]);
 		expanded = process_arg_expansions(cmd->args[i], &terminal()->status);
-		// printf("After expansion: '%s'\n", expanded);
 		free(cmd->args[i]);
 		cmd->args[i] = expanded;
 		i++;

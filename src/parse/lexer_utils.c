@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afonsocoutinho <afonsocoutinho@student.    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:31:00 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/24 00:49:12 by afonsocouti      ###   ########.fr       */
+/*   Updated: 2025/03/30 12:08:05 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,22 @@ void	skip_whitespace(t_lexer *lexer)
 {
 	while (lexer->curr_char && ft_isspace(lexer->curr_char))
 		advance_lexer(lexer);
+}
+
+bool	can_move(char *quote, char curr)
+{
+	if (curr == *quote)
+	{
+		*quote = 0;
+		return (true);
+	}
+	else if (curr == '\'' || curr == '"')
+	{
+		*quote = curr;
+		return (true);
+	}
+	else if (*quote == '\'' || *quote == '"')
+		return (true);
+	return (!ft_isspace(curr) && curr != '|' && curr != '&' && curr != '<'
+		&& curr != '>');
 }
