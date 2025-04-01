@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/30 12:16:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:06:53 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,14 @@ void	loop(void)
 
 	while (1)
 	{
-		mask_signals();
+		mask_signals(0);
 		line = readline("minishell$ ");
 		if (!line)
 			ft_exit();
 		if (ft_strlen(line))
 			add_history(line);
 		terminal()->token = parse(line);
+		mask_signals(1);
 		process_token(terminal()->token);
 		free(line);
 	}
@@ -183,14 +184,25 @@ void	handle_signal(int sig)
 		rl_replace_line("", 0);
 		printf("\n");
 		rl_on_new_line();
+		terminal()->status = 130;
 	}
+	else
+		terminal()->status = 131;
 	rl_redisplay();
 }
 
-void	mask_signals(void)
+void	mask_signals(int type)
 {
-	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, handle_signal);
+	if (type == 1)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, handle_signal);
+		signal(SIGQUIT, handle_signal);
+	}
 }
 
 void	unmask_signals(void)

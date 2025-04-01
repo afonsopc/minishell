@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/30 12:05:53 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:07:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	get_heredoc(char *terminator)
 		ft_close(pipe_fds[1]);
 		exit(0);
 	}
+	waitpid(pid, &pid, 0);
 	ft_close(pipe_fds[1]);
 	return (pipe_fds[0]);
 }

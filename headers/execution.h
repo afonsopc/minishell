@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/01 15:01:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:54:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <ft_utils.h>
 
 void		unmask_signals(void);
-void		mask_signals(void);
+void		mask_signals(int type);
 void		wait_token(t_token *token);
 void		kill_token(t_token *token);
 char		*path_join(char *str1, char *str2);
