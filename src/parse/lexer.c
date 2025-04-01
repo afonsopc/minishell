@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 12:08:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:41:50 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*handle_special_char(t_lexer *lexer)
 	return (token);
 }
 
-void	add_token_to_array(t_list **tokens, char *token)
+static void	add_token_to_array(t_list **tokens, char *token)
 {
 	if (token && *token)
-		ft_list_add(tokens, ft_strdup(token), free);
+		ft_list_add(tokens, token, free);
 	else
 		free(token);
 }
@@ -51,6 +51,7 @@ static char	**lexer_tokenize(char *input)
 			break ;
 		token = handle_special_char(lexer);
 		add_token_to_array(&tokens, token);
+		token = NULL;
 	}
 	free(lexer);
 	result = ft_list_to_strv(tokens);

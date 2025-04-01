@@ -73,25 +73,13 @@ r: re
 
 v: re readline.supp
 	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=readline.supp ./minishell
-vv: $(NAME) readline.supp
-	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=readline.supp ./minishell
 
 readline.supp:
-	@wget https://raw.githubusercontent.com/benjaminbrassart/minishell/master/readline.supp 2> /dev/null 1> /dev/null
+	@wget https://raw.githubusercontent.com/afonsopc/minishell/refs/heads/readline.supp/readline.supp -O readline.supp
 
 test: re
 	@git clone https://github.com/LucasKuhn/minishell_tester
 	@cd minishell_tester && (./tester || true) && cd ..
 	@rm -rf minishell_tester
 
-test_syntax: re
-	@git clone https://github.com/LucasKuhn/minishell_tester
-	@cd minishell_tester && ((./tester syntax) || true) && cd ..
-	@rm -rf minishell_tester
-
-test_os_specific: re
-	@git clone https://github.com/LucasKuhn/minishell_tester
-	@cd minishell_tester && ((./tester os_specific) || true) && cd ..
-	@rm -rf minishell_tester
-
-.PHONY: all re clean fclean r v vv readline.supp
+.PHONY: all re clean fclean r v readline.supp

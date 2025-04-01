@@ -3,4 +3,3 @@ obj/
 **/.DS_Store
 minishell
 readline.supp
-readline.supp.*

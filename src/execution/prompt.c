@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/01 16:34:27 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:43:42 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	handle_signal(int sig)
 	rl_replace_line("", 0);
 	if (sig == SIGINT)
 	{
-		printf("\n");
+		ft_fputstr(1, "\n");
 		terminal()->status = 130;
 	}
 	else
