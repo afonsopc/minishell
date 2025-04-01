@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:49:35 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 12:13:39 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:50:07 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,9 @@ char	*ft_itoa(int n)
 
 bool	ft_strequal(char *s1, char *s2)
 {
-	size_t	length;
-
 	if (!s1 || !s2)
 		return (false);
-	length = ft_strlen(s1);
-	if (length > ft_strlen(s2))
-		length = ft_strlen(s2);
-	return (ft_strncmp(s1, s2, length) == 0);
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (false);
+	return (ft_strncmp(s1, s2, ft_strlen(s1)) == 0);
 }
