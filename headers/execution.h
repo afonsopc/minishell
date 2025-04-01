@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 18:16:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:01:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char		*get_curr_dir(void);
 bool		process_redirections(t_token *token);
 void		close_all_non_standart_fds(void);
 char		*redirect_in_loop(char *terminator);
-void		process_wildcards(t_cmd *cmd);
 void		arg_clean(t_cmd *cmd);
 
 void		process(t_token	*token, int in, int out);
