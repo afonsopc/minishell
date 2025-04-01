@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 11:58:55 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:39:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	export_str(t_cmd *cmd, char *value)
 		len++;
 	if (args[1])
 		args[1][len] = 0;
-	if (cmd->in != 0 && cmd->out != 1) // TODO without this, cmd works
+	if (cmd->in == 0 && cmd->out == 1)
 		ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]),
 			free);
 	ft_strvfree(args);

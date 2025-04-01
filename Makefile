@@ -36,11 +36,6 @@ vv: $(NAME) readline.supp
 readline.supp:
 	@wget https://raw.githubusercontent.com/benjaminbrassart/minishell/master/readline.supp 2> /dev/null 1> /dev/null
 
-test_builtins: re
-	@git clone https://github.com/LucasKuhn/minishell_tester
-	@cd minishell_tester && ((./tester builtins)|| true) && cd ..
-	@rm -rf minishell_tester
-
 test: re
 	@git clone https://github.com/LucasKuhn/minishell_tester
 	@cd minishell_tester && (./tester || true) && cd ..
