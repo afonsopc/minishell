@@ -16,6 +16,7 @@ SRCS = src/cmd/cd.c \
 	   src/execution/process/pipe.c \
 	   src/execution/process/process.c \
 	   src/execution/arg_clean.c \
+	   src/execution/hide_signals.c \
 	   src/execution/arg_expansion.c \
 	   src/execution/execution.c \
 	   src/execution/process_redirections.c \
