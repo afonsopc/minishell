@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   utils10.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 12:34:07 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/01 16:43:25 by paude-so         ###   ########.fr       */
+/*   Created: 2025/03/29 15:18:01 by paude-so          #+#    #+#             */
+/*   Updated: 2025/03/29 17:01:17 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <ft_utils.h>
 
-t_terminal	*terminal(void)
+void	ft_close(int fd)
 {
-	static t_terminal	t;
-
-	return (&t);
+	if (fd > 2)
+		close(fd);
 }
 
-void	ft_exit(void)
+void	ft_close2(int fd1, int fd2)
 {
-	ft_fputstr(1, "exit\n");
-	ft_exit_free();
+	ft_close(fd1);
+	ft_close(fd2);
 }
 
-void	ft_exit_free(void)
+void	ft_fprint_strv(int fd, char **strv)
 {
-	(close(0), close(1), close(2));
-	ft_hashmap_destroy(terminal()->env);
-	free_token(terminal()->token);
-	exit(terminal()->status);
+	int	i;
+
+	i = 0;
+	ft_fputstr(fd, "[");
+	while (strv && strv[i])
+	{
+		ft_fputstr(fd, strv[i]);
+		if (strv[i + 1])
+			ft_fputstr(fd, ", ");
+		i++;
+	}
+	ft_fputstr(fd, "]\n");
 }

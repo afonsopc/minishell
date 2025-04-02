@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   hide_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 12:34:07 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/01 16:43:25 by paude-so         ###   ########.fr       */
+/*   Created: 2025/04/01 16:33:05 by paude-so          #+#    #+#             */
+/*   Updated: 2025/04/01 16:33:12 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <execution.h>
 
-t_terminal	*terminal(void)
+void	toggle_signal_echo(bool hide)
 {
-	static t_terminal	t;
+	struct termios	terminos_p;
 
-	return (&t);
-}
-
-void	ft_exit(void)
-{
-	ft_fputstr(1, "exit\n");
-	ft_exit_free();
-}
-
-void	ft_exit_free(void)
-{
-	(close(0), close(1), close(2));
-	ft_hashmap_destroy(terminal()->env);
-	free_token(terminal()->token);
-	exit(terminal()->status);
+	tcgetattr(STDOUT_FILENO, &terminos_p);
+	if (hide)
+		terminos_p.c_lflag |= ECHOCTL;
+	else
+		terminos_p.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDOUT_FILENO, TCSANOW, &terminos_p);
 }

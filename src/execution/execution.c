@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/27 22:31:31 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:06:44 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ char	*handle_contains_slash(struct stat stat_struct, char *path)
 {
 	terminal()->status = 126;
 	if (is_directory(path))
-		return (str().copy(": Is a directory\n"));
+		return (ft_strdup(": Is a directory\n"));
 	else if (stat(path, &stat_struct) == -1)
 	{
 		terminal()->status = 127;
-		return (str().copy(": No such file or directory\n"));
+		return (ft_strdup(": No such file or directory\n"));
 	}
 	else if (access(path, X_OK) == -1)
-		return (str().copy(": Permission denied\n"));
+		return (ft_strdup(": Permission denied\n"));
 	terminal()->status = 0;
 	return (NULL);
 }
@@ -44,12 +44,10 @@ char	*handle_contains_slash(struct stat stat_struct, char *path)
 char	*handle_doesnt_contain_slash(struct stat stat_struct, char *path)
 {
 	terminal()->status = 127;
-	if (is_directory(path) || access(path, X_OK) == -1)
-		return (str().copy(": command not found\n"));
-	else if (stat(path, &stat_struct) == -1)
-		return (str().copy(": No such file or directory\n"));
-	terminal()->status = 0;
-	return (NULL);
+	if (!(is_directory(path) || access(path, X_OK) == -1) && stat(path,
+			&stat_struct) == -1)
+		return (ft_strdup(": No such file or directory\n"));
+	return (ft_strdup(": command not found\n"));
 }
 
 bool	assert_cmd(t_cmd *cmd)
@@ -61,15 +59,15 @@ bool	assert_cmd(t_cmd *cmd)
 	if (!cmd || !cmd->args || !cmd->args[0])
 		return (false);
 	error_message = NULL;
-	if (str().contains(cmd->args[0], "/"))
+	if (ft_strstr(cmd->args[0], "/"))
 		error_message = handle_contains_slash(stat_struct, cmd->args[0]);
 	else
 		error_message = handle_doesnt_contain_slash(stat_struct, cmd->args[0]);
 	if (error_message)
 	{
-		error_prompt = str().join("minishell: ", cmd->args[0]);
-		(str().fputstr)(2, error_prompt);
-		(str().fputstr)(2, error_message);
+		error_prompt = ft_strjoin("minishell: ", cmd->args[0]);
+		ft_fputstr(2, error_prompt);
+		ft_fputstr(2, error_message);
 		free(error_prompt);
 		free(error_message);
 		return (false);
@@ -77,21 +75,23 @@ bool	assert_cmd(t_cmd *cmd)
 	return (true);
 }
 
-pid_t	execute(t_cmd *cmd, int in, int out)
+pid_t	execute(t_cmd *cmd)
 {
 	pid_t	pid;
 
-	if (!assert_cmd(cmd))
-		return (0);
 	pid = fork();
-	if (!pid)
-		(dup2(in, 0), dup2(out, 1));
-	ft_close(in);
-	ft_close(out);
 	if (pid)
-		return (pid);
+		return (ft_close(cmd->in), ft_close(cmd->out), pid);
+	if (cmd->in != -2)
+		dup2(cmd->in, STDIN_FILENO);
+	if (cmd->out != -2)
+		dup2(cmd->out, STDOUT_FILENO);
+	if (!assert_cmd(cmd))
+		ft_exit_free();
 	close_all_non_standart_fds();
 	unmask_signals();
-	execve(cmd->args[0], cmd->args, hashmap(terminal()->env)->to_array());
-	exit(127);
+	execve(cmd->args[0], cmd->args, ft_hashmap_to_strv(terminal()->env));
+	terminal()->status = 127;
+	ft_exit_free();
+	return (0);
 }

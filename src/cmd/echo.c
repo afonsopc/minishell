@@ -3,49 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:46:41 by edos-san          #+#    #+#             */
-/*   Updated: 2025/02/16 22:13:24 by afpachec         ###   ########.fr       */
+/*   Created: 2025/03/13 12:36:36 by paude-so          #+#    #+#             */
+/*   Updated: 2025/04/01 16:17:45 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static bool	check_flag(char	*str)
+static bool	check_flag(char *str)
 {
 	if (!str || *str != '-')
 		return (false);
 	str++;
-	while (*str == 'n')
+	while (*str)
+	{
+		if (*str != 'n')
+			return (false);
 		str++;
-	return ((*str == '\0'));
+	}
+	return (true);
 }
 
-pid_t	execute_echo(t_cmd *cmd, int in, int out)
+pid_t	execute_echo(t_cmd *cmd)
 {
-	bool	flag;
-	size_t	i;
+	int		i;
 
-	if (str().equals(cmd->args[1], "$?"))
+	i = 1;
+	while (cmd->args[i] && check_flag(cmd->args[i]))
+		i++;
+	while (cmd->args[i])
 	{
-		(str().fputnbr)(out, terminal()->status);
-		(str().fputstr)(out, "\n");
-		ft_close(out);
-		ft_close(in);
-		return (0);
-	}
-	flag = check_flag(cmd->args[1]);
-	i = flag;
-	while (cmd->args[++i])
-	{
-		(str().fputstr)(out, cmd->args[i]);
+		ft_fputstr(cmd->out, cmd->args[i]);
 		if (cmd->args[i + 1])
-			(str().fputstr)(out, " ");
+			ft_fputstr(cmd->out, " ");
+		++i;
 	}
-	if (!flag)
-		(str().fputstr)(out, "\n");
-	ft_close(out);
-	ft_close(in);
+	if (!check_flag(cmd->args[1]))
+		ft_fputstr(cmd->out, "\n");
+	terminal()->status = 0;
+	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

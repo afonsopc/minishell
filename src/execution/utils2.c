@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/01/27 14:54:28 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:16:09 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*get_curr_dir(void)
 	char	*curr_dir;
 
 	cwd = get_cwd();
-	dirs = (str().split)(cwd, "/");
-	curr_dir = str().copy(dirs[str().size_list(dirs) - 1]);
-	(free(cwd), free_list(dirs));
+	dirs = ft_split(cwd, "/");
+	curr_dir = ft_strdup(dirs[ft_strvlen(dirs) - 1]);
+	(free(cwd), ft_strvfree(dirs));
 	return (curr_dir);
 }
 
@@ -47,6 +47,15 @@ void	close_all_non_standart_fds(void)
 	int	fd;
 
 	fd = 2;
-	while (++fd <= 1024)
+	while (++fd <= FOPEN_MAX)
 		ft_close(fd);
+}
+
+void	free_redirect(t_redirect *r)
+{
+	if (!r)
+		return ;
+	free_redirect(r->next);
+	ft_strvfree(r->args);
+	free(r);
 }

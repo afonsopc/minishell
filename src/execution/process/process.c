@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:24:29 by afpachec          #+#    #+#             */
-/*   Updated: 2025/02/17 00:40:16 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/03/29 18:19:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ void	process(t_token	*token, int in, int out)
 
 void	process_token(t_token	*token)
 {
-	if (!token || !process_redirections(token))
+	if (!token)
+		return ;
+	process_token_expansions(token);
+	parse_token_redirections(token);
+	if (!process_redirections(token) && token->type == CMD)
 		return ;
 	process(token, 0, 1);
 	wait_token(token);

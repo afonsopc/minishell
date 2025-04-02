@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@42.fr>                  +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:55:27 by edos-san          #+#    #+#             */
-/*   Updated: 2025/02/16 23:46:40 by afpachec         ###   ########.fr       */
+/*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
+/*   Updated: 2025/04/01 14:39:15 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	__isalnum(char c);
 
 static bool	check_key(char *value)
 {
@@ -20,73 +18,80 @@ static bool	check_key(char *value)
 
 	if (!value)
 		return (false);
-	alpha_count = 0;
-	while ((str().isalnum)(*value))
+	if (!(ft_isalpha(*value) || *value == '_'))
+		return (false);
+	alpha_count = ft_isalpha(*value);
+	value++;
+	while (*value && (ft_isalnum(*value) || *value == '_'))
 	{
-		alpha_count += (str().isalpha)(*value);
+		alpha_count += ft_isalpha(*value);
 		value++;
 	}
 	return (!*value && alpha_count);
 }
 
-static void	export_str(char *value)
+static void	export_str(t_cmd *cmd, char *arg)
 {
-	char	**args;
-	size_t	len;
+	char	*var_name;
+	char	*var_value;
+	char	*equals;
 
-	args = str().split(value, "=");
-	if (!check_key(args[0]))
+	equals = ft_strstr(arg, "=");
+	if (!arg)
+		return ;
+	var_name = arg;
+	if (equals)
+		var_name = ft_strndup(arg, equals - arg);
+	if (!check_key(var_name))
 	{
-		(str().fputstr)(2, "export: `");
-		(str().fputstr)(2, args[0]);
-		(str().fputstr)(2, "': not a valid identifier\n");
-		free_list(args);
+		ft_fputstr(2, "export: ");
+		ft_fputstr(2, "not a valid identifier\n");
 		terminal()->status = 1;
+		if (equals)
+			free(var_name);
 		return ;
 	}
-	if (str().contains(value, "=") && !args[1])
-		args[1] = str().copy("");
-	len = 0;
-	while (args[1] && args[1][len] && __isalnum(args[1][len]))
-		len++;
-	if (args[1])
-		args[1][len] = 0;
-	(hashmap(terminal()->env)->put)(str().copy(args[0]), str().copy(args[1]));
-	free_list(args);
+	if (!equals)
+		return ;
+	var_value = ft_strdup(equals + 1);
+	if (cmd->in == 0 && cmd->out == 1)
+		ft_hashmap_set(terminal()->env, var_name, ft_strdup(var_value),
+			free);
+	free(var_name);
 }
 
 static void	print_export(int out)
 {
 	t_element	*tmp;
 
-	tmp = hashmap(terminal()->env)->get_element_index(0);
+	tmp = terminal()->env->table[0];
 	while (tmp)
 	{
-		(str().fputstr)(out, "declare -x ");
-		(str().fputstr)(out, tmp->key);
+		ft_fputstr(out, "declare -x ");
+		ft_fputstr(out, tmp->key);
 		if (tmp->value)
 		{
-			(str().fputstr)(out, "=");
-			(str().fputstr)(out, tmp->value);
+			ft_fputstr(out, "=");
+			ft_fputstr(out, tmp->value);
 		}
-		(str().fputstr)(out, "\n");
+		ft_fputstr(out, "\n");
 		tmp = tmp->next;
 	}
 }
 
-pid_t	execute_export(t_cmd *cmd, int in, int out)
+pid_t	execute_export(t_cmd *cmd)
 {
 	size_t	i;
 
+	terminal()->status = 0;
 	i = 1;
-	if (str().size_list(cmd->args) == 1)
-		print_export(out);
+	if (ft_strvlen(cmd->args) == 1)
+		print_export(cmd->out);
 	else
 	{
 		while (cmd->args[i])
-			export_str(cmd->args[i++]);
+			export_str(cmd, cmd->args[i++]);
 	}
-	ft_close(out);
-	ft_close(in);
+	ft_close2(cmd->in, cmd->out);
 	return (0);
 }

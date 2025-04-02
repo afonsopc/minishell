@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edos-san <edos-san@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:55:27 by edos-san          #+#    #+#             */
-/*   Updated: 2024/12/23 18:15:17 by edos-san         ###   ########.fr       */
+/*   Created: 2025/03/13 12:32:38 by paude-so          #+#    #+#             */
+/*   Updated: 2025/04/01 14:39:27 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-pid_t	execute_unset(t_cmd *cmd, int in, int out)
+pid_t	execute_unset(t_cmd *cmd)
 {
 	size_t	i;
 
-	i = 1;
-	while (cmd->args[i])
-		hashmap(terminal()->env)->remove_key(cmd->args[i++]);
-	ft_close(out);
-	ft_close(in);
+	ft_close2(cmd->in, cmd->out);
+	i = 0;
+	while (cmd->args[++i])
+	{
+		if (cmd->in == 0 && cmd->out == 1)
+			ft_hashmap_del(terminal()->env, cmd->args[i]);
+	}
+	terminal()->status = 0;
 	return (0);
 }
