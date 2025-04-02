@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/02 20:35:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:47:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ pid_t	execute_cd(t_cmd *cmd)
 	ft_close2(cmd->in, cmd->out);
 	terminal()->status = 0;
 	dir = NULL;
+	if (cmd->in != 0 || cmd->out != 1)
+		return (0);
 	if (cmd->args[0] && cmd->args[1] && cmd->args[2])
 		too_many_args_error();
 	else if (cmd->args[1])
