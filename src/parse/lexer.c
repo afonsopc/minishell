@@ -6,13 +6,25 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:41 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/01 16:41:50 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:15:48 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*handle_special_char(t_lexer *lexer)
+static char	*read_word(t_lexer *lexer)
+{
+	size_t	start;
+	char	quote;
+
+	quote = 0;
+	start = lexer->pos;
+	while (lexer->curr_char && can_move(&quote, lexer->curr_char))
+		advance_lexer(lexer);
+	return (ft_strndup(lexer->input + start, lexer->pos - start));
+}
+
+static char	*handle_special_char(t_lexer *lexer)
 {
 	char	*token;
 
@@ -64,16 +76,4 @@ char	**tokenize(char *input)
 	if (!input || !*input)
 		return (NULL);
 	return (lexer_tokenize(input));
-}
-
-char	*read_word(t_lexer *lexer)
-{
-	size_t	start;
-	char	quote;
-
-	quote = 0;
-	start = lexer->pos;
-	while (lexer->curr_char && can_move(&quote, lexer->curr_char))
-		advance_lexer(lexer);
-	return (ft_strndup(lexer->input + start, lexer->pos - start));
 }
