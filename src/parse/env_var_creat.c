@@ -58,7 +58,7 @@ void	process_env_assignments(char **args)
 		{
 			if (!env_var[1])
 				env_var[1] = ft_strdup("");
-			ft_hashmap_set(terminal()->env, ft_strdup(env_var[0]),
+			ft_hashmap_set(terminal()->env, env_var[0],
 				ft_strdup(env_var[1]), free);
 			ft_strvfree(env_var);
 		}

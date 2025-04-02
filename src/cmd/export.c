@@ -30,31 +30,28 @@ static bool	check_key(char *value)
 	return (!*value && alpha_count);
 }
 
-static void	export_str(t_cmd *cmd, char *value)
+static void	export_str(t_cmd *cmd, char *arg)
 {
-	char	**args;
-	size_t	len;
+	char	*var_name;
+	char	*var_value;
+	char	*equals;
 
-	args = ft_split(value, "=");
-	if (!check_key(args[0]))
+	equals = ft_strstr(arg, "=");
+	if (!arg || !equals)
+		return ;
+	var_name = ft_strndup(arg, equals - arg);
+	if (!check_key(var_name))
 	{
 		ft_fputstr(2, "export: ");
 		ft_fputstr(2, "not a valid identifier\n");
-		ft_strvfree(args);
 		terminal()->status = 1;
-		return ;
+		return (free(var_name));
 	}
-	if (ft_strstr(value, "=") && !args[1])
-		args[1] = ft_strdup("");
-	len = 0;
-	while (args[1] && args[1][len] && ft_isalnum(args[1][len]))
-		len++;
-	if (args[1])
-		args[1][len] = 0;
+	var_value = ft_strdup(equals + 1);
 	if (cmd->in == 0 && cmd->out == 1)
-		ft_hashmap_set(terminal()->env, ft_strdup(args[0]), ft_strdup(args[1]),
+		ft_hashmap_set(terminal()->env, var_name, ft_strdup(var_value),
 			free);
-	ft_strvfree(args);
+	free(var_name);
 }
 
 static void	print_export(int out)

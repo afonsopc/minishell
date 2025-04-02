@@ -33,7 +33,7 @@ t_element	*ft_element_new(char *key, void *value,
 	new_el = ft_calloc(1, sizeof(t_element));
 	if (!new_el)
 		return (NULL);
-	new_el->key = key;
+	new_el->key = ft_strdup(key);
 	if (!new_el->key)
 		return (free(new_el), NULL);
 	new_el->value = value;

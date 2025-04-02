@@ -57,7 +57,7 @@ pid_t	execute_cd(t_cmd *cmd)
 			chdir_error(dir);
 			terminal()->status = 1;
 		}
-		ft_hashmap_set(terminal()->env, ft_strdup("PWD"), get_cwd(), free);
+		ft_hashmap_set(terminal()->env, "PWD", get_cwd(), free);
 	}
 	return (0);
 }

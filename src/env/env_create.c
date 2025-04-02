@@ -26,7 +26,7 @@ void	init_env(char **env)
 		values[1] = ft_strdup(separator + 1);
 		if (values && values[0] && *values[0])
 		{
-			ft_hashmap_set(terminal()->env, ft_strdup(values[0]),
+			ft_hashmap_set(terminal()->env, values[0],
 				ft_strdup(values[1]), free);
 		}
 		ft_strvfree(values);
