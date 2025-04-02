@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:35:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,17 @@ pid_t	execute_cd(t_cmd *cmd)
 	if (cmd->args[0] && cmd->args[1] && cmd->args[2])
 		too_many_args_error();
 	else if (cmd->args[1])
-		dir = cmd->args[1];
+	{
+		if (ft_strequal(cmd->args[1], "-") && ft_hashmap_get_value(terminal()->env, "OLDPWD"))
+		{
+			dir = ft_hashmap_get_value(terminal()->env, "OLDPWD");
+			if (dir)
+				ft_fputstr(1, dir);
+			ft_fputstr(1, "\n");
+		}
+		else
+			dir = cmd->args[1];
+	}
 	else
 		dir = ft_hashmap_get_value(terminal()->env, "HOME");
 	if (dir)
@@ -57,6 +67,7 @@ pid_t	execute_cd(t_cmd *cmd)
 			chdir_error(dir);
 			terminal()->status = 1;
 		}
+		ft_hashmap_set(terminal()->env, "OLDPWD", ft_strdup(ft_hashmap_get_value(terminal()->env, "PWD")), free);
 		ft_hashmap_set(terminal()->env, "PWD", get_cwd(), free);
 	}
 	return (0);
