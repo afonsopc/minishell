@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 16:55:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 15:20:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:54:37 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ pid_t	execute_env(t_cmd *cmd)
 		ft_fputstr(cmd->out, args[i]);
 		ft_fputstr(cmd->out, "\n");
 	}
+	ft_strvfree(args);
 	terminal()->status = 0;
 	ft_close2(cmd->in, cmd->out);
 	return (0);
