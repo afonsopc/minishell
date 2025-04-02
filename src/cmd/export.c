@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/01 14:39:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:40:11 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 static bool	check_key(char *value)
 {
-	size_t	alpha_count;
-
-	if (!value)
+	if (!value || !*value)
 		return (false);
-	if (!(ft_isalpha(*value) || *value == '_'))
+	if (ft_isdigit(*value))
 		return (false);
-	alpha_count = ft_isalpha(*value);
-	value++;
-	while (*value && (ft_isalnum(*value) || *value == '_'))
+	while (*value)
 	{
-		alpha_count += ft_isalpha(*value);
+		if (!ft_isalnum(*value) && *value != '_')
+			return (false);
 		value++;
 	}
-	return (!*value && alpha_count);
+	return (true);
 }
 
 static void	export_str(t_cmd *cmd, char *arg)

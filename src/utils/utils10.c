@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils10.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:18:01 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/29 17:01:17 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:39:23 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ void	ft_fprint_strv(int fd, char **strv)
 		i++;
 	}
 	ft_fputstr(fd, "]\n");
+}
+
+bool	ft_isdigit(int c)
+{
+	return ((c >= '0' && c <= '9'));
 }
