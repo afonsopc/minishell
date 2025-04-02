@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/02 20:47:37 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:50:47 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,15 @@ pid_t	execute_cd(t_cmd *cmd)
 			dir = cmd->args[1];
 	}
 	else
+	{
 		dir = ft_hashmap_get_value(terminal()->env, "HOME");
+		if (!dir)
+		{
+			ft_fputstr(2, "cd: HOME not set\n");
+			terminal()->status = 1;
+			return (0);
+		}
+	}
 	if (dir)
 	{
 		if (chdir(dir) == -1)

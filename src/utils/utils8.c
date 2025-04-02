@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils8.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 13:16:34 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 12:12:48 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:49:40 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ char	**ft_hashmap_to_strv(t_hashmap *hashmap)
 {
 	size_t		i;
 	t_element	*curr_el;
+	char		*tmp;
 	char		**strv;
 
 	if (!hashmap)
@@ -162,8 +163,9 @@ char	**ft_hashmap_to_strv(t_hashmap *hashmap)
 	curr_el = hashmap->table[0];
 	while (curr_el)
 	{
-		strv[i] = ft_strjoin(curr_el->key, "=");
-		strv[i] = ft_strjoin(strv[i], curr_el->value);
+		tmp = ft_strjoin(curr_el->key, "=");
+		strv[i] = ft_strjoin(tmp, curr_el->value);
+		free(tmp);
 		curr_el = curr_el->next;
 		i++;
 	}
