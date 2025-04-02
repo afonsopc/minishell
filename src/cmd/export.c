@@ -37,16 +37,22 @@ static void	export_str(t_cmd *cmd, char *arg)
 	char	*equals;
 
 	equals = ft_strstr(arg, "=");
-	if (!arg || !equals)
+	if (!arg)
 		return ;
-	var_name = ft_strndup(arg, equals - arg);
+	var_name = arg;
+	if (equals)
+		var_name = ft_strndup(arg, equals - arg);
 	if (!check_key(var_name))
 	{
 		ft_fputstr(2, "export: ");
 		ft_fputstr(2, "not a valid identifier\n");
 		terminal()->status = 1;
-		return (free(var_name));
+		if (equals)
+			free(var_name);
+		return ;
 	}
+	if (!equals)
+		return ;
 	var_value = ft_strdup(equals + 1);
 	if (cmd->in == 0 && cmd->out == 1)
 		ft_hashmap_set(terminal()->env, var_name, ft_strdup(var_value),
