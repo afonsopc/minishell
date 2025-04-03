@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:48 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/03 17:50:43 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:07:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ t_token	*parse(char *line)
 	size_t	pos;
 	t_token	*result;
 
+	free_token(terminal()->token);
 	if (!line || is_only_spaces(line))
 		return (NULL);
-	free_token(terminal()->token);
 	if (check_syntax_errors(line))
 	{
 		ft_fputstr(2, "minishell: syntax error\n");
