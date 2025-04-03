@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/02 19:56:35 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:44:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ t_token					*new_token(char *type, t_cmd *cmd);
 // env
 void					init_env(char **env);
 void					process_env_assignments(char **args);
+char					*process_arg_expansions(char *arg, int *exit_status);
+char					*expand_variables_in_string(char *str, int *ext_sts);
 
 // terminal
 t_terminal				*terminal(void);
@@ -128,7 +130,5 @@ void					loop(void);
 // cmd
 void					free_cmd(t_cmd *cmd);
 t_cmd					*new_cmd(char **args);
-
-void					print_token2(t_token *t, int nivel);
 
 #endif

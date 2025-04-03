@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:25:28 by paude-so          #+#    #+#             */
-/*   Updated: 2025/03/30 12:12:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:42:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*expand_variable(char *var_name, int *exit_status)
 	return (ft_strdup(value));
 }
 
-static char	*process_dollar_expansion(char *str, int *i, int *exit_status)
+char	*process_dollar_expansion(char *str, int *i, int *exit_status)
 {
 	char	*var_name;
 	char	*value;
@@ -51,39 +51,7 @@ static char	*process_dollar_expansion(char *str, int *i, int *exit_status)
 	return (value);
 }
 
-static char	*expand_variables_in_string(char *str, int *exit_status)
-{
-	int		i;
-	char	*result;
-	char	*tmp;
-	char	*expansion;
-
-	if (!str)
-		return (NULL);
-	result = ft_strdup("");
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			expansion = process_dollar_expansion(str, &i, exit_status);
-			tmp = ft_strjoin(result, expansion);
-			free(result);
-			free(expansion);
-			result = tmp;
-		}
-		else
-		{
-			tmp = ft_charjoin(result, str[i]);
-			free(result);
-			result = tmp;
-			i++;
-		}
-	}
-	return (result);
-}
-
-static char	*process_quotes_expansion(char *str, int *i, int *exit_status)
+char	*process_quotes_expansion(char *str, int *i, int *exit_status)
 {
 	char	quote;
 	char	*content;
@@ -103,46 +71,6 @@ static char	*process_quotes_expansion(char *str, int *i, int *exit_status)
 		free(content);
 	}
 	(*i)++;
-	return (result);
-}
-
-static char	*process_arg_expansions(char *arg, int *exit_status)
-{
-	int		i;
-	char	*result;
-	char	*tmp;
-	char	*expansion;
-
-	if (!arg)
-		return (NULL);
-	result = ft_strdup("");
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] == '$')
-		{
-			expansion = process_dollar_expansion(arg, &i, exit_status);
-			tmp = ft_strjoin(result, expansion);
-			free(result);
-			free(expansion);
-			result = tmp;
-		}
-		else if (arg[i] == '\'' || arg[i] == '"')
-		{
-			expansion = process_quotes_expansion(arg, &i, exit_status);
-			tmp = ft_strjoin(result, expansion);
-			free(result);
-			free(expansion);
-			result = tmp;
-		}
-		else
-		{
-			tmp = ft_charjoin(result, arg[i]);
-			free(result);
-			result = tmp;
-			i++;
-		}
-	}
 	return (result);
 }
 
@@ -175,5 +103,3 @@ void	process_token_expansions(t_token *token)
 	else
 		process_args_expansions(token->cmd);
 }
-
-//TODO norminette
