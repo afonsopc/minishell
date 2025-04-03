@@ -37,6 +37,7 @@ SRCS = src/cmd/cd.c \
 	   src/main.c \
 	   src/utils/utils1.c \
 	   src/utils/utils10.c \
+	   src/utils/utils11.c \
 	   src/utils/utils2.c \
 	   src/utils/utils3.c \
 	   src/utils/utils4.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/02 20:40:11 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:51:39 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ static bool	check_key(char *value)
 	return (true);
 }
 
+static void	export_error(char **equals, char **var_name)
+{
+	ft_fputstr(2, "export: ");
+	ft_fputstr(2, "not a valid identifier\n");
+	terminal()->status = 1;
+	if (*equals)
+		free(*var_name);
+}
+
 static void	export_str(t_cmd *cmd, char *arg)
 {
 	char	*var_name;
@@ -41,11 +50,7 @@ static void	export_str(t_cmd *cmd, char *arg)
 		var_name = ft_strndup(arg, equals - arg);
 	if (!check_key(var_name))
 	{
-		ft_fputstr(2, "export: ");
-		ft_fputstr(2, "not a valid identifier\n");
-		terminal()->status = 1;
-		if (equals)
-			free(var_name);
+		export_error(&equals, &var_name);
 		return ;
 	}
 	if (!equals)
