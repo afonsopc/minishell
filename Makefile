@@ -1,7 +1,7 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I headers -I /opt/homebrew/opt/readline/include -I .brew/opt/readline/include
+INCLUDES = -I headers -I /opt/homebrew/opt/readline/include
 SRCS = src/cmd/cd.c \
 	   src/cmd/cmd.c \
 	   src/cmd/echo.c \
@@ -47,10 +47,9 @@ SRCS = src/cmd/cd.c \
 	   src/utils/utils7.c \
 	   src/utils/utils8.c \
 	   src/utils/utils9.c
-
 OBJ_DIR = obj/
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
-READLINE_FLAGS = -L /opt/homebrew/opt/readline/lib -lreadline -lncurses -L .brew/opt/readline/lib
+READLINE_FLAGS = -L /opt/homebrew/opt/readline/lib -lreadline -lncurses
 
 all: $(NAME)
 

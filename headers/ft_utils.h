@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:15:46 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/02 20:39:39 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:09:51 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void					ft_close(int fd);
 void					ft_close2(int fd1, int fd2);
 void					ft_fprint_strv(int fd, char **strv);
 bool					ft_isdigit(int c);
+char					*ft_strappend(char *str, char append);
 
 #endif

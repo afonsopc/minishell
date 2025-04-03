@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/01 16:07:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/03 23:15:20 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <execution.h>
+
+static void	expand_variables(char **str)
+{
+	int		i;
+	int		j;
+	char	*result;
+	char	*tmp;
+	char	*tmp2;
+
+	result = NULL;
+	i = -1;
+	while (str[0][++i])
+	{
+		if (str[0][i] == '$' && (ft_isalpha(str[0][i + 1]) || str[0][i + 1] == '_'))
+		{
+			j = ++i;
+			while (str[0][i] && (ft_isalnum(str[0][i]) || str[0][i] == '_'))
+				i++;
+			tmp2 = ft_substr(str[0], j, i - j);
+			tmp = ft_hashmap_get_value(terminal()->env, tmp2);
+			free(tmp2);
+			if (tmp)
+			{
+				tmp2 = ft_strjoin(result, tmp);
+				free(result);
+				result = tmp2;
+			}
+			--i;
+			continue ;
+		}
+		tmp = ft_strappend(result, str[0][i]);
+		free(result);
+		result = tmp;
+	}
+	free(*str);
+	*str = result;
+}
 
 static int	get_heredoc(char *terminator)
 {
@@ -22,11 +59,16 @@ static int	get_heredoc(char *terminator)
 	pid = fork();
 	if (!pid)
 	{
+		ft_close(pipe_fds[0]);
 		redirect_in_content = redirect_in_loop(terminator);
+		if (!redirect_in_content)
+			redirect_in_content = ft_strdup("");
+		if (!ft_strstr(terminator, "\"") && !ft_strstr(terminator, "'"))
+			expand_variables(&redirect_in_content);
 		ft_fputstr(pipe_fds[1], redirect_in_content);
 		free(redirect_in_content);
 		ft_close(pipe_fds[1]);
-		exit(0);
+		ft_exit_free();
 	}
 	waitpid(pid, &pid, 0);
 	ft_close(pipe_fds[1]);

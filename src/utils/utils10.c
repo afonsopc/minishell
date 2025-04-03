@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:18:01 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/02 20:39:23 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/03 23:25:32 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,15 @@ void	ft_fprint_strv(int fd, char **strv)
 bool	ft_isdigit(int c)
 {
 	return ((c >= '0' && c <= '9'));
+}
+
+char	*ft_strappend(char *str, char append)
+{
+	char	*tmp;
+	char	*appended;
+
+	tmp = ft_strndup(&append, 1);
+	appended = ft_strjoin(str, tmp);
+	free(tmp);
+	return (appended);
 }

@@ -6,7 +6,11 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:36:26 by paude-so          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2025/04/03 13:51:39 by paude-so         ###   ########.fr       */
+=======
+/*   Updated: 2025/04/03 23:20:16 by afpachec         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +61,7 @@ static void	export_str(t_cmd *cmd, char *arg)
 		return ;
 	var_value = ft_strdup(equals + 1);
 	if (cmd->in == 0 && cmd->out == 1)
-		ft_hashmap_set(terminal()->env, var_name, ft_strdup(var_value),
-			free);
+		ft_hashmap_set(terminal()->env, var_name, var_value, free);
 	free(var_name);
 }
 
