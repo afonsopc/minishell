@@ -6,7 +6,7 @@
 /*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/03 23:15:20 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:46:05 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int	get_heredoc(char *terminator)
 		ft_fputstr(pipe_fds[1], redirect_in_content);
 		free(redirect_in_content);
 		ft_close(pipe_fds[1]);
+		close_all_non_standart_fds();
 		ft_exit_free();
 	}
 	waitpid(pid, &pid, 0);
@@ -96,7 +97,7 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 	int		*fd;
 	char	*error_prompt;
 
-	if (!cmd || !redirect)
+	if (!cmd || !redirect || !redirect->args[0] || !redirect->args[1])
 		return (true);
 	if (redirect->type == IN)
 		fd = &cmd->in;
