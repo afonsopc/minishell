@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/03 15:10:03 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:50:08 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,21 @@ t_token	*parse_and_or(char **tokens, size_t *pos)
 		left = result;
 	}
 	return (left);
+}
+
+void	add_redirection(t_cmd *cmd, t_redirect *new_redirect)
+{
+	t_redirect	*redirect;
+
+	if (!cmd || !new_redirect)
+		return ;
+	if (!cmd->redirect)
+	{
+		cmd->redirect = new_redirect;
+		return ;
+	}
+	redirect = cmd->redirect;
+	while (redirect->next)
+		redirect = redirect->next;
+	redirect->next = new_redirect;
 }

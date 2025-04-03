@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:25:48 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/03 15:05:33 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:50:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,6 @@ t_redirect	*create_redirection(char **tokens, size_t *pos)
 	return (redirect);
 }
 
-void	add_redirection(t_cmd *cmd, t_redirect *new_redirect)
-{
-	t_redirect	*redirect;
-
-	if (!cmd || !new_redirect)
-		return ;
-	if (!cmd->redirect)
-	{
-		cmd->redirect = new_redirect;
-		return ;
-	}
-	redirect = cmd->redirect;
-	while (redirect->next)
-		redirect = redirect->next;
-	redirect->next = new_redirect;
-}
-
 static bool	check_syntax_errors(char *line)
 {
 	int		i;
@@ -81,13 +64,24 @@ static bool	check_syntax_errors(char *line)
 	return (false);
 }
 
+static bool	is_only_spaces(char *line)
+{
+	while (*line)
+	{
+		if (!ft_isspace(*line))
+			return (false);
+		++line;
+	}
+	return (true);
+}
+
 t_token	*parse(char *line)
 {
 	char	**tokens;
 	size_t	pos;
 	t_token	*result;
 
-	if (!line || !*line)
+	if (!line || is_only_spaces(line))
 		return (NULL);
 	free_token(terminal()->token);
 	if (check_syntax_errors(line))
