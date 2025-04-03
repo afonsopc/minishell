@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:40:27 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/03 14:57:30 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:10:03 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ t_token	*parse_pipe(char **tokens, size_t *pos)
 	return (left);
 }
 
+static bool	is_and_or(char *token)
+{
+	return (ft_strequal(token, "&&") || ft_strequal(token, "||"));
+}
+
 t_token	*parse_and_or(char **tokens, size_t *pos)
 {
 	t_token	*left;
@@ -56,8 +61,7 @@ t_token	*parse_and_or(char **tokens, size_t *pos)
 	left = parse_pipe(tokens, pos);
 	if (!left)
 		return (NULL);
-	while (tokens[*pos] && (ft_strcmp(tokens[*pos], "&&") == 0
-			|| ft_strcmp(tokens[*pos], "||") == 0))
+	while (tokens[*pos] && is_and_or(tokens[*pos]))
 	{
 		if (!tokens[*pos])
 			return (seg_fault_handler(&left), NULL);
