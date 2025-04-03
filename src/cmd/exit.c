@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/02 20:31:07 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:34:54 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ pid_t	execute_exit(t_cmd *cmd)
 	terminal()->status = str_to_status(cmd->args[1]);
 	if (errno)
 	{
-		terminal()->status = 255;
+		terminal()->status = 2;
 		ft_fputstr(2, "exit: ");
 		ft_fputstr(2, cmd->args[1]);
 		ft_fputstr(2, ": numeric argument required\n");
