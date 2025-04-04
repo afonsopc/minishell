@@ -6,44 +6,53 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 19:38:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:01:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <execution.h>
 
+static char	*append_variable_value(char *str, int *i, char *result)
+{
+	int		j;
+	char	*tmp;
+	char	*tmp2;
+
+	j = ++(*i);
+	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
+		(*i)++;
+	tmp2 = ft_substr(str, j, *i - j);
+	tmp = ft_hashmap_get_value(terminal()->env, tmp2);
+	free(tmp2);
+	if (tmp)
+	{
+		tmp2 = ft_strjoin(result, tmp);
+		free(result);
+		result = tmp2;
+	}
+	--(*i);
+	return (result);
+}
+
 static void	expand_variables(char **str)
 {
 	int		i;
-	int		j;
 	char	*result;
 	char	*tmp;
-	char	*tmp2;
 
 	result = NULL;
 	i = -1;
 	while (str[0][++i])
 	{
-		if (str[0][i] == '$' && (ft_isalpha(str[0][i + 1]) || str[0][i + 1] == '_'))
+		if (str[0][i] == '$' && (ft_isalpha(str[0][i + 1]) || str[0][i
+				+ 1] == '_'))
+			result = append_variable_value(str[0], &i, result);
+		else
 		{
-			j = ++i;
-			while (str[0][i] && (ft_isalnum(str[0][i]) || str[0][i] == '_'))
-				i++;
-			tmp2 = ft_substr(str[0], j, i - j);
-			tmp = ft_hashmap_get_value(terminal()->env, tmp2);
-			free(tmp2);
-			if (tmp)
-			{
-				tmp2 = ft_strjoin(result, tmp);
-				free(result);
-				result = tmp2;
-			}
-			--i;
-			continue ;
+			tmp = ft_strappend(result, str[0][i]);
+			free(result);
+			result = tmp;
 		}
-		tmp = ft_strappend(result, str[0][i]);
-		free(result);
-		result = tmp;
 	}
 	free(*str);
 	*str = result;
@@ -85,8 +94,8 @@ static int	get_redirect_fd(t_redirect *redirect)
 		if (redirect->type == IN)
 			return (get_heredoc(redirect->args[1]));
 		else
-			return (open(redirect->args[1],
-					O_WRONLY | O_CREAT | O_APPEND, 0644));
+			return (open(redirect->args[1], O_WRONLY | O_CREAT | O_APPEND,
+					0644));
 	}
 	else if (redirect->type == IN)
 		return (open(redirect->args[1], O_RDONLY));
@@ -94,7 +103,7 @@ static int	get_redirect_fd(t_redirect *redirect)
 		return (open(redirect->args[1], O_WRONLY | O_CREAT | O_TRUNC, 0644));
 }
 
-static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
+bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 {
 	int		*fd;
 	char	*error_prompt;
@@ -117,20 +126,4 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 		return (false);
 	}
 	return (!terminal()->status && process_redirection(cmd, redirect->next));
-}
-
-bool	process_redirections(t_token *token)
-{
-	bool	bool1;
-	bool	bool2;
-
-	if (!token)
-		return (true);
-	if (token->type != CMD)
-	{
-		bool1 = process_redirections(token->left);
-		bool2 = process_redirections(token->right);
-		return (bool1 && bool2);
-	}
-	return (process_redirection(token->cmd, token->cmd->redirect));
 }

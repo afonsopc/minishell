@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 14:16:09 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 20:01:09 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,20 @@ void	free_redirect(t_redirect *r)
 	free_redirect(r->next);
 	ft_strvfree(r->args);
 	free(r);
+}
+
+bool	process_redirections(t_token *token)
+{
+	bool	bool1;
+	bool	bool2;
+
+	if (!token)
+		return (true);
+	if (token->type != CMD)
+	{
+		bool1 = process_redirections(token->left);
+		bool2 = process_redirections(token->right);
+		return (bool1 && bool2);
+	}
+	return (process_redirection(token->cmd, token->cmd->redirect));
 }
