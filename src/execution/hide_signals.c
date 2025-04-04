@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:33:05 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/04 19:03:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:19:19 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	handle_signal_heredoc(int sig)
 	signal(SIGINT, SIG_DFL);
 	close_all_non_standart_fds();
 	ft_free_minishell();
-	kill(0, SIGINT);
+	exit(130);
 }
 
 void	mask_signals(int type)

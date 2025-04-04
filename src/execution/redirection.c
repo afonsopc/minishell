@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 00:46:05 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:26:04 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ static int	get_heredoc(char *terminator)
 		ft_exit_free();
 	}
 	waitpid(pid, &pid, 0);
+	terminal()->status = WEXITSTATUS(pid);
+	if (WTERMSIG(pid) == SIGINT)
+		terminal()->status = 130;
+	if (WTERMSIG(pid) == SIGQUIT)
+		terminal()->status = 131;
 	ft_close(pipe_fds[1]);
 	return (pipe_fds[0]);
 }
@@ -114,7 +119,7 @@ static bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 		cmd->loser_status = 1;
 		return (false);
 	}
-	return (true && process_redirection(cmd, redirect->next));
+	return (!terminal()->status && process_redirection(cmd, redirect->next));
 }
 
 bool	process_redirections(t_token *token)
