@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:51:47 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/02 20:53:41 by afpachec         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:28:43 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ pid_t	execute(t_cmd *cmd)
 	if (!assert_cmd(cmd))
 		ft_exit_free();
 	close_all_non_standart_fds();
-	unmask_signals();
+	mask_signals(CLEAR);
 	env = ft_hashmap_to_strv(terminal()->env);
 	execve(cmd->args[0], cmd->args, env);
 	ft_strvfree(env);

@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:33:05 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/03 18:55:31 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:30:19 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,26 @@ static void	handle_signal_heredoc(int sig)
 
 void	mask_signals(int type)
 {
-	unmask_signals();
-	if (type == 0)
+	if (type != CLEAR)
+		mask_signals(CLEAR);
+	if (type == PROMPT)
 	{
 		signal(SIGINT, handle_signal);
 		signal(SIGQUIT, handle_signal);
 	}
-	else if (type == 1)
+	else if (type == PROCESS)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (type == 2)
+	else if (type == HEREDOC)
 	{
 		signal(SIGINT, handle_signal_heredoc);
 		signal(SIGQUIT, handle_signal);
 	}
-}
-
-void	unmask_signals(void)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	else if (type == CLEAR)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
 }

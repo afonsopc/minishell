@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/03 14:08:13 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:29:14 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	loop(void)
 
 	while (1)
 	{
-		mask_signals(0);
+		mask_signals(PROMPT);
 		toggle_signal_echo(false);
 		line = readline("minishell$ ");
 		toggle_signal_echo(true);
@@ -27,7 +27,7 @@ void	loop(void)
 		if (ft_strlen(line))
 			add_history(line);
 		terminal()->token = parse(line);
-		mask_signals(1);
+		mask_signals(PROCESS);
 		process_token(terminal()->token);
 		free(line);
 	}
@@ -64,7 +64,7 @@ char	*redirect_in_loop(char *terminator)
 	char	*lines;
 
 	lines = NULL;
-	mask_signals(2);
+	mask_signals(HEREDOC);
 	while (1)
 	{
 		line = read_line_with_signals();
