@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 16:33:05 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/04 17:30:19 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:56:21 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,12 @@ void	toggle_signal_echo(bool hide)
 
 static void	handle_signal(int sig)
 {
+	(void)sig;
 	kill_token(terminal()->token);
-	if (sig == SIGINT)
-	{
-		rl_replace_line("", 0);
-		ft_fputstr(1, "\n");
-		terminal()->status = 130;
-		rl_on_new_line();
-	}
-	else
-		terminal()->status = 131;
+	rl_replace_line("", 0);
+	ft_fputstr(1, "\n");
+	terminal()->status = 130;
+	rl_on_new_line();
 	rl_redisplay();
 }
 
@@ -54,7 +50,7 @@ void	mask_signals(int type)
 	if (type == PROMPT)
 	{
 		signal(SIGINT, handle_signal);
-		signal(SIGQUIT, handle_signal);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (type == PROCESS)
 	{
@@ -64,7 +60,7 @@ void	mask_signals(int type)
 	else if (type == HEREDOC)
 	{
 		signal(SIGINT, handle_signal_heredoc);
-		signal(SIGQUIT, handle_signal);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (type == CLEAR)
 	{

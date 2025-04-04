@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 02:55:26 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 17:27:00 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:51:18 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef enum e_sig_type
 	CLEAR
 }	t_sig_type;
 
-void		unmask_signals(void);
 void		mask_signals(int type);
 void		wait_token(t_token *token);
 void		kill_token(t_token *token);
