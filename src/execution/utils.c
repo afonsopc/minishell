@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 21:29:50 by afpachec          #+#    #+#             */
-/*   Updated: 2025/03/29 20:35:15 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:13:41 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	wait_token(t_token *token)
 	terminal()->status = WEXITSTATUS(ret);
 	if (WTERMSIG(ret) == SIGINT)
 		terminal()->status = 130;
+	if (WTERMSIG(ret) == SIGQUIT)
+		terminal()->status = 131;
 	token->pid = 0;
 }
 
