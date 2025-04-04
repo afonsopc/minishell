@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 19:26:04 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:38:22 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ static int	get_heredoc(char *terminator)
 		if (!ft_strstr(terminator, "\"") && !ft_strstr(terminator, "'"))
 			expand_variables(&redirect_in_content);
 		ft_fputstr(pipe_fds[1], redirect_in_content);
-		free(redirect_in_content);
-		ft_close(pipe_fds[1]);
-		close_all_non_standart_fds();
-		ft_exit_free();
+		(free(redirect_in_content), ft_close(pipe_fds[1]));
+		(close_all_non_standart_fds(), ft_exit_free());
 	}
 	waitpid(pid, &pid, 0);
 	terminal()->status = WEXITSTATUS(pid);
@@ -77,8 +75,7 @@ static int	get_heredoc(char *terminator)
 		terminal()->status = 130;
 	if (WTERMSIG(pid) == SIGQUIT)
 		terminal()->status = 131;
-	ft_close(pipe_fds[1]);
-	return (pipe_fds[0]);
+	return (ft_close(pipe_fds[1]), pipe_fds[0]);
 }
 
 static int	get_redirect_fd(t_redirect *redirect)
