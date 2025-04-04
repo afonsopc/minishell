@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:38:14 by paude-so          #+#    #+#             */
-/*   Updated: 2025/04/04 19:00:08 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:04:52 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_token
 
 typedef struct s_terminal
 {
-	int					pagman;
+	char				*pagman;
 	t_hashmap			*env;
 	void				*new_env;
 	t_token				*token;

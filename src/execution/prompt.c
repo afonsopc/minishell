@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 17:29:14 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 19:06:47 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,19 @@ static char	*append_line_with_newline(char *lines, char *line)
 char	*redirect_in_loop(char *terminator)
 {
 	char	*line;
-	char	*lines;
 
-	lines = NULL;
+	terminal()->pagman = NULL;
 	mask_signals(HEREDOC);
 	while (1)
 	{
 		line = read_line_with_signals();
-		if (ft_strcmp(line, terminator) == 0)
+		if (ft_strequal(line, terminator))
 		{
 			free(line);
 			break ;
 		}
-		lines = append_line_with_newline(lines, line);
+		terminal()->pagman = append_line_with_newline(terminal()->pagman, line);
 		free(line);
 	}
-	return (lines);
+	return (terminal()->pagman);
 }
