@@ -6,7 +6,7 @@
 /*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 16:45:58 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 20:01:22 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/04 21:28:02 by paude-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ bool	process_redirection(t_cmd *cmd, t_redirect *redirect)
 		terminal()->status = 1;
 		cmd->loser = true;
 		cmd->loser_status = 1;
+		free(error_prompt);
 		return (false);
 	}
 	return (!terminal()->status && process_redirection(cmd, redirect->next));
