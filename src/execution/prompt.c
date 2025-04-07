@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:56:03 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/04 19:06:47 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:45:41 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 void	loop(void)
 {
 	char	*line;
+	char	*prompt;
 
 	while (1)
 	{
 		mask_signals(PROMPT);
 		toggle_signal_echo(false);
-		line = readline("minishell$ ");
+		prompt = get_prompt();
+		if (!prompt)
+			ft_exit();
+		line = readline(prompt);
+		free(prompt);
 		toggle_signal_echo(true);
 		if (!line)
 			ft_exit();
