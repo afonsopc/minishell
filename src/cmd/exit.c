@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paude-so <paude-so@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: afpachec <afpachec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:03:21 by afpachec          #+#    #+#             */
-/*   Updated: 2025/04/03 13:34:54 by paude-so         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:47:00 by afpachec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ pid_t	execute_exit(t_cmd *cmd)
 		ft_fputstr(2, "exit: too many arguments\n");
 		return (0);
 	}
-	ft_exit();
+	if (cmd->in == 0 && cmd->out == 1)
+		ft_exit();
 	return (0);
 }
