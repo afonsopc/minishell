@@ -63,7 +63,7 @@ $(OBJ_DIR)%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJ_DIR) valgrind_log.txt readline.supp
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@rm -rf $(NAME)
@@ -73,11 +73,8 @@ re: fclean all
 r: re
 	@ clear && ./minishell
 
-v: re readline.supp
-	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=readline.supp ./minishell
-
-readline.supp:
-	@wget https://raw.githubusercontent.com/afonsopc/minishell/refs/heads/readline.supp/readline.supp -O readline.supp
+v: re
+	@valgrind --show-leak-kinds=all --leak-check=full --track-fds=all --suppressions=$(PWD)/readline.supp ./minishell
 
 test: re
 	@git clone https://github.com/LucasKuhn/minishell_tester
